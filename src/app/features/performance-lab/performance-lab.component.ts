@@ -1,11 +1,11 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-performance-lab',
   standalone: true,
   imports: [],
   templateUrl: './performance-lab.component.html',
-  styleUrl: './performance-lab.component.scss'
+  styleUrl: './performance-lab.component.scss',
 })
 export class PerformanceLabComponent {
   isMonitoring = signal(false);
@@ -15,7 +15,7 @@ export class PerformanceLabComponent {
     bundleSize: 0,
     memoryUsage: 0,
     firstContentfulPaint: 0,
-    largestContentfulPaint: 0
+    largestContentfulPaint: 0,
   });
 
   performanceTips = [
@@ -23,38 +23,38 @@ export class PerformanceLabComponent {
       title: 'Lazy Loading',
       description: 'Carga componentes solo cuando se necesitan',
       implemented: true,
-      impact: 'Alto'
+      impact: 'Alto',
     },
     {
       title: 'Tree Shaking',
       description: 'Elimina código no utilizado del bundle',
       implemented: true,
-      impact: 'Alto'
+      impact: 'Alto',
     },
     {
       title: 'Code Splitting',
       description: 'Divide el código en chunks más pequeños',
       implemented: true,
-      impact: 'Medio'
+      impact: 'Medio',
     },
     {
       title: 'Signals + Zoneless',
       description: 'Reduce overhead de change detection',
       implemented: false,
-      impact: 'Medio'
+      impact: 'Medio',
     },
     {
       title: 'Optimización de Imágenes',
       description: 'WebP, lazy loading, CDN',
       implemented: false,
-      impact: 'Medio'
+      impact: 'Medio',
     },
     {
       title: 'Cache Strategy',
       description: 'Headers de caché y service workers',
       implemented: false,
-      impact: 'Alto'
-    }
+      impact: 'Alto',
+    },
   ];
 
   startMonitoring(): void {
@@ -75,7 +75,7 @@ export class PerformanceLabComponent {
       bundleSize: Math.random() * 100 + 50,
       memoryUsage: Math.random() * 50 + 20,
       firstContentfulPaint: Math.random() * 30 + 15,
-      largestContentfulPaint: Math.random() * 40 + 20
+      largestContentfulPaint: Math.random() * 40 + 20,
     });
 
     setTimeout(() => this.simulateMetrics(), 2000);

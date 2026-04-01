@@ -8,7 +8,7 @@
 
 Este curso está enfocado en el desarrollo profesional de librerías reutilizables y su distribución mediante NPM. A lo largo del curso aprenderás a crear librerías desde cero, mantenerlas, versionarlas y publicarlas, aplicando buenas prácticas de desarrollo y herramientas modernas del ecosistema JavaScript.
 
-El objetivo es evitar prácticas como el *copy/paste* y fomentar la reutilización de código mediante librerías mantenibles, escalables y listas para producción.
+El objetivo es evitar prácticas como el _copy/paste_ y fomentar la reutilización de código mediante librerías mantenibles, escalables y listas para producción.
 
 ---
 
@@ -26,6 +26,7 @@ El objetivo es evitar prácticas como el *copy/paste* y fomentar la reutilizaci�
 ## 📚 Contenido del Curso
 
 ### 📦 Módulo 1: Introducción a NPM y Librerías
+
 - ¿Qué es NPM y cómo funciona?
 - Inicialización de proyectos (`package.json`)
 - Gestión de dependencias
@@ -34,6 +35,7 @@ El objetivo es evitar prácticas como el *copy/paste* y fomentar la reutilizaci�
 ---
 
 ### 🟨 Módulo 2: Librerías en JavaScript (Node.js)
+
 - Creación de librerías en JavaScript
 - Exportación de módulos
 - Buenas prácticas de estructura
@@ -42,6 +44,7 @@ El objetivo es evitar prácticas como el *copy/paste* y fomentar la reutilizaci�
 ---
 
 ### 🔷 Módulo 3: Librerías en TypeScript
+
 - Configuración de TypeScript para librerías
 - Compilación y distribución
 - Tipado fuerte y mantenimiento
@@ -50,6 +53,7 @@ El objetivo es evitar prácticas como el *copy/paste* y fomentar la reutilizaci�
 ---
 
 ### 🧪 Módulo 4: Testing y Calidad de Código
+
 - Testing con Mocha
 - Validación del comportamiento de librerías
 - Cobertura de código con Coveralls
@@ -58,6 +62,7 @@ El objetivo es evitar prácticas como el *copy/paste* y fomentar la reutilizaci�
 ---
 
 ### 🔄 Módulo 5: Integración Continua (CI/CD)
+
 - Introducción a CI/CD
 - Configuración con Travis CI
 - Automatización de tests
@@ -66,6 +71,7 @@ El objetivo es evitar prácticas como el *copy/paste* y fomentar la reutilizaci�
 ---
 
 ### 📖 Módulo 6: Documentación de Librerías
+
 - Generación automática con Compodoc
 - Buenas prácticas de documentación
 - Publicación de documentación
@@ -74,6 +80,7 @@ El objetivo es evitar prácticas como el *copy/paste* y fomentar la reutilizaci�
 ---
 
 ### 🅰️ Módulo 7: Librerías en Angular
+
 - Creación de librerías Angular
 - Estructura y configuración
 - Reutilización en proyectos Angular
@@ -82,6 +89,7 @@ El objetivo es evitar prácticas como el *copy/paste* y fomentar la reutilizaci�
 ---
 
 ### ⚛️ Módulo 8: Introducción a Librerías en React
+
 - Conceptos básicos para librerías React
 - Estructura de proyectos
 - Exportación y uso
@@ -90,6 +98,7 @@ El objetivo es evitar prácticas como el *copy/paste* y fomentar la reutilizaci�
 ---
 
 ### 🌍 Módulo 9: Publicación y Gestión en NPM
+
 - Publicar librerías en NPM
 - Actualización de versiones
 - Gestión de paquetes
@@ -98,6 +107,7 @@ El objetivo es evitar prácticas como el *copy/paste* y fomentar la reutilizaci�
 ---
 
 ### 🤝 Módulo 10: Open Source y Colaboración
+
 - Cómo contribuir a proyectos
 - Gestión de issues y PRs
 - Buenas prácticas en comunidad
@@ -149,7 +159,7 @@ Al finalizar el curso serás capaz de:
 
 ### Instalación
 
-```bash
+````bash
 # Clonar el repositorio
 git clone <repository-url>
 cd npm-libraries-course
@@ -169,9 +179,10 @@ cd compilacion-despliegues
 
 # Instalar dependencias
 npm install
-```
+````
 
 ### Servidor de Desarrollo
+
 ```bash
 # Iniciar servidor de desarrollo
 ng serve
@@ -180,6 +191,7 @@ ng serve
 ```
 
 ### Build de Producción
+
 ```bash
 # Build para producción
 ng build --configuration production
@@ -199,8 +211,8 @@ ng build --configuration production --stats-json
 - [COMPODOC](https://compodoc.app/)
 - [Travis](https://www.travis-ci.com/)
 - [RxJS](https://rxjs-dev.firebaseapp.com/)
-
----
+- [Git en el Servidor - Generando tu clave pública SSH](https://git-scm.com/book/es/v2/Git-en-el-Servidor-Generando-tu-clave-p%C3%BAblica-SSH)
+- [Conexión a Github con SSH](https://docs.github.com/es/authentication/connecting-to-github-with-ssh)
 
 ## 📄 Licencia
 
@@ -214,5 +226,4 @@ Las sugerencias y mejoras son bienvenidas. Por favor, abre un issue para discuti
 
 ---
 
-*Hecho con ❤️ para la comunidad de desarrolladores Angular*
-
+_Hecho con ❤️ para la comunidad de desarrolladores Angular_

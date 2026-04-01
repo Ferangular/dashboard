@@ -1,16 +1,14 @@
 <div class="settings">
   <div class="settings__header">
     <h1 class="settings__title">Ajustes de Rendimiento</h1>
-    <p class="settings__description">
-      Configura las opciones de optimización para tu aplicación Angular 21
-    </p>
+    <p class="settings__description">Configura las opciones de optimización para tu aplicación Angular 21</p>
   </div>
 
   <div class="settings__content">
     <div class="settings__main">
       <section class="settings-section">
         <h2 class="settings-section__title">Opciones de Optimización</h2>
-        
+
         <div class="settings-grid">
           @for (option of performanceOptions; track option.key) {
             <div class="setting-item">
@@ -19,14 +17,14 @@
                   <h3 class="setting-item__title">{{ option.label }}</h3>
                   <p class="setting-item__description">{{ option.description }}</p>
                 </div>
-                
+
                 @if (typeof settings()[option.key] === 'boolean') {
                   <label class="toggle-switch">
-                    <input 
-                      type="checkbox" 
+                    <input
+                      type="checkbox"
                       [checked]="settings()[option.key]"
                       (change)="updateSetting(option.key, $any($event.target).checked)"
-                    >
+                    />
                     <span class="toggle-switch__slider"></span>
                   </label>
                 }
@@ -38,11 +36,12 @@
 
       <section class="settings-section">
         <h2 class="settings-section__title">Estrategias Avanzadas</h2>
-        
+
         <div class="strategy-options">
           <div class="strategy-item">
-            <label class="strategy-item__label">Preload Strategy</label>
-            <select 
+            <label class="strategy-item__label" for="preload-strategy">Preload Strategy</label>
+            <select
+              id="preload-strategy"
               class="strategy-item__select"
               [value]="settings().preloadStrategy"
               (change)="updateSetting('preloadStrategy', $any($event.target).value)"
@@ -54,8 +53,9 @@
           </div>
 
           <div class="strategy-item">
-            <label class="strategy-item__label">Cache Strategy</label>
-            <select 
+            <label class="strategy-item__label" for="cache-strategy">Cache Strategy</label>
+            <select
+              id="cache-strategy"
               class="strategy-item__select"
               [value]="settings().cacheStrategy"
               (change)="updateSetting('cacheStrategy', $any($event.target).value)"
