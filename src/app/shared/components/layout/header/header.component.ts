@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, Renderer2, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationItem } from '../../../../core/interfaces/navigation.interface';
 import { AppSettingsService } from '../../../../core/services/app-settings.service';
@@ -17,6 +17,7 @@ export class HeaderComponent {
   private appSettings = inject(AppSettingsService);
   private sidebarService = inject(SidebarService);
   private i18nService = inject(I18nService);
+  private renderer = inject(Renderer2);
 
   isSidebarOpen = signal(false);
   isDarkMode = signal(false);
@@ -108,9 +109,9 @@ export class HeaderComponent {
 
   private updateTheme(): void {
     if (this.isDarkMode()) {
-      document.documentElement.classList.add('dark');
+      this.renderer.addClass(document.documentElement, 'dark');
     } else {
-      document.documentElement.classList.remove('dark');
+      this.renderer.removeClass(document.documentElement, 'dark');
     }
   }
 }
