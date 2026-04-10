@@ -1,157 +1,101 @@
-# 🚀 Curso: Desarrollo y Publicación de Librerías con NPM
+# 📊 Dashboard Responsive - Angular 21 Performance Lab
 
-> Aprende a crear, gestionar y publicar librerías reutilizables en JavaScript, TypeScript, Angular y React
-
----
-
-## 📋 Descripción del Curso
-
-Este curso está enfocado en el desarrollo profesional de librerías reutilizables y su distribución mediante NPM. A lo largo del curso aprenderás a crear librerías desde cero, mantenerlas, versionarlas y publicarlas, aplicando buenas prácticas de desarrollo y herramientas modernas del ecosistema JavaScript.
-
-El objetivo es evitar prácticas como el _copy/paste_ y fomentar la reutilización de código mediante librerías mantenibles, escalables y listas para producción.
+> Dashboard responsive moderno desarrollado con Angular 21 para optimización de rendimiento y mejores prácticas de desarrollo
 
 ---
 
-## 🎯 Objetivos del Curso
+## 🎯 Descripción del Proyecto
 
-- Crear librerías reutilizables desde cero
-- Gestionar versiones y publicaciones en NPM
-- Aplicar buenas prácticas de desarrollo y testing
-- Automatizar procesos con integración continua
-- Documentar librerías de forma profesional
-- Contribuir y gestionar proyectos Open Source
+Este proyecto es un **dashboard responsive** actualmente en desarrollo que sirve como laboratorio para experimentar con técnicas de optimización de rendimiento en Angular 21. La aplicación está diseñada para ser escalable, mantenible y seguir las mejores prácticas del framework.
+
+**Estado actual:** 🚧 **En desarrollo activo** - Abierto a mejoras y contribuciones
 
 ---
 
-## 📚 Contenido del Curso
+## 📸 Vista Previa de la Aplicación
 
-### 📦 Módulo 1: Introducción a NPM y Librerías
+![Dashboard Preview](./dashboard-preview.png)
 
-- ¿Qué es NPM y cómo funciona?
-- Inicialización de proyectos (`package.json`)
-- Gestión de dependencias
-- Versionado semántico (SemVer)
+_Interfaz principal del dashboard mostrando el menú lateral, navegación superior y badges de entorno_
 
 ---
 
-### 🟨 Módulo 2: Librerías en JavaScript (Node.js)
+## ✨ Características Principales
 
-- Creación de librerías en JavaScript
-- Exportación de módulos
-- Buenas prácticas de estructura
-- Uso en proyectos reales
+### 🎨 Interfaz de Usuario
 
----
+- **Diseño responsive** adaptado a diferentes tamaños de pantalla
+- **Sidebar navegacional** con menú principal
+- **Header dinámico** con información del entorno
+- **Badges de entorno** para identificar desarrollo/producción
+- **Modo DEBUG** activable para desarrollo
 
-### 🔷 Módulo 3: Librerías en TypeScript
+### 🛠️ Características Técnicas
 
-- Configuración de TypeScript para librerías
-- Compilación y distribución
-- Tipado fuerte y mantenimiento
-- Generación de definiciones (`.d.ts`)
+- **Angular 21** con standalone components
+- **TypeScript** para tipado fuerte
+- **SCSS** para estilos modularizados
+- **Signals** para gestión de estado reactiva
+- **Lazy loading** para optimización de carga
+- **Build optimizado** para producción
 
----
+### 📱 Navegación
 
-### 🧪 Módulo 4: Testing y Calidad de Código
-
-- Testing con Mocha
-- Validación del comportamiento de librerías
-- Cobertura de código con Coveralls
-- Mejora de calidad y detección de errores
-
----
-
-### 🔄 Módulo 5: Integración Continua (CI/CD)
-
-- Introducción a CI/CD
-- Configuración con Travis CI
-- Automatización de tests
-- Flujo de integración profesional
+- **Inicio** - Dashboard principal
+- **Listado** - Vistas de datos tabulares
+- **Rendimiento** - Laboratorio de performance
+- **Contacto** - Formulario de contacto
+- **Ajustes** - Configuración de la aplicación
 
 ---
 
-### 📖 Módulo 6: Documentación de Librerías
+## 🚀 Tecnologías Utilizadas
 
-- Generación automática con Compodoc
-- Buenas prácticas de documentación
-- Publicación de documentación
-- Hosting con Firebase
-
----
-
-### 🅰️ Módulo 7: Librerías en Angular
-
-- Creación de librerías Angular
-- Estructura y configuración
-- Reutilización en proyectos Angular
-- Buenas prácticas en ecosistema Angular
+- **Frontend:** Angular 21
+- **Lenguaje:** TypeScript
+- **Estilos:** SCSS/CSS3
+- **Build Tool:** Angular CLI
+- **Package Manager:** npm
+- **Control de Versiones:** Git
 
 ---
 
-### ⚛️ Módulo 8: Introducción a Librerías en React
+## 📋 Estado del Desarrollo
 
-- Conceptos básicos para librerías React
-- Estructura de proyectos
-- Exportación y uso
-- Consideraciones clave
+### ✅ Funcionalidades Implementadas
 
----
+- [x] Estructura base del dashboard
+- [x] Sistema de routing con lazy loading
+- [x] Componentes layout (header, footer, sidebar)
+- [x] Sistema de configuración dinámica
+- [x] Navegación responsive
+- [x] Badges de entorno
+- [x] Modo debug
 
-### 🌍 Módulo 9: Publicación y Gestión en NPM
+### 🚧 En Desarrollo
 
-- Publicar librerías en NPM
-- Actualización de versiones
-- Gestión de paquetes
-- Distribución y consumo
+- [ ] Componentes de visualización de datos
+- [ ] Sistema de temas (dark/light mode)
+- [ ] Internacionalización (i18n)
+- [ ] Tests unitarios y e2e
+- [ ] Optimización de performance avanzada
 
----
+### 🎯 Próximamente
 
-### 🤝 Módulo 10: Open Source y Colaboración
-
-- Cómo contribuir a proyectos
-- Gestión de issues y PRs
-- Buenas prácticas en comunidad
-- Mantenimiento de librerías públicas
+- [ ] Dashboard analytics
+- [ ] Gráficos interactivos
+- [ ] Sistema de notificaciones
+- [ ] Perfiles de usuario
+- [ ] API integration
 
 ---
 
 ## 🛠️ Requisitos Previos
 
-- Conocimientos básicos de:
-  - JavaScript
-  - TypeScript
-  - Git
-- Experiencia básica en:
-  - Angular (recomendado)
-  - React (opcional)
-- No es necesario conocimiento previo de NPM
-
----
-
-## 🚀 Metodología
-
-- Explicaciones paso a paso
-- Enfoque práctico
-- +20 horas de contenido
-- +300 lecciones
-- Más de 10 proyectos completos
-- Retos prácticos
-- Aprendizaje progresivo
-
----
-
-## 🧠 Resultados de Aprendizaje
-
-Al finalizar el curso serás capaz de:
-
-- Crear librerías en JavaScript y TypeScript
-- Desarrollar librerías en Angular
-- Comprender la base para librerías en React
-- Publicar y versionar paquetes en NPM
-- Implementar testing y CI/CD
-- Documentar librerías profesionalmente
-- Reutilizar código entre múltiples proyectos
-- Participar en proyectos Open Source
+- **Node.js** (v18 o superior)
+- **npm** (v9 o superior)
+- **Angular CLI** (v21)
+- **Git** para control de versiones
 
 ---
 
@@ -159,33 +103,20 @@ Al finalizar el curso serás capaz de:
 
 ### Instalación
 
-````bash
-# Clonar el repositorio
-git clone <repository-url>
-cd npm-libraries-course
-
-# Instalar dependencias
-npm install
-
----
-
-## 🚀 Comenzando
-
-### Instalación
 ```bash
 # Clonar el repositorio
 git clone <repository-url>
-cd compilacion-despliegues
+cd dashboard
 
 # Instalar dependencias
 npm install
-````
+```
 
 ### Servidor de Desarrollo
 
 ```bash
 # Iniciar servidor de desarrollo
-ng serve
+npm run start
 
 # Navegar a http://localhost:4200/
 ```
@@ -194,37 +125,125 @@ ng serve
 
 ```bash
 # Build para producción
-ng build --configuration production
+npm run build
 
 # Build con análisis de bundle
-ng build --configuration production --stats-json
+npm run build:analyze
+
+# Vista previa del build
+npm run preview
+```
+
+### Linting y Formateo
+
+```bash
+# Verificar estilo de código
+npm run lint
+
+# Corregir automáticamente
+npm run lint:fix
+
+# Formatear código
+npm run format
 ```
 
 ---
 
-## 📖 Recursos Adicionales
+## 📁 Estructura del Proyecto
 
-- [Documentación Oficial de Angular](https://angular.dev)
-- [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli)
-- [Webpack Documentation](https://webpack.js.org/)
-- [Lighthouse Performance Testing](https://developers.google.com/web/tools/lighthouse)
-- [COMPODOC](https://compodoc.app/)
-- [Travis](https://www.travis-ci.com/)
-- [RxJS](https://rxjs-dev.firebaseapp.com/)
-- [Git en el Servidor - Generando tu clave pública SSH](https://git-scm.com/book/es/v2/Git-en-el-Servidor-Generando-tu-clave-p%C3%BAblica-SSH)
-- [Conexión a Github con SSH](https://docs.github.com/es/authentication/connecting-to-github-with-ssh)
-- [Configurando git por primera vez](https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Configurando-Git-por-primera-vez)
+```
+src/
+├── app/
+│   ├── core/                 # Servicios e interfaces core
+│   │   ├── services/         # Servicios globales
+│   │   └── interfaces/       # Tipos e interfaces
+│   ├── shared/               # Componentes compartidos
+│   │   └── components/
+│   │       └── layout/       # Componentes de layout
+│   ├── features/             # Módulos de funcionalidades
+│   └── app.routes.ts         # Configuración de rutas
+├── assets/                   # Recursos estáticos
+├── environments/             # Configuración de entornos
+└── styles/                   # Estilos globales
+```
+
+---
+
+## 🔧 Configuración
+
+### Variables de Entorno
+
+El proyecto utiliza configuración dinámica mediante archivos JSON:
+
+```json
+{
+  "appName": "Angular 21 Performance Lab",
+  "environmentName": "DESARROLLO",
+  "debug": true,
+  "ui": {
+    "showEnvironmentBadge": true,
+    "showDebugPanel": true
+  }
+}
+```
+
+---
+
+## 🤝 Cómo Contribuir
+
+Este proyecto está **abierto a mejoras** y **sugerencias**. Para contribuir:
+
+1. **Fork** el repositorio
+2. Crear una rama: `git checkout -b feature/nueva-caracteristica`
+3. Realizar los cambios
+4. Hacer commit: `git commit -m 'feat: agregar nueva característica'`
+5. Push: `git push origin feature/nueva-caracteristica`
+6. Abrir un **Pull Request**
+
+### 🎯 Áreas de Mejora Prioritarias
+
+- Optimización de performance
+- Componentes reutilizables
+- Testing y calidad de código
+- Documentación técnica
+- Accesibilidad (a11y)
+
+---
+
+## 📊 Información de Build
+
+- **Tamaño del bundle:** ~66 KB (gzipped)
+- **Tiempo de build:** ~3 segundos
+- **Performance Score:** 95+ (Lighthouse)
+- **Compatibilidad:** Modern browsers (ES2020+)
+
+---
 
 ## 📄 Licencia
 
-Este proyecto es parte de un curso educativo. Uso exclusivo para fines de aprendizaje.
+Este proyecto es educativo y está abierto para contribuciones de la comunidad.
 
 ---
 
-## 🤝 Contribuciones
+## 🔗 Recursos Adicionales
 
-Las sugerencias y mejoras son bienvenidas. Por favor, abre un issue para discutir cambios significativos antes de hacer un pull request.
+- [Documentación Oficial de Angular](https://angular.dev)
+- [Angular CLI Overview](https://angular.dev/tools/cli)
+- [Angular Performance Guide](https://angular.dev/guide/performance)
+- [TypeScript Documentation](https://www.typescriptlang.org/)
 
 ---
 
-_Hecho con ❤️ para la comunidad de desarrolladores Angular_
+## 📞 Contacto
+
+Para sugerencias, reportes de bugs o contribuciones:
+
+- 📧 **Email:** [tu-email@ejemplo.com]
+- 🐛 **Issues:** [GitHub Issues](link-al-repositorio/issues)
+- 💬 **Discusiones:** [GitHub Discussions](link-al-repositorio/discussions)
+
+---
+
+_🚀 **Dashboard Responsive** - Construido con ❤️ usando Angular 21_
+
+_Última actualización: Abril 2026_
