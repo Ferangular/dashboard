@@ -213,6 +213,7 @@ ng build --configuration production --stats-json
 - [RxJS](https://rxjs-dev.firebaseapp.com/)
 - [Git en el Servidor - Generando tu clave pública SSH](https://git-scm.com/book/es/v2/Git-en-el-Servidor-Generando-tu-clave-p%C3%BAblica-SSH)
 - [Conexión a Github con SSH](https://docs.github.com/es/authentication/connecting-to-github-with-ssh)
+- [Configurando git por primera vez](https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Configurando-Git-por-primera-vez)
 
 ## 📄 Licencia
 

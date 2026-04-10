@@ -6,10 +6,11 @@
       </button>
 
       <div class="header__logo">
-        <img [src]="appConfig()?.logo" [alt]="appConfig()?.appName" class="header__logo-img">
-        <h1 class="header__title">{{ appConfig()?.appName }}</h1>
+        <img [src]="appConfig().logo" [alt]="appConfig().appName" class="header__logo-img" />
+        <h1 class="header__title">{{ appConfig().appName }}</h1>
       </div>
-    </div>º
+    </div>
+    º
 
     <div class="header__right">
       <nav class="header__nav">
@@ -30,23 +31,21 @@
 
       <!-- Selector de idiomas -->
       <div class="header__language-selector">
-        <select 
+        <select
           class="header__language-select"
           [value]="currentLanguage()"
           (change)="changeLanguage($any($event.target).value)"
           aria-label="Seleccionar idioma"
         >
           @for (lang of availableLanguages; track lang.code) {
-            <option [value]="lang.code">
-              {{ lang.flag }} {{ lang.name }}
-            </option>
+            <option [value]="lang.code">{{ lang.flag }} {{ lang.name }}</option>
           }
         </select>
       </div>
 
-      @if (appConfig()?.ui?.showEnvironmentBadge) {
+      @if (appConfig().ui.showEnvironmentBadge) {
         <div class="header__badge">
-          <span class="header__badge-text">{{ appConfig()?.environmentName }}</span>
+          <span class="header__badge-text">{{ appConfig().environmentName }}</span>
         </div>
       }
     </div>
