@@ -87,6 +87,14 @@
     min-width: 4rem;
     backdrop-filter: blur(10px);
 
+    // Estilos para las opciones del select
+    option {
+      background: var(--bg-primary) !important;
+      color: var(--text-primary) !important;
+      padding: 0.5rem !important;
+      font-weight: 500 !important;
+    }
+
     &:hover {
       background: rgba(255, 255, 255, 1);
       border-color: var(--text-secondary);
@@ -247,6 +255,17 @@
 
       &::after {
         color: var(--text-primary);
+      }
+
+      // Opciones del selector en modo oscuro
+      option {
+        background: #000000 !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
+
+        &:hover {
+          background: #1a1a1a !important;
+        }
       }
     }
 

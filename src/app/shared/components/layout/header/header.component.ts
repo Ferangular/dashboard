@@ -110,8 +110,32 @@ export class HeaderComponent {
   private updateTheme(): void {
     if (this.isDarkMode()) {
       this.renderer.addClass(document.documentElement, 'dark');
+      this.updateSelectOptions(true);
     } else {
       this.renderer.removeClass(document.documentElement, 'dark');
+      this.updateSelectOptions(false);
     }
+  }
+
+  private updateSelectOptions(isDark: boolean): void {
+    setTimeout(() => {
+      const select = document.querySelector('.header__language-select') as HTMLSelectElement;
+      if (select) {
+        const options = select.querySelectorAll('option');
+        options.forEach((option) => {
+          if (isDark) {
+            // Modo oscuro: usa variables CSS del tema oscuro
+            this.renderer.setStyle(option, 'background', '#0d1117');
+            this.renderer.setStyle(option, 'color', '#f0f6fc');
+            this.renderer.setStyle(option, 'font-weight', '600');
+          } else {
+            // Modo claro: usa variables CSS del tema claro
+            this.renderer.setStyle(option, 'background', '#ffffff');
+            this.renderer.setStyle(option, 'color', '#333333');
+            this.renderer.setStyle(option, 'font-weight', '500');
+          }
+        });
+      }
+    }, 0);
   }
 }
