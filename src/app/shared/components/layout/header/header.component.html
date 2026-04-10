@@ -10,7 +10,6 @@
         <h1 class="header__title">{{ appConfig().appName }}</h1>
       </div>
     </div>
-    º
 
     <div class="header__right">
       <nav class="header__nav">
@@ -42,6 +41,19 @@
           }
         </select>
       </div>
+
+      <!-- Dark mode toggle -->
+      <button
+        class="header__dark-mode-toggle"
+        (click)="toggleDarkMode()"
+        [attr.aria-label]="isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'"
+      >
+        @if (isDarkMode()) {
+          <span class="header__dark-mode-icon">🌙</span>
+        } @else {
+          <span class="header__dark-mode-icon">☀️</span>
+        }
+      </button>
 
       @if (appConfig().ui.showEnvironmentBadge) {
         <div class="header__badge">

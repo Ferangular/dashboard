@@ -7,14 +7,22 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background-color: var(--bg-primary);
+  transition: background-color var(--transition-normal);
 
   &__header {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: #c1083b; // Verde para header
-    border-bottom: 0.0625rem solid #e0e0e0;
+    background: var(--color-primary);
+    border-bottom: 0.0625rem solid var(--border-color);
+    transition:
+      background-color var(--transition-normal),
+      border-color var(--transition-normal);
   }
 
   &__container {
@@ -24,14 +32,15 @@
   }
 
   &__sidebar {
-
     position: fixed;
     top: 3.75rem; // Debajo del header (60px)
     left: 0;
     width: var(--sidebar-width);
 
-    border-right: 0.0625rem solid #e0e0e0;
-    transition: width 0.3s ease;
+    border-right: 0.0625rem solid var(--border-color);
+    transition:
+      width 0.3s ease,
+      border-color var(--transition-normal);
     flex-shrink: 0;
     height: calc(100vh - 4rem); // Altura menos header (60px) y footer (64px)
     z-index: 20;
@@ -62,35 +71,38 @@
   }
 
   // Scroll personalizado para mejor UX
-&__content {
-  flex: 1;
-  padding: 2rem;
-  overflow-y: auto;
-  overflow-x: hidden;
-  min-height: calc(100vh - 3.75rem); // Altura mínima menos header
+  &__content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: calc(100vh - 3.75rem); // Altura mínima menos header
     padding-bottom: 9.375rem; // Espacio extra para que no se corte con el footer (150px)
+    background-color: var(--bg-primary);
+    transition: background-color var(--transition-normal);
 
-  // Scroll personalizado
-  &::-webkit-scrollbar {
-    width: 0.5rem; // 8px
-    border-radius: 0.25rem; // 4px
-  }
+    // Scroll personalizado
+    &::-webkit-scrollbar {
+      width: 0.5rem; // 8px
+      border-radius: 0.25rem; // 4px
+    }
 
-  &::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 0.25rem; // 4px
-  }
+    &::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+      border-radius: 0.25rem; // 4px
+      transition: background-color var(--transition-normal);
+    }
 
-  &::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 0.25rem; // 4px
-    transition: background-color 0.3s ease;
+    &::-webkit-scrollbar-thumb {
+      background: var(--text-secondary);
+      border-radius: 0.25rem; // 4px
+      transition: background-color var(--transition-normal);
 
-    &:hover {
-      background: #a8a8a8;
+      &:hover {
+        background: var(--text-primary);
+      }
     }
   }
-}
 
   &__footer {
     width: 100%;
@@ -100,7 +112,9 @@
     right: 0;
     background: transparent; // Sin fondo de colores
     z-index: 10;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     transform-origin: bottom;
 
     &--hidden {
@@ -129,19 +143,31 @@
     justify-content: center;
     width: 3rem;
     height: 3rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
     backdrop-filter: blur(10px);
 
     &:hover {
       background: rgba(255, 255, 255, 1);
       transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+      box-shadow: var(--shadow-lg);
       border-color: rgba(44, 62, 80, 0.3);
     }
 
     &:active {
       transform: translateY(0) scale(0.95);
-      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow-sm);
+    }
+
+    // Modo oscuro
+    :global(.dark) & {
+      background: rgba(30, 30, 30, 0.95);
+      color: var(--text-primary);
+      border-color: var(--border-color);
+
+      &:hover {
+        background: rgba(40, 40, 40, 1);
+        border-color: var(--text-secondary);
+      }
     }
   }
 

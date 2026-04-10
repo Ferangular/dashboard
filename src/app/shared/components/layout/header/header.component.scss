@@ -1,7 +1,10 @@
 .header {
-  background: white;
-  border-bottom: 1px solid #e0e0e0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  transition:
+    background-color var(--transition-normal),
+    border-color var(--transition-normal);
 
   &__container {
     display: flex;
@@ -25,16 +28,18 @@
     padding: 0.5rem;
     cursor: pointer;
     border-radius: 4px;
-    transition: background-color 0.2s;
+    transition: background-color var(--transition-fast);
 
     &:hover {
-      background-color: #f5f5f5;
+      background-color: var(--bg-secondary);
     }
   }
 
   &__menu-icon {
     font-size: 1.5rem;
     line-height: 1;
+    color: var(--text-primary);
+    transition: color var(--transition-normal);
   }
 
   &__logo {
@@ -53,7 +58,8 @@
     font-size: 1.25rem;
     font-weight: 600;
     margin: 0;
-    color: #333;
+    color: var(--text-primary);
+    transition: color var(--transition-normal);
   }
 
   &__right {
@@ -69,28 +75,28 @@
   &__language-select {
     appearance: none;
     background: rgba(255, 255, 255, 0.9);
-    border: 0.0625rem solid rgba(44, 62, 80, 0.2);
+    border: 0.0625rem solid var(--border-color);
     border-radius: 1.25rem;
     padding: 0.5rem 2rem 0.5rem 1rem;
     font-size: 0.875rem;
     font-weight: 500;
-    color: #2c3e50;
+    color: var(--text-primary);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal);
     min-width: 4rem;
     backdrop-filter: blur(10px);
 
     &:hover {
       background: rgba(255, 255, 255, 1);
-      border-color: rgba(44, 62, 80, 0.3);
+      border-color: var(--text-secondary);
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow-md);
     }
 
     &:focus {
       outline: none;
-      border-color: #3498db;
-      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.2);
     }
 
     // Custom arrow
@@ -103,13 +109,13 @@
     }
 
     &::after {
-      content: '▼';
+      content: "▼";
       position: absolute;
       right: 0.75rem;
       top: 50%;
       transform: translateY(-50%);
       font-size: 0.625rem;
-      color: #2c3e50;
+      color: var(--text-primary);
       pointer-events: none;
     }
   }
@@ -141,17 +147,17 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    transition: all 0.2s;
-    color: #666;
+    transition: all var(--transition-fast);
+    color: var(--text-secondary);
 
     &:hover {
-      background-color: #f5f5f5;
-      color: #333;
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
     }
 
     &--active {
-      background-color: #e3f2fd;
-      color: #1976d2;
+      background-color: var(--color-primary);
+      color: white;
     }
   }
 
@@ -165,15 +171,114 @@
 
   &__badge {
     padding: 0.25rem 0.75rem;
-    background-color: #4caf50;
+    background-color: var(--color-primary);
     color: white;
     border-radius: 12px;
     font-size: 0.75rem;
     font-weight: 600;
+    transition: background-color var(--transition-normal);
   }
 
   &__badge-text {
     text-transform: uppercase;
     letter-spacing: 0.5px;
+  }
+
+  &__dark-mode-toggle {
+    background: rgba(255, 255, 255, 0.9);
+    border: 0.0625rem solid rgba(44, 62, 80, 0.2);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+
+    &:hover {
+      background: rgba(255, 255, 255, 1);
+      border-color: rgba(44, 62, 80, 0.3);
+      transform: translateY(-1px) scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.95);
+    }
+  }
+
+  &__dark-mode-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: transform 0.3s ease;
+  }
+
+  // Dark mode styles
+  :global(.dark) & {
+    background: var(--bg-secondary);
+    border-bottom-color: var(--border-color);
+
+    &__title {
+      color: var(--text-primary);
+    }
+
+    &__menu-btn:hover {
+      background-color: var(--bg-secondary);
+    }
+
+    &__language-select {
+      background: rgba(30, 30, 30, 0.9);
+      border-color: var(--border-color);
+      color: var(--text-primary);
+
+      &:hover {
+        background: rgba(40, 40, 40, 1);
+        border-color: var(--text-secondary);
+      }
+
+      &::after {
+        color: var(--text-primary);
+      }
+    }
+
+    &__nav-btn {
+      color: var(--text-secondary);
+
+      &:hover {
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+      }
+
+      &--active {
+        background-color: var(--color-primary);
+        color: white;
+      }
+    }
+
+    &__dark-mode-toggle {
+      background: rgba(30, 30, 30, 0.9);
+      border-color: var(--border-color);
+
+      &:hover {
+        background: rgba(40, 40, 40, 1);
+        border-color: var(--text-secondary);
+      }
+    }
+
+    &__badge {
+      background-color: var(--color-primary);
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
   }
 }

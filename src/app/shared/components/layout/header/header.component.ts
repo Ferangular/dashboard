@@ -19,6 +19,7 @@ export class HeaderComponent {
   private i18nService = inject(I18nService);
 
   isSidebarOpen = signal(false);
+  isDarkMode = signal(false);
 
   appConfig = computed(() => this.appSettings.config);
 
@@ -80,6 +81,36 @@ export class HeaderComponent {
     this.router.navigate([path]);
     if (window.innerWidth <= 768) {
       this.isSidebarOpen.set(false);
+    }
+  }
+
+  constructor() {
+    this.initializeDarkMode();
+  }
+
+  private initializeDarkMode(): void {
+    const savedTheme = localStorage.getItem('darkMode');
+    if (savedTheme) {
+      this.isDarkMode.set(savedTheme === 'true');
+      this.updateTheme();
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      this.isDarkMode.set(prefersDark);
+      this.updateTheme();
+    }
+  }
+
+  toggleDarkMode(): void {
+    this.isDarkMode.set(!this.isDarkMode());
+    localStorage.setItem('darkMode', this.isDarkMode().toString());
+    this.updateTheme();
+  }
+
+  private updateTheme(): void {
+    if (this.isDarkMode()) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
   }
 }

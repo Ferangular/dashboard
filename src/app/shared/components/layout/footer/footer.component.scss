@@ -1,7 +1,10 @@
 .footer {
-  background: #f8f9fa;
-  border-top: 1px solid #e0e0e0;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
   margin-top: auto;
+  transition:
+    background-color var(--transition-normal),
+    border-color var(--transition-normal);
 
   &__container {
     max-width: 1200px;
@@ -25,15 +28,17 @@
 
   &__app-name {
     font-weight: 600;
-    color: #333;
+    color: var(--text-primary);
     margin: 0;
     font-size: 1rem;
+    transition: color var(--transition-normal);
   }
 
   &__description {
-    color: #666;
+    color: var(--text-secondary);
     margin: 0;
     font-size: 0.875rem;
+    transition: color var(--transition-normal);
   }
 
   &__right {
@@ -47,7 +52,8 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.875rem;
-    color: #666;
+    color: var(--text-secondary);
+    transition: color var(--transition-normal);
   }
 
   &__version {
@@ -55,11 +61,14 @@
   }
 
   &__separator {
-    color: #ccc;
+    color: var(--text-secondary);
+    opacity: 0.5;
+    transition: color var(--transition-normal);
   }
 
   &__year {
-    color: #666;
+    color: var(--text-secondary);
+    transition: color var(--transition-normal);
   }
 
   &__debug {
@@ -68,7 +77,7 @@
   }
 
   &__debug-badge {
-    background-color: #ff5722;
+    background-color: var(--color-primary);
     color: white;
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
@@ -76,6 +85,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    transition: background-color var(--transition-normal);
   }
 
   @media (max-width: 768px) {

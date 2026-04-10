@@ -7,9 +7,15 @@
       }
     </div>
 
-    <button class="sidebar__toggle" (click)="toggleCollapse()" aria-label="Toggle sidebar">
-      <span class="sidebar__toggle-icon">{{ isCollapsed() ? '→' : '←' }}</span>
-    </button>
+    @if (!isCollapsed()) {
+      <button class="sidebar__toggle" (click)="toggleCollapse()" aria-label="Toggle sidebar">
+        <span class="sidebar__toggle-icon">←</span>
+      </button>
+    } @else {
+      <button class="sidebar__toggle sidebar__toggle--collapsed" (click)="toggleCollapse()" aria-label="Expand sidebar">
+        <span class="sidebar__toggle-icon">→</span>
+      </button>
+    }
   </div>
 
   <nav class="sidebar__nav">
