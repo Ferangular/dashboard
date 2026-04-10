@@ -1,8 +1,4 @@
-<aside 
-  class="sidebar"
-  [class.sidebar--collapsed]="isCollapsed()"
-  [class.sidebar--mobile-open]="isMobileOpen()"
->
+<aside class="sidebar" [class.sidebar--collapsed]="isCollapsed()" [class.sidebar--mobile-open]="isMobileOpen()">
   <div class="sidebar__header">
     <div class="sidebar__logo">
       <span class="sidebar__logo-icon">🚀</span>
@@ -10,7 +6,7 @@
         <span class="sidebar__logo-text">Perf Lab</span>
       }
     </div>
-    
+
     <button class="sidebar__toggle" (click)="toggleCollapse()" aria-label="Toggle sidebar">
       <span class="sidebar__toggle-icon">{{ isCollapsed() ? '→' : '←' }}</span>
     </button>
@@ -20,14 +16,14 @@
     <ul class="sidebar__nav-list">
       @for (item of navigationItems; track item.id) {
         <li class="sidebar__nav-item">
-          <button 
+          <button
             class="sidebar__nav-btn"
             [class.sidebar__nav-btn--active]="isActive(item.path)"
             (click)="navigateTo(item.path)"
           >
             <span class="sidebar__nav-icon">{{ item.icon }}</span>
             @if (!isCollapsed()) {
-              <span class="sidebar__nav-label">{{ item.label }}</span>
+              <span class="sidebar__nav-label">{{ translate(item.label) }}</span>
             }
           </button>
         </li>

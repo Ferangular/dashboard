@@ -1,1 +1,14 @@
-{}
+{
+  "navigation": {
+    "home": "Inicio",
+    "list": "Listado",
+    "performance": "Rendimiento",
+    "detail": "Detalle",
+    "laboratory": "Laboratorio",
+    "contact": "Contacto",
+    "settings": "Ajustes"
+  },
+  "language": {
+    "select": "Seleccionar idioma"
+  }
+}

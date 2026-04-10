@@ -1,7 +1,8 @@
-import { Component, signal, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppSettingsService } from '../../../../core/services/app-settings.service';
 import { NavigationItem } from '../../../../core/interfaces/navigation.interface';
+import { AppSettingsService } from '../../../../core/services/app-settings.service';
+import { I18nService } from '../../../../core/services/i18n.service';
 import { SidebarService } from '../../../../core/services/sidebar.service';
 
 @Component({
@@ -9,61 +10,58 @@ import { SidebarService } from '../../../../core/services/sidebar.service';
   standalone: true,
   imports: [],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   router = inject(Router);
   private appSettings = inject(AppSettingsService);
   private sidebarService = inject(SidebarService);
+  private i18nService = inject(I18nService);
 
   isSidebarOpen = signal(false);
 
   appConfig = computed(() => this.appSettings.config);
-  
-  // Idiomas disponibles
-  availableLanguages = [
-    { code: 'es', name: 'ES', flag: '🇪🇸' },
-    { code: 'en', name: 'EN', flag: '🇬🇧' }
-  ];
-  
-  currentLanguage = signal('es'); // Idioma actual (por defecto español)
+
+  availableLanguages = this.i18nService.getAvailableLanguages();
+
+  currentLanguage = computed(() => this.i18nService.getCurrentLanguage());
 
   navigationItems: NavigationItem[] = [
     {
       id: 'home',
-      label: 'Inicio',
+      label: 'navigation.home',
       path: '/',
       icon: 'home',
-      order: 1
+      order: 1,
     },
     {
       id: 'list',
-      label: 'Listado',
+      label: 'navigation.list',
       path: '/list',
       icon: 'list',
-      order: 2
+      order: 2,
     },
     {
       id: 'performance',
-      label: 'Rendimiento',
+      label: 'navigation.performance',
       path: '/performance-lab',
       icon: 'speed',
-      order: 3
+      order: 3,
     },
     {
       id: 'contact',
-      label: 'Contacto',
+      label: 'navigation.contact',
       path: '/contact',
       icon: 'mail',
-      order: 4
+      order: 4,
     },
     {
       id: 'settings',
-      label: 'Ajustes',
+      label: 'navigation.settings',
       path: '/settings',
       icon: 'settings',
-      order: 5
-    }
+      order: 5,
+    },
   ];
 
   toggleSidebar(): void {
@@ -71,9 +69,11 @@ export class HeaderComponent {
   }
 
   changeLanguage(languageCode: string): void {
-    this.currentLanguage.set(languageCode);
-    // Aquí podrías integrar con un servicio de i18n
-    console.log('Idioma cambiado a:', languageCode);
+    this.i18nService.setLanguage(languageCode);
+  }
+
+  translate(key: string): string {
+    return this.i18nService.translate(key);
   }
 
   navigateTo(path: string): void {

@@ -1,1 +1,14 @@
-{}
+{
+  "navigation": {
+    "home": "Home",
+    "list": "List",
+    "performance": "Performance",
+    "detail": "Detail",
+    "laboratory": "Laboratory",
+    "contact": "Contact",
+    "settings": "Settings"
+  },
+  "language": {
+    "select": "Select language"
+  }
+}
