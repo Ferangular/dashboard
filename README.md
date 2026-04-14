@@ -206,7 +206,7 @@ Este proyecto está **abierto a mejoras** y **sugerencias**. Para contribuir:
 - Componentes reutilizables
 - Testing y calidad de código
 - Documentación técnica
-- Accesibilidad (a11y)
+- Accesibilidad (a11y) - [Ver Checklist](./docs/accessibility-checklist.md)
 
 ---
 
