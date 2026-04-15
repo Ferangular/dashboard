@@ -1,10 +1,11 @@
-import { Component, computed, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './shared/components/layout/header/header.component';
-import { SidebarComponent } from './shared/components/layout/sidebar/sidebar.component';
-import { FooterComponent } from './shared/components/layout/footer/footer.component';
+import { AccessibilityWidgetComponent } from './components/accessibility-widget.component/accessibility-widget.component';
 import { AppSettingsService } from './core/services/app-settings.service';
 import { SidebarService } from './core/services/sidebar.service';
+import { FooterComponent } from './shared/components/layout/footer/footer.component';
+import { HeaderComponent } from './shared/components/layout/header/header.component';
+import { SidebarComponent } from './shared/components/layout/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +15,11 @@ import { SidebarService } from './core/services/sidebar.service';
     RouterOutlet,
     HeaderComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    AccessibilityWidgetComponent,
   ],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
   private appSettings = inject(AppSettingsService);
@@ -32,6 +34,6 @@ export class App {
   }
 
   toggleFooter(): void {
-    this.isFooterVisible.update(visible => !visible);
+    this.isFooterVisible.update((visible) => !visible);
   }
 }

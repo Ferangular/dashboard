@@ -33,6 +33,9 @@
 
   <!-- Botón toggle independiente y flotante -->
   <button class="footer__toggle" (click)="toggleFooter()" aria-label="Toggle footer">
-    <span class="footer__toggle-icon">{{ isFooterVisible() ? '▼' : '▲' }}</span>
+    <span class="footer__toggle-icon">{{ isFooterVisible() ? '&#x25bc;' : '&#x25b2;' }}</span>
   </button>
+
+  <!-- Widget de accesibilidad flotante -->
+  <app-accessibility-widget></app-accessibility-widget>
 </div>

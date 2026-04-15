@@ -74,4 +74,11 @@ export class ThemeService {
   isDark(): boolean {
     return this.isDarkMode();
   }
+
+  // Método para resetear el tema (útil para debugging)
+  resetTheme(): void {
+    localStorage.removeItem('darkMode');
+    this.isDarkMode.set(false);
+    this.updateTheme();
+  }
 }

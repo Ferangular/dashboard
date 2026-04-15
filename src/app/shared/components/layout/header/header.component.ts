@@ -89,4 +89,8 @@ export class HeaderComponent {
   toggleDarkMode(): void {
     this.themeService.toggleDarkMode();
   }
+
+  resetTheme(): void {
+    this.themeService.resetTheme();
+  }
 }

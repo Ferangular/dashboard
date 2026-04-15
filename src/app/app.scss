@@ -144,7 +144,7 @@
     left: 0;
     right: 0;
     background: transparent; // Sin fondo de colores
-    z-index: 10;
+    z-index: 5; // Por debajo del widget de accesibilidad (z-index: 1000)
     transition:
       transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
       height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -170,7 +170,7 @@
     font-size: 1.25rem;
     font-weight: 600;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 15;
+    z-index: 6; // Por debajo del widget de accesibilidad (z-index: 1000)
     display: flex;
     align-items: center;
     justify-content: center;

@@ -10,6 +10,82 @@ body {
     background-color var(--transition-normal);
 }
 
+/* Clases de accesibilidad globales para el widget */
+.font-size-80 {
+  font-size: 0.8em !important;
+}
+
+.font-size-90 {
+  font-size: 0.9em !important;
+}
+
+.font-size-110 {
+  font-size: 1.1em !important;
+}
+
+.font-size-120 {
+  font-size: 1.2em !important;
+}
+
+.font-size-130 {
+  font-size: 1.3em !important;
+}
+
+.font-size-140 {
+  font-size: 1.4em !important;
+}
+
+.font-size-150 {
+  font-size: 1.5em !important;
+}
+
+.contrast-high {
+  --bg-primary: #ffffff !important;
+  --bg-secondary: #f0f0f0 !important;
+  --text-primary: #000000 !important;
+  --text-secondary: #000000 !important;
+  --border-color: #000000 !important;
+}
+
+.contrast-dark {
+  --bg-primary: #1a1a1a !important;
+  --bg-secondary: #2d2d2d !important;
+  --text-primary: #ffffff !important;
+  --text-secondary: #e0e0e0 !important;
+  --border-color: #404040 !important;
+}
+
+/* Clases específicas del widget que no interfieren con el tema principal */
+.accessibility-contrast-dark {
+  --bg-primary: #1a1a1a !important;
+  --bg-secondary: #2d2d2d !important;
+  --text-primary: #ffffff !important;
+  --text-secondary: #e0e0e0 !important;
+  --border-color: #404040 !important;
+}
+
+.accessibility-contrast-high {
+  --bg-primary: #ffffff !important;
+  --bg-secondary: #f0f0f0 !important;
+  --text-primary: #000000 !important;
+  --text-secondary: #000000 !important;
+  --border-color: #000000 !important;
+}
+
+.spacing-wide {
+  line-height: 1.75 !important;
+}
+
+.spacing-extra-wide {
+  line-height: 2 !important;
+}
+
+.high-contrast-focus *:focus {
+  outline: 3px solid #ffcc00 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 2px #000000 !important;
+}
+
 h1,
 h2,
 h3,
