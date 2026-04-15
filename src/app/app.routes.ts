@@ -3,6 +3,7 @@ import { AccessibilityDemoComponent } from './components/accessibility-demo.comp
 import { CheckVersionComponent } from './components/check-version.component/check-version.component';
 import { ContactFormComponent } from './components/contact-form.component/contact-form.component';
 import { KeyboardNavigationDemoComponent } from './components/keyboard-navigation-demo.component/keyboard-navigation-demo.component';
+import { SemanticStructure } from './components/semantic-structure/semantic-structure';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,11 @@ export const routes: Routes = [
     path: 'keyboard-navigation',
     component: KeyboardNavigationDemoComponent,
     title: 'Regla 4: Navegación por Teclado',
+  },
+  {
+    path: 'semantic-structure',
+    component: SemanticStructure,
+    title: 'Regla 6: Encabezados y Estructura Semántica',
   },
   {
     path: '**',

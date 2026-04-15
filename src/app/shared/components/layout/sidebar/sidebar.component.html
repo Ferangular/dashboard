@@ -22,16 +22,54 @@
     <ul class="sidebar__nav-list">
       @for (item of navigationItems; track item.id) {
         <li class="sidebar__nav-item">
-          <button
-            class="sidebar__nav-btn"
-            [class.sidebar__nav-btn--active]="isActive(item.path)"
-            (click)="navigateTo(item.path)"
-          >
-            <span class="sidebar__nav-icon">{{ item.icon }}</span>
-            @if (!isCollapsed()) {
-              <span class="sidebar__nav-label">{{ translate(item.label) }}</span>
-            }
-          </button>
+          @if (item.children && item.children.length > 0) {
+            <div class="sidebar__nav-group">
+              <button
+                class="sidebar__nav-btn sidebar__nav-btn--parent"
+                [class.sidebar__nav-btn--active]="isActive(item.path)"
+                (click)="handleParentClick(item)"
+                aria-expanded="{{ isExpanded(item.id) }}"
+                aria-controls="submenu-{{ item.id }}"
+              >
+                <span class="sidebar__nav-icon">{{ item.icon }}</span>
+
+                @if (!isCollapsed()) {
+                  <span class="sidebar__nav-label">{{ translate(item.label) }}</span>
+                  <span class="sidebar__nav-arrow" [class.sidebar__nav-arrow--expanded]="isExpanded(item.id)">▶</span>
+                }
+              </button>
+
+              <ul
+                id="submenu-{{ item.id }}"
+                class="sidebar__submenu"
+                [class.sidebar__submenu--expanded]="isExpanded(item.id)"
+              >
+                @for (child of item.children; track child.id) {
+                  <li class="sidebar__submenu-item">
+                    <button
+                      class="sidebar__nav-btn sidebar__nav-btn--child"
+                      [class.sidebar__nav-btn--active]="isActive(child.path)"
+                      (click)="navigateTo(child.path)"
+                    >
+                      <span class="sidebar__nav-icon">{{ child.icon }}</span>
+                      <span class="sidebar__nav-label">{{ translate(child.label) }}</span>
+                    </button>
+                  </li>
+                }
+              </ul>
+            </div>
+          } @else {
+            <button
+              class="sidebar__nav-btn"
+              [class.sidebar__nav-btn--active]="isActive(item.path)"
+              (click)="navigateTo(item.path)"
+            >
+              <span class="sidebar__nav-icon">{{ item.icon }}</span>
+              @if (!isCollapsed()) {
+                <span class="sidebar__nav-label">{{ translate(item.label) }}</span>
+              }
+            </button>
+          }
         </li>
       }
     </ul>

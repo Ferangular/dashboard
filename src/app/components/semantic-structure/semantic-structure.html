@@ -1,0 +1,490 @@
+<div class="semantic-demo">
+  <!-- Header Principal con role banner -->
+  <header class="demo-header" role="banner">
+    <h1 class="main-title">Regla 6: Encabezados y Estructura Semántica</h1>
+    <p class="demo-description">
+      La estructura semántica proper proporciona contexto y navegación clara para todos los usuarios, especialmente para
+      usuarios de lectores de pantalla.
+    </p>
+  </header>
+
+  <!-- Navegación Principal -->
+  <nav class="demo-nav" role="navigation" aria-label="Navegación de la demostración">
+    <ul class="nav-list">
+      <li><button class="nav-btn" (click)="setCurrentView('hierarchy')">Jerarquía de Encabezados</button></li>
+      <li><button class="nav-btn" (click)="setCurrentView('landmarks')">Landmarks ARIA</button></li>
+      <li><button class="nav-btn" (click)="setCurrentView('comparison')">Correcto vs Incorrecto</button></li>
+      <li><button class="nav-btn" (click)="setCurrentView('testing')">Herramientas de Testing</button></li>
+    </ul>
+  </nav>
+
+  <!-- Contenido Principal -->
+  <main class="demo-main" role="main">
+    <!-- Vista 1: Jerarquía de Encabezados -->
+    <section class="view-section" [class.active]="currentView() === 'hierarchy'">
+      <h2>1. Jerarquía Correcta de Encabezados</h2>
+
+      <div class="hierarchy-demo">
+        <div class="structure-controls">
+          <button class="control-btn" (click)="toggleStructureView()">
+            {{ showCorrectStructure() ? 'Mostrar Estructura Incorrecta' : 'Mostrar Estructura Correcta' }}
+          </button>
+          <button class="control-btn" (click)="analyzeStructure()">Analizar Estructura</button>
+        </div>
+
+        @if (showCorrectStructure()) {
+          <!-- Estructura Correcta -->
+          <div class="correct-structure">
+            <h1 id="main-title" class="heading-1" [class.highlighted]="isHighlighted('main-title')">
+              Título Principal de la Página
+              <button
+                class="highlight-btn"
+                (click)="highlightElement('main-title')"
+                aria-label="Resaltar este encabezado"
+              >
+                ?
+              </button>
+            </h1>
+
+            <section class="content-section">
+              <h2 id="main-section" class="heading-2" [class.highlighted]="isHighlighted('main-section')">
+                Sección Principal
+                <button
+                  class="highlight-btn"
+                  (click)="highlightElement('main-section')"
+                  aria-label="Resaltar este encabezado"
+                >
+                  ?
+                </button>
+              </h2>
+
+              <p>Este es el contenido principal de la primera sección.</p>
+
+              <section class="subsection">
+                <h3
+                  id="important-subsection"
+                  class="heading-3"
+                  [class.highlighted]="isHighlighted('important-subsection')"
+                >
+                  Subsección Importante
+                  <button
+                    class="highlight-btn"
+                    (click)="highlightElement('important-subsection')"
+                    aria-label="Resaltar este encabezado"
+                  >
+                    ?
+                  </button>
+                </h3>
+
+                <p>Contenido detallado de la subsección importante.</p>
+
+                <section class="detail-section">
+                  <h4 id="specific-details" class="heading-4" [class.highlighted]="isHighlighted('specific-details')">
+                    Detalles Específicos
+                    <button
+                      class="highlight-btn"
+                      (click)="highlightElement('specific-details')"
+                      aria-label="Resaltar este encabezado"
+                    >
+                      ?
+                    </button>
+                  </h4>
+
+                  <p>Información específica y detallada.</p>
+
+                  <section class="info-section">
+                    <h5 id="additional-info" class="heading-5" [class.highlighted]="isHighlighted('additional-info')">
+                      Información Adicional
+                      <button
+                        class="highlight-btn"
+                        (click)="highlightElement('additional-info')"
+                        aria-label="Resaltar este encabezado"
+                      >
+                        ?
+                      </button>
+                    </h5>
+
+                    <p>Información complementaria adicional.</p>
+
+                    <section class="reference-section">
+                      <h6 id="final-reference" class="heading-6" [class.highlighted]="isHighlighted('final-reference')">
+                        Referencia Final
+                        <button
+                          class="highlight-btn"
+                          (click)="highlightElement('final-reference')"
+                          aria-label="Resaltar este encabezado"
+                        >
+                          ?
+                        </button>
+                      </h6>
+
+                      <p>Referencia final y conclusión.</p>
+                    </section>
+                  </section>
+                </section>
+              </section>
+
+              <section class="subsection">
+                <h3 id="other-subsection" class="heading-3" [class.highlighted]="isHighlighted('other-subsection')">
+                  Otra Subsección
+                  <button
+                    class="highlight-btn"
+                    (click)="highlightElement('other-subsection')"
+                    aria-label="Resaltar este encabezado"
+                  >
+                    ?
+                  </button>
+                </h3>
+
+                <p>Otro contenido de subsección al mismo nivel.</p>
+              </section>
+            </section>
+
+            <section class="content-section">
+              <h2 id="second-section" class="heading-2" [class.highlighted]="isHighlighted('second-section')">
+                Segunda Sección Principal
+                <button
+                  class="highlight-btn"
+                  (click)="highlightElement('second-section')"
+                  aria-label="Resaltar este encabezado"
+                >
+                  ?
+                </button>
+              </h2>
+
+              <p>Contenido de la segunda sección principal.</p>
+
+              <section class="subsection">
+                <h3
+                  id="secondary-subsection"
+                  class="heading-3"
+                  [class.highlighted]="isHighlighted('secondary-subsection')"
+                >
+                  Subsección Secundaria
+                  <button
+                    class="highlight-btn"
+                    (click)="highlightElement('secondary-subsection')"
+                    aria-label="Resaltar este encabezado"
+                  >
+                    ?
+                  </button>
+                </h3>
+
+                <p>Contenido de la subsección secundaria.</p>
+              </section>
+            </section>
+          </div>
+        } @else {
+          <!-- Estructura Incorrecta -->
+          <div class="incorrect-structure">
+            <h1>Título Principal</h1>
+            <h3>Subtítulo (incorrecto - salto de h1 a h3)</h3>
+            <h1>Otro Título Principal (incorrecto - múltiples h1)</h1>
+            <h4>Subsección (incorrecto - salto de h1 a h4)</h4>
+            <h2>Título de nivel 2 después de h4 (incorrecto)</h2>
+            <h5>Más contenido (incorrecto - desordenado)</h5>
+          </div>
+        }
+      </div>
+
+      <!-- Navegación por Estructura -->
+      <section class="structure-navigation">
+        <h3>Navegación por Encabezados</h3>
+        <div class="heading-nav">
+          @for (heading of headingHierarchy(); track heading.id) {
+            <div class="nav-item" style="margin-left: {{ (heading.level - 1) * 20 }}px">
+              <button class="nav-link" (click)="navigateToHeading(heading.id)">
+                {{ getHeadingLevel(heading.level) }}: {{ heading.text }}
+              </button>
+            </div>
+          }
+        </div>
+      </section>
+    </section>
+
+    <!-- Vista 2: Landmarks ARIA -->
+    <section class="view-section" [class.active]="currentView() === 'landmarks'">
+      <h2>2. Landmarks ARIA y Estructura Semántica</h2>
+
+      <div class="landmarks-demo">
+        <div class="landmark-grid">
+          @for (landmark of landmarkRegions(); track landmark.role) {
+            <div class="landmark-card">
+              <div class="landmark-header">
+                <code class="landmark-element">{{ landmark.element }}</code>
+                <span class="landmark-role">role="{{ landmark.role }}"</span>
+              </div>
+              <h3 class="landmark-title">{{ landmark.label }}</h3>
+              <p class="landmark-description">{{ landmark.description }}</p>
+              <div class="landmark-example">
+                <pre><code>{{ landmark.element }}
+  role="{{ landmark.role }}"
+  aria-label="{{ landmark.label }}"
+</code></pre>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Ejemplo Completo de Página Semántica -->
+      <section class="complete-example">
+        <h3>Ejemplo Completo de Página Semántica</h3>
+        <div class="semantic-example">
+          <pre><code>&lt;header role="banner"&gt;
+  &lt;h1&gt;Título del Sitio&lt;/h1&gt;
+  &lt;nav role="navigation" aria-label="Navegación principal"&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Servicios&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main role="main"&gt;
+  &lt;h1&gt;Título Principal de la Página&lt;/h1&gt;
+  &lt;section&gt;
+    &lt;h2&gt;Sección Principal&lt;/h2&gt;
+    &lt;article&gt;
+      &lt;h3&gt;Artículo Independiente&lt;/h3&gt;
+      &lt;p&gt;Contenido del artículo...&lt;/p&gt;
+    &lt;/article&gt;
+  &lt;/section&gt;
+&lt;/main&gt;
+
+&lt;aside role="complementary" aria-label="Contenido relacionado"&gt;
+  &lt;h2&gt;Información Adicional&lt;/h2&gt;
+  &lt;p&gt;Contenido complementario...&lt;/p&gt;
+&lt;/aside&gt;
+
+&lt;footer role="contentinfo"&gt;
+  &lt;p&gt;&copy; 2024 Sitio Web. Todos los derechos reservados.&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+        </div>
+      </section>
+    </section>
+
+    <!-- Vista 3: Comparación Correcto vs Incorrecto -->
+    <section class="view-section" [class.active]="currentView() === 'comparison'">
+      <h2>3. Comparación: Estructura Correcta vs Incorrecta</h2>
+
+      <div class="comparison-grid">
+        @for (example of incorrectExamples(); track example.title) {
+          <div class="comparison-card">
+            <div class="comparison-header">
+              <h3 class="comparison-title">?? {{ example.title }}</h3>
+              <span class="comparison-problem">{{ example.problem }}</span>
+            </div>
+            <p class="comparison-description">{{ example.description }}</p>
+            <div class="comparison-code">
+              <pre><code>{{ example.example }}</code></pre>
+            </div>
+            <div class="comparison-fix">
+              <h4>Solución Correcta:</h4>
+              <p>{{ getCorrectSolution(example.title) }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- Vista 4: Herramientas de Testing -->
+    <section class="view-section" [class.active]="currentView() === 'testing'">
+      <h2>4. Herramientas de Testing y Validación</h2>
+
+      <div class="testing-tools">
+        <div class="tool-section">
+          <h3>Herramientas Automáticas</h3>
+          <div class="tools-list">
+            <div class="tool-item">
+              <h4>axe DevTools</h4>
+              <p>Extensión de Chrome para auditoría automática de accesibilidad</p>
+              <button class="tool-btn" (click)="showAccessibleMessage('axe DevTools: Auditoría completada')">
+                Probar axe
+              </button>
+            </div>
+            <div class="tool-item">
+              <h4>WAVE Extension</h4>
+              <p>Evaluación visual de accesibilidad y estructura semántica</p>
+              <button class="tool-btn" (click)="showAccessibleMessage('WAVE: Análisis visual completado')">
+                Probar WAVE
+              </button>
+            </div>
+            <div class="tool-item">
+              <h4>Lighthouse</h4>
+              <p>Auditoría integral incluyendo estructura semántica</p>
+              <button
+                class="tool-btn"
+                (click)="showAccessibleMessage('Lighthouse: Puntuación de accesibilidad generada')"
+              >
+                Probar Lighthouse
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-section">
+          <h3>Validación Manual</h3>
+          <div class="validation-steps">
+            <div class="step-item">
+              <h4>1. Verificar Jerarquía de Encabezados</h4>
+              <ul>
+                <li>Un solo &lt;h1&gt; por página</li>
+                <li>Sin saltos de nivel (h1 ? h3)</li>
+                <li>Estructura lógica y anidada</li>
+              </ul>
+              <button class="validate-btn" (click)="validateHeadingHierarchy()">Validar Encabezados</button>
+            </div>
+            <div class="step-item">
+              <h4>2. Verificar Landmarks</h4>
+              <ul>
+                <li>Presence de roles semánticos</li>
+                <li>Labels descriptivos</li>
+                <li>Estructura lógica del documento</li>
+              </ul>
+              <button class="validate-btn" (click)="countLandmarks()">Contar Landmarks</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-section">
+          <h3>Testing con Lectores de Pantalla</h3>
+          <div class="screen-reader-testing">
+            <div class="testing-item">
+              <h4>NVDA/JAWS Navigation</h4>
+              <p>Usar teclas rápidas para navegar por estructura:</p>
+              <ul>
+                <li>
+                  <kbd>H</kbd>
+                  - Saltar entre encabezados
+                </li>
+                <li>
+                  <kbd>1</kbd>
+                  -
+                  <kbd>6</kbd>
+                  - Saltar a encabezados específicos
+                </li>
+                <li>
+                  <kbd>R</kbd>
+                  - Saltar entre landmarks
+                </li>
+                <li>
+                  <kbd>D</kbd>
+                  - Saltar entre elementos semánticos
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Mejores Prácticas -->
+    <section class="best-practices">
+      <h2>Mejores Prácticas</h2>
+      <div class="practices-grid">
+        <div class="practice-section">
+          <h3>?? Recomendaciones</h3>
+          <ul class="practice-list">
+            @for (tip of getBestPracticeTips(); track tip) {
+              <li class="practice-item">{{ tip }}</li>
+            }
+          </ul>
+        </div>
+        <div class="practice-section">
+          <h3>?? Errores Comunes</h3>
+          <ul class="practice-list errors">
+            @for (mistake of getCommonMistakes(); track mistake) {
+              <li class="practice-item">{{ mistake }}</li>
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Aside para contenido complementario -->
+  <aside class="demo-aside" role="complementary" aria-label="Información adicional">
+    <h2>Referencias Rápidas</h2>
+    <div class="quick-reference">
+      <h3>Elementos Semánticos HTML5</h3>
+      <ul>
+        <li>
+          <code>&lt;header&gt;</code>
+          - Cabecera
+        </li>
+        <li>
+          <code>&lt;nav&gt;</code>
+          - Navegación
+        </li>
+        <li>
+          <code>&lt;main&gt;</code>
+          - Contenido principal
+        </li>
+        <li>
+          <code>&lt;section&gt;</code>
+          - Sección temática
+        </li>
+        <li>
+          <code>&lt;article&gt;</code>
+          - Contenido independiente
+        </li>
+        <li>
+          <code>&lt;aside&gt;</code>
+          - Contenido complementario
+        </li>
+        <li>
+          <code>&lt;footer&gt;</code>
+          - Pie de página
+        </li>
+      </ul>
+    </div>
+
+    <div class="quick-reference">
+      <h3>Roles ARIA Principales</h3>
+      <ul>
+        <li>
+          <code>banner</code>
+          - Cabecera del sitio
+        </li>
+        <li>
+          <code>navigation</code>
+          - Navegación
+        </li>
+        <li>
+          <code>main</code>
+          - Contenido principal
+        </li>
+        <li>
+          <code>complementary</code>
+          - Contenido secundario
+        </li>
+        <li>
+          <code>contentinfo</code>
+          - Información del sitio
+        </li>
+        <li>
+          <code>search</code>
+          - Función de búsqueda
+        </li>
+        <li>
+          <code>form</code>
+          - Formulario
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Footer con información del sitio -->
+  <footer class="demo-footer" role="contentinfo">
+    <div class="footer-content">
+      <h2>Información de la Demostración</h2>
+      <p>Esta demostración cumple con los criterios WCAG 2.1 Nivel AA para estructura semántica y encabezados.</p>
+      <div class="footer-links">
+        <a href="#" class="footer-link">WCAG 2.1 Guidelines</a>
+        <a href="#" class="footer-link">ARIA Authoring Practices</a>
+        <a href="#" class="footer-link">HTML5 Semantic Elements</a>
+      </div>
+    </div>
+  </footer>
+</div>

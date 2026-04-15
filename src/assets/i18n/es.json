@@ -5,6 +5,10 @@
     "detail": "Detalle",
     "laboratory": "Laboratorio",
     "accessibility": "Accesibilidad",
+    "accessibilityDemo": "Demo de Accesibilidad",
+    "contactForm": "Formulario Accesible",
+    "keyboardNavigation": "Navegación por Teclado",
+    "semanticStructure": "Estructura Semántica",
     "keyboard": "Teclado",
     "contact": "Contacto",
     "settings": "Ajustes"

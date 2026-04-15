@@ -54,31 +54,86 @@ export class SidebarComponent {
       path: '/accessibility',
       icon: '♿',
       order: 5,
-    },
-    {
-      id: 'keyboard',
-      label: 'navigation.keyboard',
-      path: '/keyboard-navigation',
-      icon: '⌨️',
-      order: 6,
-    },
-    {
-      id: 'contact',
-      label: 'navigation.contact',
-      path: '/contact-form',
-      icon: '📧',
-      order: 7,
+      children: [
+        {
+          id: 'accessibility-demo',
+          label: 'navigation.accessibilityDemo',
+          path: '/accessibility',
+          icon: '✨',
+          order: 1,
+        },
+        {
+          id: 'contact-form',
+          label: 'navigation.contactForm',
+          path: '/contact-form',
+          icon: '??',
+          order: 2,
+        },
+        {
+          id: 'keyboard-navigation',
+          label: 'navigation.keyboardNavigation',
+          path: '/keyboard-navigation',
+          icon: '⌨️',
+          order: 3,
+        },
+        {
+          id: 'semantic-structure',
+          label: 'navigation.semanticStructure',
+          path: '/semantic-structure',
+          icon: '??',
+          order: 4,
+        },
+      ],
     },
     {
       id: 'settings',
       label: 'navigation.settings',
       path: '/settings',
       icon: '⚙️',
-      order: 8,
+      order: 6,
     },
   ];
 
   currentPath = computed(() => this.router.url);
+
+  // Submenu management
+  expandedItems = signal<Set<string>>(new Set());
+  isToggling = signal(false);
+
+  toggleSubmenu(itemId: string): void {
+    // Prevenir múltiples clicks rápidos
+    if (this.isToggling()) return;
+    this.isToggling.set(true);
+
+    const current = new Set(this.expandedItems());
+    if (current.has(itemId)) {
+      current.delete(itemId);
+    } else {
+      current.add(itemId);
+    }
+    this.expandedItems.set(current);
+
+    // Usar signal con efecto para limpiar el estado después de la animación
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        this.isToggling.set(false);
+      });
+    });
+  }
+
+  isExpanded(itemId: string): boolean {
+    return this.expandedItems().has(itemId);
+  }
+
+  handleParentClick(item: NavigationItem): void {
+    // Si tiene hijos, manejar el submenú
+    if (item.children && item.children.length > 0) {
+      this.toggleSubmenu(item.id);
+    } else {
+      // Si no tiene hijos, navegar normalmente
+      this.navigateTo(item.path);
+    }
+  }
 
   toggleCollapse(): void {
     this.sidebarService.toggle();
