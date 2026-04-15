@@ -6,12 +6,24 @@ const angular = require('angular-eslint');
 
 module.exports = defineConfig([
   {
-    files: ['**/*.ts'],
+    ignores: [
+      '**/node_modules/**',
+      '**/.angular/**',
+      '**/dist/**',
+      '**/coverage/**',
+      '**/reports/**',
+      '**/.git/**',
+      '**/public/**',
+    ],
+  },
+
+  {
+    files: ['src/**/*.ts'],
     extends: [
       eslint.configs.recommended,
-      tseslint.configs.recommended,
-      tseslint.configs.stylistic,
-      angular.configs.tsRecommended,
+      ...tseslint.configs.recommended,
+      ...tseslint.configs.stylistic,
+      ...angular.configs.tsRecommended,
     ],
     processor: angular.processInlineTemplates,
     rules: {
@@ -33,9 +45,15 @@ module.exports = defineConfig([
       ],
     },
   },
+
   {
-    files: ['**/*.html'],
-    extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
-    rules: {},
+    files: ['src/**/*.html'],
+    extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
+    rules: {
+      '@angular-eslint/template/click-events-have-key-events': 'error',
+      '@angular-eslint/template/interactive-supports-focus': 'error',
+      '@angular-eslint/template/mouse-events-have-key-events': 'error',
+      '@angular-eslint/template/no-positive-tabindex': 'error',
+    },
   },
 ]);

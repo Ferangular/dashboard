@@ -1,0 +1,9 @@
+REPORTE DE ACCESIBILIDAD - ESLINT
+=================================
+
+Archivos analizados: 47
+Archivos con incidencias: 0
+Errores: 0
+Warnings: 0
+
+No se han encontrado incidencias de accesibilidad.
