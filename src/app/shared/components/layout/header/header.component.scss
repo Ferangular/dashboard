@@ -75,13 +75,13 @@
 
   &__language-select {
     appearance: none;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     border: 0.0625rem solid var(--border-color);
     border-radius: 1.25rem;
     padding: 0.5rem 2rem 0.5rem 1rem;
     font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--text-primary);
+    font-weight: 600;
+    color: #1a1a1a;
     cursor: pointer;
     transition: all var(--transition-normal);
     min-width: 4rem;
@@ -97,7 +97,8 @@
 
     &:hover {
       background: rgba(255, 255, 255, 1);
-      border-color: var(--text-secondary);
+      border-color: #666666;
+      color: #000000;
       transform: translateY(-1px);
       box-shadow: var(--shadow-md);
     }
@@ -180,11 +181,11 @@
 
   &__badge {
     padding: 0.25rem 0.75rem;
-    background-color: var(--color-primary);
-    color: white;
+    background-color: #e91e63;
+    color: #ffffff;
     border-radius: 12px;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     transition: background-color var(--transition-normal);
   }
 
@@ -246,15 +247,16 @@
     &__language-select {
       background: rgba(30, 30, 30, 0.9);
       border-color: var(--border-color);
-      color: var(--text-primary);
+      color: #ffffff;
 
       &:hover {
         background: rgba(40, 40, 40, 1);
-        border-color: var(--text-secondary);
+        border-color: #cccccc;
+        color: #ffffff;
       }
 
       &::after {
-        color: var(--text-primary);
+        color: #ffffff;
       }
 
       // Opciones del selector en modo oscuro
@@ -294,10 +296,10 @@
     }
 
     &__badge {
-      background-color: var(--color-primary);
+      background-color: #d81b60;
 
       &:hover {
-        opacity: 0.8;
+        background-color: #c2185b;
       }
     }
   }

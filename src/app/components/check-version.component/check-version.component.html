@@ -1,33 +1,77 @@
-<div class="page" [style.background]="accentColor">
+<section class="page" [style.background]="accentColor" aria-labelledby="page-title">
   <div class="card" [style.border-color]="primaryColor">
-    <img [src]="logo" alt="Logo entorno" class="logo" />
+    <header>
+      <img [src]="logo" alt="Logo de {{ appName }} - Dashboard Angular" class="logo" />
+      <h1 id="page-title" [style.color]="primaryColor">{{ appName }}</h1>
+    </header>
 
-    <h1 [style.color]="primaryColor">{{ appName }}</h1>
+    <main>
+      @if (showEnvironmentBadge) {
+        <div class="badge" [style.background]="secondaryColor" role="status" aria-live="polite">
+          <strong>Entorno:</strong>
+          {{ environmentName }}
+        </div>
+      }
 
-    @if (showEnvironmentBadge) {
-      <p class="badge" [style.background]="secondaryColor">Entorno: {{ environmentName }}</p>
-    }
+      <section aria-labelledby="config-title">
+        <h2 id="config-title">Configuración del Sistema</h2>
 
-    <p>
-      <strong>Producción:</strong>
-      {{ environment.production }}
-    </p>
-    <p>
-      <strong>API URL:</strong>
-      {{ apiUrl }}
-    </p>
-    <p>
-      <strong>Debug:</strong>
-      {{ debug }}
-    </p>
+        <dl class="config-list">
+          <div class="config-item">
+            <dt><strong>Producción:</strong></dt>
+            <dd>{{ environment.production ? 'Activado' : 'Desactivado' }}</dd>
+          </div>
 
-    @if (showDebugPanel) {
-      <div class="debug-box" [style.border-color]="secondaryColor">
-        <p>Panel debug visible</p>
-        <p>Color primario: {{ primaryColor }}</p>
-        <p>Color secundario: {{ secondaryColor }}</p>
-        <p>Color acento: {{ accentColor }}</p>
-      </div>
-    }
+          <div class="config-item">
+            <dt><strong>API URL:</strong></dt>
+            <dd>
+              <code>{{ apiUrl }}</code>
+            </dd>
+          </div>
+
+          <div class="config-item">
+            <dt><strong>Debug:</strong></dt>
+            <dd>{{ debug ? 'Activado' : 'Desactivado' }}</dd>
+          </div>
+        </dl>
+      </section>
+
+      @if (showDebugPanel) {
+        <section class="debug-box" [style.border-color]="secondaryColor" aria-labelledby="debug-title">
+          <h3 id="debug-title">Panel de Depuración</h3>
+
+          <dl class="debug-list">
+            <div class="debug-item">
+              <dt>Estado del panel:</dt>
+              <dd>Visible</dd>
+            </div>
+
+            <div class="debug-item">
+              <dt>Color primario:</dt>
+              <dd>
+                <span class="color-sample" [style.background]="primaryColor"></span>
+                <code>{{ primaryColor }}</code>
+              </dd>
+            </div>
+
+            <div class="debug-item">
+              <dt>Color secundario:</dt>
+              <dd>
+                <span class="color-sample" [style.background]="secondaryColor"></span>
+                <code>{{ secondaryColor }}</code>
+              </dd>
+            </div>
+
+            <div class="debug-item">
+              <dt>Color de acento:</dt>
+              <dd>
+                <span class="color-sample" [style.background]="accentColor"></span>
+                <code>{{ accentColor }}</code>
+              </dd>
+            </div>
+          </dl>
+        </section>
+      }
+    </main>
   </div>
-</div>
+</section>

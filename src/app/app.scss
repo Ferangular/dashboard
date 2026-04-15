@@ -3,6 +3,38 @@
   --sidebar-width: 15.625rem; // 250px
 }
 
+// Enlace de salto al contenido principal (Regla 7 - Accesibilidad)
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 1000;
+  border-radius: 0 0 4px 0;
+  font-size: 14px;
+  font-weight: 500;
+  transition: top 0.3s ease;
+
+  &:focus {
+    top: 0;
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+
+  // Modo oscuro
+  :global(.dark) & {
+    background: #fff;
+    color: #000;
+
+    &:focus {
+      outline-color: #000;
+    }
+  }
+}
+
 .app {
   display: flex;
   flex-direction: column;

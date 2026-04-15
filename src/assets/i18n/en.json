@@ -2,9 +2,9 @@
   "navigation": {
     "home": "Home",
     "list": "List",
-    "performance": "Performance",
     "detail": "Detail",
     "laboratory": "Laboratory",
+    "accessibility": "Accessibility",
     "contact": "Contact",
     "settings": "Settings"
   },

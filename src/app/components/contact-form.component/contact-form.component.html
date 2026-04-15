@@ -1,0 +1,278 @@
+<section class="contact-form" aria-labelledby="form-title">
+  <div class="form-container">
+    <header>
+      <h1 id="form-title">Formulario de Contacto Accesible</h1>
+      <p class="form-description">
+        Completa todos los campos marcados con asterisco (*). Los campos obligatorios están claramente indicados.
+      </p>
+    </header>
+
+    <form (ngSubmit)="onSubmit()" novalidate aria-labelledby="form-title">
+      <!-- Campo Nombre -->
+      <div class="form-group" [class.form-group--error]="getErrorMessage('name')">
+        <label for="name" class="form-label">
+          Nombre completo *
+          <span class="required-indicator" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="name"
+          type="text"
+          [formField]="contactForm.name"
+          class="form-input"
+          [class.form-input--error]="getErrorMessage('name')"
+          [attr.aria-invalid]="getErrorMessage('name') ? 'true' : 'false'"
+          [attr.aria-describedby]="getErrorMessage('name') ? 'name-error' : null"
+          placeholder="Ej: Juan Pérez García"
+          autocomplete="name"
+          required
+        />
+        @if (getErrorMessage('name')) {
+          <div id="name-error" class="form-error" role="alert" aria-live="polite">
+            <span class="error-icon">!</span>
+            {{ getErrorMessage('name') }}
+          </div>
+        }
+      </div>
+
+      <!-- Campo Email -->
+      <div class="form-group" [class.form-group--error]="getErrorMessage('email')">
+        <label for="email" class="form-label">
+          Correo electrónico *
+          <span class="required-indicator" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="email"
+          type="email"
+          [formField]="contactForm.email"
+          class="form-input"
+          [class.form-input--error]="getErrorMessage('email')"
+          [attr.aria-invalid]="getErrorMessage('email') ? 'true' : 'false'"
+          [attr.aria-describedby]="getErrorMessage('email') ? 'email-error email-help' : 'email-help'"
+          placeholder="ejemplo@correo.com"
+          autocomplete="email"
+          required
+        />
+        <div id="email-help" class="form-help">Usa un formato de correo válido (ejemplo@dominio.com)</div>
+        @if (getErrorMessage('email')) {
+          <div id="email-error" class="form-error" role="alert" aria-live="polite">
+            <span class="error-icon">!</span>
+            {{ getErrorMessage('email') }}
+          </div>
+        }
+      </div>
+
+      <!-- Campo Teléfono -->
+      <div class="form-group" [class.form-group--error]="getErrorMessage('phone')">
+        <label for="phone" class="form-label">
+          Teléfono
+          <span class="optional-indicator">(opcional)</span>
+        </label>
+        <input
+          id="phone"
+          type="tel"
+          [formField]="contactForm.phone"
+          class="form-input"
+          [class.form-input--error]="getErrorMessage('phone')"
+          [attr.aria-invalid]="getErrorMessage('phone') ? 'true' : 'false'"
+          [attr.aria-describedby]="getErrorMessage('phone') ? 'phone-error phone-help' : 'phone-help'"
+          placeholder="Ej: +34 600 000 000"
+          autocomplete="tel"
+        />
+        <div id="phone-help" class="form-help">Formato internacional preferido (+34 600 000 000)</div>
+        @if (getErrorMessage('phone')) {
+          <div id="phone-error" class="form-error" role="alert" aria-live="polite">
+            <span class="error-icon">!</span>
+            {{ getErrorMessage('phone') }}
+          </div>
+        }
+      </div>
+
+      <!-- Campo Asunto -->
+      <div class="form-group" [class.form-group--error]="getErrorMessage('subject')">
+        <label for="subject" class="form-label">
+          Asunto *
+          <span class="required-indicator" aria-hidden="true">*</span>
+        </label>
+        <select
+          id="subject"
+          [formField]="contactForm.subject"
+          class="form-select"
+          [class.form-select--error]="getErrorMessage('subject')"
+          [attr.aria-invalid]="getErrorMessage('subject') ? 'true' : 'false'"
+          [attr.aria-describedby]="getErrorMessage('subject') ? 'subject-error' : null"
+          required
+        >
+          <option value="">Selecciona un asunto...</option>
+          <option value="consultation">Consulta general</option>
+          <option value="support">Soporte técnico</option>
+          <option value="feedback">Sugerencias</option>
+          <option value="bug">Reportar error</option>
+          <option value="other">Otros</option>
+        </select>
+        @if (getErrorMessage('subject')) {
+          <div id="subject-error" class="form-error" role="alert" aria-live="polite">
+            <span class="error-icon">!</span>
+            {{ getErrorMessage('subject') }}
+          </div>
+        }
+      </div>
+
+      <!-- Campo Mensaje -->
+      <div class="form-group" [class.form-group--error]="getErrorMessage('message')">
+        <label for="message" class="form-label">
+          Mensaje *
+          <span class="required-indicator" aria-hidden="true">*</span>
+        </label>
+        <textarea
+          id="message"
+          [formField]="contactForm.message"
+          class="form-textarea"
+          [class.form-textarea--error]="getErrorMessage('message')"
+          [attr.aria-invalid]="getErrorMessage('message') ? 'true' : 'false'"
+          [attr.aria-describedby]="getErrorMessage('message') ? 'message-error message-help' : 'message-help'"
+          rows="5"
+          placeholder="Describe tu consulta o solicitud en detalle..."
+          required
+        ></textarea>
+        <div id="message-help" class="form-help">
+          Mínimo 10 caracteres. Sé lo más específico posible para poder ayudarte mejor.
+        </div>
+        @if (getErrorMessage('message')) {
+          <div id="message-error" class="form-error" role="alert" aria-live="polite">
+            <span class="error-icon">!</span>
+            {{ getErrorMessage('message') }}
+          </div>
+        }
+      </div>
+
+      <!-- Campo Preferencia de Contacto -->
+      <fieldset class="form-fieldset" aria-describedby="contact-preference-help">
+        <legend class="form-legend">
+          Preferencia de contacto *
+          <span class="required-indicator" aria-hidden="true">*</span>
+        </legend>
+        <div id="contact-preference-help" class="form-help">Selecciona cómo prefieres que te contactemos</div>
+
+        <div class="radio-group">
+          <div class="radio-option">
+            <input
+              id="contact-email"
+              type="radio"
+              [formField]="contactForm.contactPreference"
+              value="email"
+              class="radio-input"
+              [attr.aria-invalid]="getErrorMessage('contactPreference') ? 'true' : 'false'"
+            />
+            <label for="contact-email" class="radio-label">Correo electrónico</label>
+          </div>
+
+          <div class="radio-option">
+            <input
+              id="contact-phone"
+              type="radio"
+              [formField]="contactForm.contactPreference"
+              value="phone"
+              class="radio-input"
+              [attr.aria-invalid]="getErrorMessage('contactPreference') ? 'true' : 'false'"
+            />
+            <label for="contact-phone" class="radio-label">Llamada telefónica</label>
+          </div>
+
+          <div class="radio-option">
+            <input
+              id="contact-whatsapp"
+              type="radio"
+              [formField]="contactForm.contactPreference"
+              value="whatsapp"
+              class="radio-input"
+              [attr.aria-invalid]="getErrorMessage('contactPreference') ? 'true' : 'false'"
+            />
+            <label for="contact-whatsapp" class="radio-label">WhatsApp</label>
+          </div>
+        </div>
+
+        @if (getErrorMessage('contactPreference')) {
+          <div class="form-error" role="alert" aria-live="polite">
+            <span class="error-icon">!</span>
+            {{ getErrorMessage('contactPreference') }}
+          </div>
+        }
+      </fieldset>
+
+      <!-- Casilla de Términos -->
+      <div class="checkbox-group" [class.checkbox-group--error]="getErrorMessage('terms')">
+        <input
+          id="terms"
+          type="checkbox"
+          [formField]="contactForm.terms"
+          class="checkbox-input"
+          [attr.aria-invalid]="getTermsError() ? 'true' : 'false'"
+          [attr.aria-describedby]="getTermsError() ? 'terms-error' : null"
+        />
+        <label for="terms" class="checkbox-label">
+          Acepto la
+          <a href="/privacy" class="link" target="_blank" rel="noopener noreferrer">política de privacidad</a>
+          y los
+          <a href="/terms" class="link" target="_blank" rel="noopener noreferrer">términos y condiciones</a>
+          *
+        </label>
+        @if (getTermsError()) {
+          <div id="terms-error" class="form-error" role="alert" aria-live="polite">
+            <span class="error-icon">!</span>
+            {{ getTermsError() }}
+          </div>
+        }
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="btn btn--primary"
+          [disabled]="isFormInvalid || isSubmitting()"
+          [attr.aria-disabled]="isFormInvalid || isSubmitting()"
+        >
+          @if (!isSubmitting()) {
+            <span>Enviar mensaje</span>
+          } @else {
+            <span class="loading-text">
+              Enviando...
+              <span class="loading-spinner" aria-hidden="true"></span>
+            </span>
+          }
+        </button>
+
+        <button
+          type="button"
+          class="btn btn--secondary"
+          (click)="resetForm()"
+          [disabled]="isSubmitting()"
+          [attr.aria-disabled]="isSubmitting()"
+        >
+          Limpiar formulario
+        </button>
+      </div>
+      <!-- Mensaje de éxito -->
+      @if (showSuccess()) {
+        <div class="form-success" role="alert" aria-live="polite">
+          <span class="success-icon"></span>
+          ¡Mensaje enviado correctamente! Nos pondremos en contacto contigo pronto.
+        </div>
+      }
+
+      <!-- Resumen de errores -->
+      @if (hasErrors && formSubmitted()) {
+        <div class="form-summary-errors" role="alert" aria-live="assertive">
+          <h3 class="summary-title">Se encontraron {{ errorCount }} errores:</h3>
+          <ul class="error-list">
+            @for (error of getAllErrors(); track error) {
+              <li class="error-item">
+                {{ error }}
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </form>
+  </div>
+</section>

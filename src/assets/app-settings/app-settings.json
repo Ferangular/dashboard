@@ -6,8 +6,8 @@
   "logo": "assets/icons/logo-prod.svg",
   "theme": {
     "primary": "#2e7d32",
-    "secondary": "#66bb6a",
-    "accent": "#c8e6c9"
+    "secondary": "#1b5e20",
+    "accent": "#388e3c"
   },
   "ui": {
     "showEnvironmentBadge": true,

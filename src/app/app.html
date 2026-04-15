@@ -1,16 +1,27 @@
 <div class="app">
-  <app-header class="app__header"></app-header>
-  
+  <!-- Enlace de salto al contenido principal (Regla 7) -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+  <header class="app__header">
+    <app-header></app-header>
+  </header>
+
   <div class="app__container">
-    <app-sidebar class="app__sidebar" [class.app__sidebar--collapsed]="isSidebarCollapsed()"></app-sidebar>
-    
+    <nav
+      class="app__sidebar"
+      [class.app__sidebar--collapsed]="isSidebarCollapsed()"
+      aria-label="Menú de navegación principal"
+    >
+      <app-sidebar></app-sidebar>
+    </nav>
+
     <div class="app__content-wrapper">
-      <main class="app__main">
+      <main id="main-content" class="app__main" role="main">
         <div class="app__content">
           <router-outlet></router-outlet>
         </div>
       </main>
-      
+
       <!-- Footer independiente -->
       <div class="app__footer" [class.app__footer--hidden]="!isFooterVisible()">
         @if (isFooterVisible()) {
@@ -19,7 +30,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- Botón toggle independiente y flotante -->
   <button class="footer__toggle" (click)="toggleFooter()" aria-label="Toggle footer">
     <span class="footer__toggle-icon">{{ isFooterVisible() ? '▼' : '▲' }}</span>

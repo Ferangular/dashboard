@@ -49,18 +49,25 @@ export class SidebarComponent {
       order: 4,
     },
     {
+      id: 'accessibility',
+      label: 'navigation.accessibility',
+      path: '/accessibility',
+      icon: '♿',
+      order: 5,
+    },
+    {
       id: 'contact',
       label: 'navigation.contact',
-      path: '/contact',
+      path: '/contact-form',
       icon: '📧',
-      order: 5,
+      order: 6,
     },
     {
       id: 'settings',
       label: 'navigation.settings',
       path: '/settings',
       icon: '⚙️',
-      order: 6,
+      order: 7,
     },
   ];
 

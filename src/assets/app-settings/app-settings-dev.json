@@ -5,9 +5,9 @@
   "debug": true,
   "logo": "assets/icons/logo-dev.svg",
   "theme": {
-    "primary": "#1565c0",
-    "secondary": "#42a5f5",
-    "accent": "#90caf9"
+    "primary": "#c1083b",
+    "secondary": "#0d47a1",
+    "accent": "#d32f2f"
   },
   "ui": {
     "showEnvironmentBadge": true,

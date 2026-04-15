@@ -1,9 +1,10 @@
-import { Component, computed, inject, Renderer2, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationItem } from '../../../../core/interfaces/navigation.interface';
 import { AppSettingsService } from '../../../../core/services/app-settings.service';
 import { I18nService } from '../../../../core/services/i18n.service';
 import { SidebarService } from '../../../../core/services/sidebar.service';
+import { ThemeService } from '../../../../core/services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -17,10 +18,10 @@ export class HeaderComponent {
   private appSettings = inject(AppSettingsService);
   private sidebarService = inject(SidebarService);
   private i18nService = inject(I18nService);
-  private renderer = inject(Renderer2);
+  private themeService = inject(ThemeService);
 
   isSidebarOpen = signal(false);
-  isDarkMode = signal(false);
+  isDarkMode = this.themeService.isDarkMode;
 
   appConfig = computed(() => this.appSettings.config);
 
@@ -85,57 +86,7 @@ export class HeaderComponent {
     }
   }
 
-  constructor() {
-    this.initializeDarkMode();
-  }
-
-  private initializeDarkMode(): void {
-    const savedTheme = localStorage.getItem('darkMode');
-    if (savedTheme) {
-      this.isDarkMode.set(savedTheme === 'true');
-      this.updateTheme();
-    } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      this.isDarkMode.set(prefersDark);
-      this.updateTheme();
-    }
-  }
-
   toggleDarkMode(): void {
-    this.isDarkMode.set(!this.isDarkMode());
-    localStorage.setItem('darkMode', this.isDarkMode().toString());
-    this.updateTheme();
-  }
-
-  private updateTheme(): void {
-    if (this.isDarkMode()) {
-      this.renderer.addClass(document.documentElement, 'dark');
-      this.updateSelectOptions(true);
-    } else {
-      this.renderer.removeClass(document.documentElement, 'dark');
-      this.updateSelectOptions(false);
-    }
-  }
-
-  private updateSelectOptions(isDark: boolean): void {
-    setTimeout(() => {
-      const select = document.querySelector('.header__language-select') as HTMLSelectElement;
-      if (select) {
-        const options = select.querySelectorAll('option');
-        options.forEach((option) => {
-          if (isDark) {
-            // Modo oscuro: usa variables CSS del tema oscuro
-            this.renderer.setStyle(option, 'background', '#0d1117');
-            this.renderer.setStyle(option, 'color', '#f0f6fc');
-            this.renderer.setStyle(option, 'font-weight', '600');
-          } else {
-            // Modo claro: usa variables CSS del tema claro
-            this.renderer.setStyle(option, 'background', '#ffffff');
-            this.renderer.setStyle(option, 'color', '#333333');
-            this.renderer.setStyle(option, 'font-weight', '500');
-          }
-        });
-      }
-    }, 0);
+    this.themeService.toggleDarkMode();
   }
 }
