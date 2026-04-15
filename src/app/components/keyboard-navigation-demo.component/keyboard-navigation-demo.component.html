@@ -1,0 +1,220 @@
+<div class="keyboard-demo">
+  <header class="demo-header">
+    <h1>Regla 4: Navegación por Teclado</h1>
+    <p class="demo-description">
+      Todos los elementos interactivos deben ser operables mediante teclado con orden lógico de tabulación.
+    </p>
+  </header>
+
+  <main class="demo-content">
+    <!-- Demo 1: Skip Links (Bloques de omisión) -->
+    <section class="demo-section">
+      <h2>1. Enlaces de Salto (Skip Links)</h2>
+      <div class="skip-links-demo">
+        <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+        <a href="#navigation" class="skip-link">Saltar a navegación</a>
+        <a href="#forms" class="skip-link">Saltar a formularios</a>
+      </div>
+
+      <div class="explanation">
+        <h3>✅ Implementación Correcta:</h3>
+        <ul>
+          <li>Enlaces visibles solo al recibir foco</li>
+          <li>Posicionamiento absoluto con top negativo</li>
+          <li>z-index alto para prioridad</li>
+          <li>Transición suave al recibir foco</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Demo 2: Tab Order Lógico -->
+    <section class="demo-section" id="navigation">
+      <h2>2. Orden de Tabulación Lógico</h2>
+      <div class="tab-order-demo">
+        <nav class="keyboard-nav">
+          <button class="nav-btn" tabindex="0">Inicio</button>
+          <button class="nav-btn" tabindex="0">Productos</button>
+          <button class="nav-btn" tabindex="0">Servicios</button>
+          <button class="nav-btn" tabindex="0">Contacto</button>
+        </nav>
+
+        <div class="content-area">
+          <h3>Contenido Principal</h3>
+          <p>El orden de tabulación sigue la estructura visual del documento.</p>
+          <button class="action-btn">Botón de Acción</button>
+        </div>
+      </div>
+
+      <div class="explanation">
+        <h3>✅ Orden Correcto:</h3>
+        <ol>
+          <li>Navegación → Contenido principal → Botones de acción</li>
+          <li>Respetar la jerarquía visual</li>
+          <li>tabindex="0" para elementos interactivos</li>
+          <li>tabindex="-1" para elementos programáticamente enfocados</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Demo 3: Focus Visible -->
+    <section class="demo-section">
+      <h2>3. Indicadores de Foco Visibles</h2>
+      <div class="focus-demo">
+        <div class="focus-examples">
+          <button class="focus-btn">Botón Estándar</button>
+          <input type="text" class="focus-input" placeholder="Campo de texto" />
+          <select class="focus-select">
+            <option>Opción 1</option>
+            <option>Opción 2</option>
+          </select>
+          <a href="#" class="focus-link">Enlace Estándar</a>
+        </div>
+      </div>
+
+      <div class="explanation">
+        <h3>✅ Estilos de Foco:</h3>
+        <ul>
+          <li>outline: 2px solid con alto contraste</li>
+          <li>outline-offset: 2px para separación</li>
+          <li>Colores que cumplen ratio 4.5:1</li>
+          <li>Consistente entre todos los elementos</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Demo 4: Patrones de Teclado -->
+    <section class="demo-section" id="forms">
+      <h2>4. Patrones de Interacción por Teclado</h2>
+
+      <!-- Tabs con navegación por teclado -->
+      <div class="keyboard-tabs">
+        <h3>Navegación por Pestañas (Tabs)</h3>
+        <div class="tabs-container" role="tablist">
+          <button class="tab-btn" role="tab" aria-selected="true" aria-controls="panel1" tabindex="0">Tab 1</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel2" tabindex="-1">Tab 2</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel3" tabindex="-1">Tab 3</button>
+        </div>
+
+        <div class="tab-panels">
+          <div id="panel1" class="tab-panel" role="tabpanel" aria-labelledby="tab1">
+            <h4>Contenido del Tab 1</h4>
+            <p>Este panel está seleccionado y visible.</p>
+          </div>
+          <div id="panel2" class="tab-panel" role="tabpanel" aria-labelledby="tab2" hidden>
+            <h4>Contenido del Tab 2</h4>
+            <p>Este panel está oculto.</p>
+          </div>
+          <div id="panel3" class="tab-panel" role="tabpanel" aria-labelledby="tab3" hidden>
+            <h4>Contenido del Tab 3</h4>
+            <p>Este panel está oculto.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal con teclado -->
+      <div class="keyboard-modal">
+        <h3>Modal Accesible por Teclado</h3>
+        <button class="modal-trigger" (click)="openModal()">Abrir Modal</button>
+
+        @if (isModalOpen()) {
+          <div class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <div class="modal-content">
+              <h3 id="modal-title">Modal de Ejemplo</h3>
+              <p>Este modal puede ser operado completamente con teclado.</p>
+              <button class="modal-close" (click)="closeModal()">Cerrar</button>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- Demo 5: Atajos de Teclado -->
+    <section class="demo-section">
+      <h2>5. Atajos de Teclado Comunes</h2>
+      <div class="shortcuts-demo">
+        <table class="shortcuts-table">
+          <thead>
+            <tr>
+              <th>Tecla</th>
+              <th>Función</th>
+              <th>Ejemplo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><kbd>Tab</kbd></td>
+              <td>Navegar al siguiente elemento</td>
+              <td>Moverse entre campos</td>
+            </tr>
+            <tr>
+              <td><kbd>Shift + Tab</kbd></td>
+              <td>Navegar al anterior elemento</td>
+              <td>Retroceder en navegación</td>
+            </tr>
+            <tr>
+              <td><kbd>Enter</kbd></td>
+              <td>Activar botones/enlaces</td>
+              <td>Presionar botones</td>
+            </tr>
+            <tr>
+              <td><kbd>Space</kbd></td>
+              <td>Activar botones/checkbox</td>
+              <td>Marcar opciones</td>
+            </tr>
+            <tr>
+              <td><kbd>Esc</kbd></td>
+              <td>Cerrar modales/diálogos</td>
+              <td>Salir de ventanas</td>
+            </tr>
+            <tr>
+              <td><kbd>Arrow Keys</kbd></td>
+              <td>Navegar en listas/menús</td>
+              <td>Moverse entre opciones</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Demo 6: Trampas Comunes y Soluciones -->
+    <section class="demo-section">
+      <h2>6. Trampas Comunes y Soluciones</h2>
+      <div class="traps-solutions">
+        <div class="trap-example">
+          <h3>❌ Trampa: Foco Atrapado</h3>
+          <div class="focus-trap-wrong">
+            <input type="text" placeholder="Campo 1" />
+            <button onclick="alert('¡Trampa!')">Botón Problemático</button>
+            <input type="text" placeholder="Campo 2" />
+          </div>
+        </div>
+
+        <div class="solution-example">
+          <h3>✅ Solución: Gestión Proper del Foco</h3>
+          <div class="focus-trap-correct">
+            <input type="text" placeholder="Campo 1" />
+            <button (click)="handleAction()">Botón Accesible</button>
+            <input type="text" placeholder="Campo 2" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer con información adicional -->
+  <footer class="demo-footer">
+    <div class="keyboard-status">
+      <h3>Estado Actual de Navegación</h3>
+      <div class="status-info">
+        <p>
+          Elemento enfocado:
+          <span class="focused-element">{{ focusedElement() }}</span>
+        </p>
+        <p>
+          Posición Tab:
+          <span class="tab-index">{{ tabIndex() }}</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+</div>

@@ -56,18 +56,25 @@ export class SidebarComponent {
       order: 5,
     },
     {
+      id: 'keyboard',
+      label: 'navigation.keyboard',
+      path: '/keyboard-navigation',
+      icon: '⌨️',
+      order: 6,
+    },
+    {
       id: 'contact',
       label: 'navigation.contact',
       path: '/contact-form',
       icon: '📧',
-      order: 6,
+      order: 7,
     },
     {
       id: 'settings',
       label: 'navigation.settings',
       path: '/settings',
       icon: '⚙️',
-      order: 7,
+      order: 8,
     },
   ];
 

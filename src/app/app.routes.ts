@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AccessibilityDemoComponent } from './components/accessibility-demo.component/accessibility-demo.component';
 import { CheckVersionComponent } from './components/check-version.component/check-version.component';
 import { ContactFormComponent } from './components/contact-form.component/contact-form.component';
+import { KeyboardNavigationDemoComponent } from './components/keyboard-navigation-demo.component/keyboard-navigation-demo.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,11 @@ export const routes: Routes = [
     path: 'contact-form',
     component: ContactFormComponent,
     title: 'Formulario de Contacto Accesible',
+  },
+  {
+    path: 'keyboard-navigation',
+    component: KeyboardNavigationDemoComponent,
+    title: 'Regla 4: Navegación por Teclado',
   },
   {
     path: '**',
