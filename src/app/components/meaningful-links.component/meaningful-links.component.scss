@@ -1,0 +1,412 @@
+.meaningful-links {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.demo-header {
+  text-align: center;
+  margin-bottom: 3rem;
+
+  h1 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+  }
+
+  .demo-description {
+    font-size: 1.1rem;
+    color: #5a6c7d;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+}
+
+.demo-section {
+  margin-bottom: 3rem;
+
+  h2 {
+    color: #34495e;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 0.5rem;
+  }
+}
+
+.example-comparison {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+
+  h3 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+  }
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bad-example,
+.good-example {
+  padding: 1.5rem;
+  border-radius: 8px;
+
+  h4 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+}
+
+.bad-example {
+  background: #ffeaea;
+  border: 1px solid #f8d7da;
+
+  h4 {
+    color: #721c24;
+  }
+
+  .problem {
+    color: #721c24;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+}
+
+.good-example {
+  background: #eaf7ea;
+  border: 1px solid #d4edda;
+
+  h4 {
+    color: #155724;
+  }
+
+  .explanation {
+    color: #155724;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+}
+
+.demo-link {
+  color: #3498db;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: inline-block;
+
+  &:hover {
+    color: #2980b9;
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+  }
+
+  &.bad {
+    color: #e74c3c;
+
+    &:hover {
+      color: #c0392b;
+    }
+  }
+
+  &.good {
+    color: #27ae60;
+
+    &:hover {
+      color: #229954;
+    }
+  }
+}
+
+.example-category {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+}
+
+.good-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin-bottom: 0.75rem;
+
+    .demo-link {
+      color: #27ae60;
+      font-weight: 500;
+    }
+  }
+}
+
+.interactive-container {
+  background: white;
+  border: 2px solid #3498db;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.demo-scenario {
+  padding: 2rem;
+
+  h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+
+  .scenario-description {
+    color: #5a6c7d;
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+}
+
+.links-only-view,
+.context-view {
+  margin-bottom: 2rem;
+
+  h4 {
+    color: #34495e;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+}
+
+.links-list {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.5rem;
+
+  .isolated-link {
+    display: block;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 6px;
+    background: white;
+    border: 1px solid #dee2e6;
+
+    &.bad {
+      color: #e74c3c;
+      border-color: #f8d7da;
+      background: #ffeaea;
+    }
+
+    &.good {
+      color: #27ae60;
+      border-color: #d4edda;
+      background: #eaf7ea;
+    }
+  }
+}
+
+.blog-posts {
+  display: grid;
+  gap: 1.5rem;
+
+  .blog-post {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1.5rem;
+
+    h3 {
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #5a6c7d;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+  }
+}
+
+.criterion-card {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  h3 {
+    color: #856404;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: #856404;
+    margin-bottom: 1rem;
+  }
+
+  .techniques {
+    .technique-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .technique-tag {
+      background: #856404;
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-family: monospace;
+    }
+  }
+}
+
+.practices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.practice-card {
+  background: #d1ecf1;
+  border: 1px solid #bee5eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+
+  h3 {
+    color: #0c5460;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    color: #0c5460;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .example {
+    background: rgba(12, 84, 96, 0.1);
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+
+    strong {
+      color: #0c5460;
+    }
+  }
+}
+
+.testing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.testing-method {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1.5rem;
+
+  h3 {
+    color: #495057;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    color: #495057;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  ol {
+    margin: 0;
+    padding-left: 1.5rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      color: #495057;
+    }
+  }
+}
+
+.checklist {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.5rem;
+
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+    min-height: 24px;
+
+    input[type="checkbox"] {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      margin-right: 1rem;
+      margin-top: 2px;
+      accent-color: #3498db;
+
+      &:focus {
+        outline: 2px solid #3498db;
+        outline-offset: 2px;
+      }
+    }
+
+    label {
+      color: #2c3e50;
+      line-height: 1.6;
+      cursor: pointer;
+      flex: 1;
+      word-wrap: break-word;
+
+      &:hover {
+        color: #3498db;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .meaningful-links {
+    padding: 1rem;
+  }
+
+  .demo-header h1 {
+    font-size: 2rem;
+  }
+
+  .practices-grid,
+  .testing-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,304 @@
+<main id="main-content" class="aria-states">
+  <header class="demo-header">
+    <h1>Regla 10: Estados y Propiedades ARIA</h1>
+    <p class="demo-description">
+      ARIA (Accessible Rich Internet Applications) proporciona estados y propiedades que mejoran la accesibilidad de
+      componentes dinámicos para tecnologías de asistencia.
+    </p>
+  </header>
+
+  <!-- Interactive Examples -->
+  <section class="demo-section" aria-labelledby="interactive-title">
+    <h2 id="interactive-title">🎮 Ejemplos Interactivos</h2>
+
+    <div class="interactive-grid">
+      <!-- Accordion Demo -->
+      <div class="demo-card">
+        <h3>Acordeón Accesible</h3>
+        <div class="accordion">
+          @for (item of accordionItems; track item.id) {
+            <div class="accordion-item">
+              <button
+                class="accordion-header"
+                (click)="toggleAccordion()"
+                [attr.aria-expanded]="isExpanded()"
+                [attr.aria-controls]="'content-' + item.id"
+                aria-label="{{ item.title }}"
+              >
+                <span class="accordion-title">{{ item.title }}</span>
+                <span class="accordion-icon" [class.expanded]="isExpanded()">▼</span>
+              </button>
+              <div
+                id="content-{{ item.id }}"
+                class="accordion-content"
+                [attr.aria-hidden]="!isExpanded()"
+                [class.visible]="isExpanded()"
+              >
+                <p>{{ item.content }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Tabs Demo -->
+      <div class="demo-card">
+        <h3>Tabs Accesibles</h3>
+        <div class="tabs-container">
+          <div class="tab-list" role="tablist" aria-label="Ejemplos de ARIA">
+            @for (tab of tabs; track tab.id) {
+              <button
+                class="tab-button"
+                role="tab"
+                [attr.aria-selected]="currentTab() === tab.id"
+                [attr.aria-controls]="'panel-' + tab.id"
+                [attr.tabindex]="currentTab() === tab.id ? '0' : '-1'"
+                (click)="selectTab(tab.id)"
+              >
+                {{ tab.label }}
+              </button>
+            }
+          </div>
+
+          @for (tab of tabs; track tab.id) {
+            <div
+              id="panel-{{ tab.id }}"
+              class="tab-panel"
+              role="tabpanel"
+              [attr.aria-labelledby]="tab.id + '-tab'"
+              [attr.hidden]="currentTab() !== tab.id"
+              [class.visible]="currentTab() === tab.id"
+            >
+              <p>{{ tab.content }}</p>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Form Controls Demo -->
+      <div class="demo-card">
+        <h3>Controles de Formulario</h3>
+        <div class="form-controls">
+          <!-- Custom Checkbox -->
+          <div class="control-group">
+            <label class="custom-checkbox">
+              <input
+                type="checkbox"
+                [attr.aria-checked]="isChecked()"
+                [attr.aria-invalid]="isInvalid()"
+                (change)="toggleCheckbox()"
+                [disabled]="isDisabled()"
+              />
+              <span class="checkmark" [class.checked]="isChecked()"></span>
+              Opción personalizada
+            </label>
+          </div>
+
+          <!-- Custom Radio -->
+          <div class="control-group">
+            <label class="custom-radio">
+              <input
+                type="radio"
+                name="custom-radio"
+                [attr.aria-checked]="isSelected()"
+                [attr.aria-disabled]="isDisabled()"
+                (change)="toggleRadio()"
+                [disabled]="isDisabled()"
+              />
+              <span class="radiomark" [class.selected]="isSelected()"></span>
+              Radio personalizado
+            </label>
+          </div>
+
+          <!-- Toggle Button -->
+          <div class="control-group">
+            <button
+              class="toggle-button"
+              [attr.aria-pressed]="isPressed()"
+              (click)="toggleButton()"
+              [disabled]="isDisabled()"
+            >
+              {{ isPressed() ? 'Activado' : 'Desactivado' }}
+            </button>
+          </div>
+
+          <!-- Disable Controls -->
+          <div class="control-group">
+            <button class="control-button" (click)="toggleDisable()" aria-label="Habilitar/Deshabilitar controles">
+              {{ isDisabled() ? 'Habilitar' : 'Deshabilitar' }} controles
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Bar Demo -->
+      <div class="demo-card">
+        <h3>Barra de Progreso</h3>
+        <div class="progress-demo">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            [attr.aria-valuenow]="currentValue()"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [attr.aria-label]="'Progreso: ' + currentValue() + '%'"
+          >
+            <div class="progress-fill" [style.width.%]="currentValue()"></div>
+            <span class="progress-text">{{ currentValue() }}%</span>
+          </div>
+
+          <div class="progress-controls">
+            <button (click)="updateValue('25')" aria-label="Establecer progreso al 25%">25%</button>
+            <button (click)="updateValue('50')" aria-label="Establecer progreso al 50%">50%</button>
+            <button (click)="updateValue('75')" aria-label="Establecer progreso al 75%">75%</button>
+            <button (click)="updateValue('100')" aria-label="Establecer progreso al 100%">100%</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Region Demo -->
+      <div class="demo-card">
+        <h3>Región Live (Anuncios Dinámicos)</h3>
+        <div class="live-region-demo">
+          <div class="live-region" [attr.aria-live]="isVisible() ? 'polite' : 'off'" aria-atomic="true">
+            @if (isVisible()) {
+              <p>{{ isExpanded() ? 'El acordeón está expandido' : 'El acordeón está colapsado' }}</p>
+            }
+          </div>
+
+          <button (click)="toggleVisibility()" aria-label="Alternar visibilidad del anuncio">
+            {{ isVisible() ? 'Ocultar' : 'Mostrar' }} anuncio
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARIA Reference -->
+  <section class="demo-section" aria-labelledby="reference-title">
+    <h2 id="reference-title">📚 Referencia de ARIA</h2>
+
+    @for (category of ariaExamples; track category.category) {
+      <div class="aria-category">
+        <h3>{{ category.category }}</h3>
+        <div class="aria-table">
+          @for (example of category.examples; track example.attribute) {
+            <div class="aria-row">
+              <div class="aria-attribute">
+                <code>{{ example.attribute }}</code>
+              </div>
+              <div class="aria-description">
+                {{ example.description }}
+              </div>
+              <div class="aria-usage">
+                <code>{{ example.usage }}</code>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </section>
+
+  <!-- Best Practices -->
+  <section class="demo-section" aria-labelledby="practices-title">
+    <h2 id="practices-title">💡 Mejores Prácticas</h2>
+
+    <div class="practices-grid">
+      @for (practice of bestPractices; track practice.title) {
+        <div class="practice-card">
+          <h3>{{ practice.title }}</h3>
+          <p>{{ practice.description }}</p>
+          <div class="practice-example">
+            <strong>Ejemplo:</strong>
+            <code>{{ practice.example }}</code>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Common Mistakes -->
+  <section class="demo-section" aria-labelledby="mistakes-title">
+    <h2 id="mistakes-title">⚠️ Errores Comunes</h2>
+
+    <div class="mistakes-grid">
+      <div class="mistake-card bad">
+        <h3>❌ Uso Incorrecto</h3>
+        <div class="code-example">
+          <pre><code>&lt;div role="button" onclick="..."&gt;
+  Haz clic
+&lt;/div&gt;</code></pre>
+        </div>
+        <p>Problema: Div con role="button" no tiene comportamiento nativo de botón</p>
+      </div>
+
+      <div class="mistake-card good">
+        <h3>✅ Uso Correcto</h3>
+        <div class="code-example">
+          <pre><code>&lt;button onclick="..."&gt;
+  Haz clic
+&lt;/button&gt;</code></pre>
+        </div>
+        <p>Solución: Usar elemento button nativo con comportamiento accesible</p>
+      </div>
+
+      <div class="mistake-card bad">
+        <h3>❌ Estados Desincronizados</h3>
+        <div class="code-example">
+          <pre><code>&lt;div aria-expanded="false"&gt;
+  &lt;!-- contenido visible --&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+        <p>Problema: aria-expanded="false" pero el contenido está visible</p>
+      </div>
+
+      <div class="mistake-card good">
+        <h3>✅ Estados Sincronizados</h3>
+        <div class="code-example">
+          <pre><code>&lt;div aria-expanded="false" hidden&gt;
+  &lt;!-- contenido oculto --&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+        <p>Solución: Estado ARIA coincide con estado visual real</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testing Tools -->
+  <section class="demo-section" aria-labelledby="testing-title">
+    <h2 id="testing-title">🧪 Herramientas de Prueba</h2>
+
+    <div class="testing-tools">
+      <div class="tool-card">
+        <h3>Chrome DevTools</h3>
+        <p>Usa el panel Accessibility para inspeccionar árboles ARIA y propiedades computadas.</p>
+        <ol>
+          <li>Abre DevTools (F12)</li>
+          <li>Ve al panel Accessibility</li>
+          <li>Selecciona elementos para ver sus propiedades ARIA</li>
+        </ol>
+      </div>
+
+      <div class="tool-card">
+        <h3>axe DevTools</h3>
+        <p>Extensión del navegador que detecta problemas de accesibilidad incluyendo errores ARIA.</p>
+        <ol>
+          <li>Instala la extensión axe DevTools</li>
+          <li>Abre el panel axe en DevTools</li>
+          <li>Ejecuta un análisis para encontrar problemas ARIA</li>
+        </ol>
+      </div>
+
+      <div class="tool-card">
+        <h3>NVDA/JAWS</h3>
+        <p>Prueba con lectores de pantalla reales para verificar que los anuncios ARIA funcionan.</p>
+        <ol>
+          <li>Instala NVDA (gratuito) o JAWS</li>
+          <li>Navega por los componentes interactivos</li>
+          <li>Verifica que los estados se anuncien correctamente</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,212 @@
+<main id="main-content" class="meaningful-links">
+  <header class="demo-header">
+    <h1>Regla 8: Enlaces Significativos</h1>
+    <p class="demo-description">
+      Los enlaces deben tener textos descriptivos que permitan entender su propósito sin necesidad de contexto
+      adicional. Esto es crucial para usuarios de lectores de pantalla.
+    </p>
+  </header>
+
+  <!-- Bad Examples -->
+  <section class="demo-section" aria-labelledby="bad-examples-title">
+    <h2 id="bad-examples-title">❌ Ejemplos Incorrectos</h2>
+
+    @for (example of badExamples; track example.title) {
+      <div class="example-comparison">
+        <h3>{{ example.title }}</h3>
+
+        <div class="comparison-grid">
+          <div class="bad-example">
+            <h4>❌ Incorrecto</h4>
+            <a href="#" class="demo-link bad">{{ example.badText }}</a>
+            <p class="problem">{{ example.problem }}</p>
+          </div>
+
+          <div class="good-example">
+            <h4>✅ Correcto</h4>
+            <a href="#" class="demo-link good">{{ example.goodText }}</a>
+            <p class="explanation">{{ example.explanation }}</p>
+          </div>
+        </div>
+      </div>
+    }
+  </section>
+
+  <!-- Good Examples -->
+  <section class="demo-section" aria-labelledby="good-examples-title">
+    <h2 id="good-examples-title">✅ Ejemplos Correctos</h2>
+
+    @for (category of goodExamples; track category.title) {
+      <div class="example-category">
+        <h3>{{ category.title }}</h3>
+        <ul class="good-links-list">
+          @for (link of category.examples; track link) {
+            <li>
+              <a href="#" class="demo-link">{{ link }}</a>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </section>
+
+  <!-- Interactive Demo -->
+  <section class="demo-section" aria-labelledby="interactive-title">
+    <h2 id="interactive-title">🎮 Demostración Interactiva</h2>
+
+    <div class="interactive-container">
+      <div class="demo-scenario">
+        <h3>Escenario: Blog de Tecnología</h3>
+        <p class="scenario-description">
+          Imagina que estás navegando por un blog y solo puedes ver los enlaces, sin contexto.
+        </p>
+
+        <div class="links-only-view">
+          <h4>Vista de Solo Enlaces (como en un lector de pantalla)</h4>
+          <div class="links-list">
+            <a href="#" class="isolated-link bad">Leer más</a>
+            <a href="#" class="isolated-link bad">Haz clic aquí</a>
+            <a href="#" class="isolated-link bad">Descargar</a>
+            <a href="#" class="isolated-link good">Leer más sobre las nuevas características de Angular 18</a>
+            <a href="#" class="isolated-link good">Descargar la guía completa de rendimiento web</a>
+            <a href="#" class="isolated-link good">Ver el video tutorial de accesibilidad</a>
+          </div>
+        </div>
+
+        <div class="context-view">
+          <h4>Vista con Contexto</h4>
+          <div class="blog-posts">
+            <article class="blog-post">
+              <h3>Nuevas características de Angular 18</h3>
+              <p>Angular 18 introduce mejoras significativas en rendimiento y desarrollador experience...</p>
+              <a href="#" class="demo-link good">Leer más sobre las nuevas características de Angular 18</a>
+            </article>
+
+            <article class="blog-post">
+              <h3>Guía de rendimiento web</h3>
+              <p>Optimiza tu sitio web con nuestras mejores prácticas y herramientas recomendadas...</p>
+              <a href="#" class="demo-link good">Descargar la guía completa de rendimiento web</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WCAG Criteria -->
+  <section class="demo-section" aria-labelledby="wcag-title">
+    <h2 id="wcag-title">📋 Criterios WCAG</h2>
+
+    @for (criterion of wcagCriteria; track criterion.criterion) {
+      <div class="criterion-card">
+        <h3>{{ criterion.criterion }} - Nivel {{ criterion.level }}</h3>
+        <p>{{ criterion.description }}</p>
+        <div class="techniques">
+          <strong>Técnicas:</strong>
+          <span class="technique-tags">
+            @for (technique of criterion.techniques; track technique) {
+              <span class="technique-tag">{{ technique }}</span>
+            }
+          </span>
+        </div>
+      </div>
+    }
+  </section>
+
+  <!-- Best Practices -->
+  <section class="demo-section" aria-labelledby="practices-title">
+    <h2 id="practices-title">💡 Mejores Prácticas</h2>
+
+    <div class="practices-grid">
+      <div class="practice-card">
+        <h3>📝 Sé Específico</h3>
+        <p>Usa textos que describan exactamente a dónde lleva el enlace o qué acción realizará.</p>
+        <div class="example">
+          <strong>Ejemplo:</strong>
+          "Descargar informe trimestral Q3 2024 (PDF)"
+        </div>
+      </div>
+
+      <div class="practice-card">
+        <h3>🎯 Incluye Formato</h3>
+        <p>Cuando el enlace lleva a un archivo específico, indica el formato y tamaño.</p>
+        <div class="example">
+          <strong>Ejemplo:</strong>
+          "Ver presentación (PowerPoint, 5.2 MB)"
+        </div>
+      </div>
+
+      <div class="practice-card">
+        <h3>🔗 Evita Repetición</h3>
+        <p>No uses el mismo texto para enlaces que van a diferentes destinos.</p>
+        <div class="example">
+          <strong>Mal:</strong>
+          "Leer más" (varias veces)
+          <br />
+          <strong>Bien:</strong>
+          "Leer más sobre tema X", "Leer más sobre tema Y"
+        </div>
+      </div>
+
+      <div class="practice-card">
+        <h3>📱 Funciona sin Estilos</h3>
+        <p>El enlace debe ser comprensible incluso sin CSS ni imágenes.</p>
+        <div class="example">
+          <strong>Ejemplo:</strong>
+          "Contactar con soporte técnico" en lugar de solo un icono
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testing Methods -->
+  <section class="demo-section" aria-labelledby="testing-title">
+    <h2 id="testing-title">🧪 Métodos de Prueba</h2>
+
+    <div class="testing-grid">
+      @for (method of testingMethods; track method.name) {
+        <div class="testing-method">
+          <h3>{{ method.name }}</h3>
+          <p>{{ method.description }}</p>
+          <ol>
+            @for (step of method.steps; track step) {
+              <li>{{ step }}</li>
+            }
+          </ol>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Accessibility Checklist -->
+  <section class="demo-section" aria-labelledby="checklist-title">
+    <h2 id="checklist-title">✅ Checklist de Verificación</h2>
+
+    <div class="checklist">
+      <div class="checklist-item">
+        <input type="checkbox" id="check1" aria-label="Enlaces descriptivos" />
+        <label for="check1">Cada enlace tiene un texto descriptivo único</label>
+      </div>
+
+      <div class="checklist-item">
+        <input type="checkbox" id="check2" aria-label="Sin textos ambiguos" />
+        <label for="check2">No se usan textos como "haz clic aquí" o "leer más"</label>
+      </div>
+
+      <div class="checklist-item">
+        <input type="checkbox" id="check3" aria-label="Formato indicado" />
+        <label for="check3">Se indica el formato y tamaño cuando es relevante</label>
+      </div>
+
+      <div class="checklist-item">
+        <input type="checkbox" id="check4" aria-label="Funciona sin CSS" />
+        <label for="check4">Los enlaces son comprensibles sin estilos CSS</label>
+      </div>
+
+      <div class="checklist-item">
+        <input type="checkbox" id="check5" aria-label="Lista de enlaces" />
+        <label for="check5">La lista de enlaces es comprensible fuera de contexto</label>
+      </div>
+    </div>
+  </section>
+</main>

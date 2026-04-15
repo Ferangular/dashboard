@@ -1,9 +1,12 @@
 import { Routes } from '@angular/router';
 import { AccessibilityDemoComponent } from './components/accessibility-demo.component/accessibility-demo.component';
+import { AriaStatesComponent } from './components/aria-states.component/aria-states.component';
 import { CheckVersionComponent } from './components/check-version.component/check-version.component';
 import { ContactFormComponent } from './components/contact-form.component/contact-form.component';
 import { KeyboardNavigationDemoComponent } from './components/keyboard-navigation-demo.component/keyboard-navigation-demo.component';
+import { MeaningfulLinksComponent } from './components/meaningful-links.component/meaningful-links.component';
 import { SemanticStructure } from './components/semantic-structure/semantic-structure';
+import { SkipLinksDemoComponent } from './components/skip-links-demo.component/skip-links-demo.component';
 
 export const routes: Routes = [
   {
@@ -30,6 +33,21 @@ export const routes: Routes = [
     path: 'semantic-structure',
     component: SemanticStructure,
     title: 'Regla 6: Encabezados y Estructura Semántica',
+  },
+  {
+    path: 'skip-links',
+    component: SkipLinksDemoComponent,
+    title: 'Regla 7: Skip Links y Bloques de Omisión',
+  },
+  {
+    path: 'meaningful-links',
+    component: MeaningfulLinksComponent,
+    title: 'Regla 8: Enlaces Significativos',
+  },
+  {
+    path: 'aria-states',
+    component: AriaStatesComponent,
+    title: 'Regla 10: Estados y Propiedades ARIA',
   },
   {
     path: '**',

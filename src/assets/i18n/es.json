@@ -9,6 +9,9 @@
     "contactForm": "Formulario Accesible",
     "keyboardNavigation": "Navegación por Teclado",
     "semanticStructure": "Estructura Semántica",
+    "skipLinks": "Skip Links",
+    "meaningfulLinks": "Enlaces Significativos",
+    "ariaStates": "Estados ARIA",
     "keyboard": "Teclado",
     "contact": "Contacto",
     "settings": "Ajustes"

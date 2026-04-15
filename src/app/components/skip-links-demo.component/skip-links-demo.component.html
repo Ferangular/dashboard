@@ -1,0 +1,148 @@
+<main id="main-content" class="skip-links-demo">
+  <header class="demo-header">
+    <h1>Regla 7: Skip Links y Bloques de Omisión</h1>
+    <p class="demo-description">
+      Los skip links permiten a usuarios de lectores de pantalla y navegación por teclado saltar contenido repetido como
+      menús de navegación.
+    </p>
+  </header>
+
+  <!-- Skip Links Demo -->
+  <section class="demo-section" aria-labelledby="skip-links-title">
+    <h2 id="skip-links-title">Ejemplos de Skip Links</h2>
+
+    @for (example of examples; track example.title) {
+      <div class="example-card">
+        <h3>{{ example.title }}</h3>
+        <p>{{ example.description }}</p>
+        <pre class="code-example"><code>{{ example.code }}</code></pre>
+      </div>
+    }
+  </section>
+
+  <!-- Live Demo -->
+  <section class="demo-section" aria-labelledby="live-demo-title">
+    <h2 id="live-demo-title">Demostración Interactiva</h2>
+
+    <div class="live-demo-container">
+      <!-- Skip Links reales -->
+      <div class="skip-links-container">
+        <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+        <a href="#navigation" class="skip-link">Ir a navegación</a>
+        <a href="#search" class="skip-link">Ir a búsqueda</a>
+      </div>
+
+      <!-- Simulación de header con navegación -->
+      <header class="simulated-header">
+        <nav id="navigation" role="navigation" aria-label="Navegación principal">
+          <ul>
+            <li><a href="#" aria-current="page">Inicio</a></li>
+            <li><a href="#">Productos</a></li>
+            <li><a href="#">Servicios</a></li>
+            <li><a href="#">Contacto</a></li>
+          </ul>
+        </nav>
+
+        <div id="search" role="search" aria-label="Búsqueda">
+          <input type="search" placeholder="Buscar..." aria-label="Término de búsqueda" />
+          <button type="submit" aria-label="Realizar búsqueda">🔍</button>
+        </div>
+      </header>
+
+      <!-- Contenido principal -->
+      <div class="main-content">
+        <h3>Contenido Principal</h3>
+        <p>
+          Este es el contenido principal de la página. Los usuarios pueden usar Tab para navegar y verán los skip links
+          cuando lleguen al inicio de la página. Al presionar Enter en un skip link, saltarán directamente a la sección
+          correspondiente.
+        </p>
+
+        <div class="instruction-box">
+          <h4>🎯 Prueba los Skip Links</h4>
+          <ol>
+            <li>
+              Presiona
+              <kbd>Tab</kbd>
+              hasta el inicio de la página
+            </li>
+            <li>Verás los skip links aparecer</li>
+            <li>
+              Presiona
+              <kbd>Enter</kbd>
+              en cualquier skip link
+            </li>
+            <li>Observarás cómo saltas directamente a esa sección</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WCAG Criteria -->
+  <section class="demo-section" aria-labelledby="wcag-title">
+    <h2 id="wcag-title">Criterios WCAG Relacionados</h2>
+
+    @for (criterion of wcagCriteria; track criterion.criterion) {
+      <div class="criterion-card">
+        <h3>{{ criterion.criterion }} - Nivel {{ criterion.level }}</h3>
+        <p>{{ criterion.description }}</p>
+        <div class="examples">
+          <strong>Ejemplos:</strong>
+          <ul>
+            @for (example of criterion.examples; track example) {
+              <li>{{ example }}</li>
+            }
+          </ul>
+        </div>
+      </div>
+    }
+  </section>
+
+  <!-- Best Practices -->
+  <section class="demo-section" aria-labelledby="practices-title">
+    <h2 id="practices-title">Mejores Prácticas</h2>
+
+    @for (practice of bestPractices; track practice.title) {
+      <div class="practice-card">
+        <h3>{{ practice.title }}</h3>
+        <p>{{ practice.description }}</p>
+      </div>
+    }
+  </section>
+
+  <!-- Testing Instructions -->
+  <section class="demo-section" aria-labelledby="testing-title">
+    <h2 id="testing-title">🧪 Cómo Probar</h2>
+
+    <div class="testing-instructions">
+      <div class="test-method">
+        <h4>1. Navegación por Teclado</h4>
+        <ul>
+          <li>
+            Usa
+            <kbd>Tab</kbd>
+            para navegar desde el inicio
+          </li>
+          <li>Verifica que los skip links sean visibles al recibir foco</li>
+          <li>
+            Presiona
+            <kbd>Enter</kbd>
+            para activarlos
+          </li>
+          <li>Confirma que saltas a la sección correcta</li>
+        </ul>
+      </div>
+
+      <div class="test-method">
+        <h4>2. Lector de Pantalla</h4>
+        <ul>
+          <li>Activa NVDA o JAWS</li>
+          <li>Navega al inicio de la página</li>
+          <li>Escucha los anuncios de los skip links</li>
+          <li>Verifica que los destinos sean anunciados correctamente</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
