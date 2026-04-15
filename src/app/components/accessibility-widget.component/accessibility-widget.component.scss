@@ -1,0 +1,446 @@
+/* Widget de accesibilidad flotante */
+.accessibility-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+
+  /* Ajustar para no solapar con footer toggle */
+  @media (min-width: 769px) {
+    bottom: 120px; // Más arriba del footer toggle
+  }
+
+  @media (max-width: 768px) {
+    bottom: 120px; // Más arriba del footer toggle en móviles
+  }
+}
+
+/* Botón flotante */
+.accessibility-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-primary, #c1083b);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.875rem;
+  min-height: 48px; /* WCAG 44px mínimo para elementos táctiles */
+  min-width: 48px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(193, 8, 59, 0.3);
+  }
+
+  &:focus {
+    outline: 2px solid var(--focus-color, #2563eb);
+    outline-offset: 2px;
+  }
+
+  .accessibility-icon {
+    flex-shrink: 0;
+  }
+
+  .accessibility-text {
+    display: inline;
+  }
+
+  /* Versión compacta para móviles */
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+    border-radius: 50%;
+
+    .accessibility-text {
+      display: none;
+    }
+  }
+}
+
+/* Panel emergente */
+.accessibility-panel {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  width: 320px;
+  max-width: 90vw;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+
+  @media (max-width: 480px) {
+    width: 280px;
+    right: -10px;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header del panel */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+
+  h3 {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .close-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    &:focus {
+      outline: 2px solid var(--focus-color);
+      outline-offset: 2px;
+    }
+  }
+}
+
+/* Contenido del panel */
+.panel-content {
+  padding: 1.25rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Grupos de configuración */
+.setting-group {
+  margin-bottom: 1.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .setting-label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+  }
+}
+
+/* Controles de tamaño de fuente */
+.size-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--bg-secondary);
+  padding: 0.5rem;
+  border-radius: 8px;
+
+  .size-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background: var(--bg-tertiary);
+    }
+
+    &:focus:not(:disabled) {
+      outline: 2px solid var(--focus-color);
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .size-indicator {
+    min-width: 50px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+  }
+}
+
+/* Información del tema */
+.contrast-info {
+  margin-bottom: 0.75rem;
+
+  .theme-info {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0.25rem 0.5rem;
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+    text-align: center;
+  }
+}
+
+/* Opciones de contraste */
+.contrast-options {
+  display: flex;
+  gap: 0.5rem;
+
+  .contrast-btn {
+    flex: 1;
+    padding: 0.5rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--bg-tertiary);
+    }
+
+    &:focus {
+      outline: 2px solid var(--focus-color);
+      outline-offset: 2px;
+    }
+
+    &.active {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
+  }
+}
+
+/* Controles de espaciado */
+.spacing-controls {
+  display: flex;
+  gap: 0.5rem;
+
+  .spacing-btn {
+    flex: 1;
+    padding: 0.5rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--bg-tertiary);
+    }
+
+    &:focus {
+      outline: 2px solid var(--focus-color);
+      outline-offset: 2px;
+    }
+
+    &.active {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
+  }
+}
+
+/* Toggle switch */
+.focus-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--border-color);
+    transition: 0.3s;
+    border-radius: 24px;
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.3s;
+      border-radius: 50%;
+    }
+  }
+
+  input:checked + .toggle-slider {
+    background-color: var(--color-primary);
+  }
+
+  input:checked + .toggle-slider:before {
+    transform: translateX(24px);
+  }
+
+  input:focus + .toggle-slider {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 2px;
+  }
+}
+
+.toggle-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* Acciones */
+.setting-actions {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+
+  .reset-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    &:focus {
+      outline: 2px solid var(--focus-color);
+      outline-offset: 2px;
+    }
+  }
+}
+
+/* Clases aplicadas al body para los diferentes modos */
+
+/* Tamaños de fuente */
+.font-size-80 {
+  font-size: 0.8em !important;
+}
+
+.font-size-90 {
+  font-size: 0.9em !important;
+}
+
+.font-size-110 {
+  font-size: 1.1em !important;
+}
+
+.font-size-120 {
+  font-size: 1.2em !important;
+}
+
+.font-size-130 {
+  font-size: 1.3em !important;
+}
+
+.font-size-140 {
+  font-size: 1.4em !important;
+}
+
+.font-size-150 {
+  font-size: 1.5em !important;
+}
+
+/* Modos de contraste */
+.contrast-high {
+  --bg-primary: #ffffff !important;
+  --bg-secondary: #f0f0f0 !important;
+  --text-primary: #000000 !important;
+  --text-secondary: #000000 !important;
+  --border-color: #000000 !important;
+}
+
+.contrast-dark {
+  --bg-primary: #1a1a1a !important;
+  --bg-secondary: #2d2d2d !important;
+  --text-primary: #ffffff !important;
+  --text-secondary: #e0e0e0 !important;
+  --border-color: #404040 !important;
+}
+
+/* Espaciado de línea */
+.spacing-wide {
+  line-height: 1.75 !important;
+}
+
+.spacing-extra-wide {
+  line-height: 2 !important;
+}
+
+/* Foco de alto contraste */
+.high-contrast-focus *:focus {
+  outline: 3px solid #ffcc00 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 2px #000000 !important;
+}

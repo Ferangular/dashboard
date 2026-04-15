@@ -1,0 +1,176 @@
+<div class="accessibility-widget">
+  <!-- Botón flotante de accesibilidad -->
+  <button
+    class="accessibility-toggle"
+    (click)="togglePanel()"
+    aria-label="Ajustes de accesibilidad"
+    [attr.aria-expanded]="isOpen() ? 'true' : 'false'"
+    [attr.aria-controls]="isOpen() ? 'accessibility-panel' : null"
+  >
+    <svg
+      class="accessibility-icon"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+      <path
+        d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2Z"
+        fill="currentColor"
+      />
+      <path
+        d="M12 18C13.1 18 14 18.9 14 20C14 21.1 13.1 22 12 22C10.9 22 10 21.1 10 20C10 18.9 10.9 18 12 18Z"
+        fill="currentColor"
+      />
+      <path
+        d="M4 12C4 13.1 4.9 14 6 14C7.1 14 8 13.1 8 12C8 10.9 7.1 10 6 10C4.9 10 4 10.9 4 12Z"
+        fill="currentColor"
+      />
+      <path
+        d="M16 12C16 13.1 16.9 14 18 14C19.1 14 20 13.1 20 12C20 10.9 19.1 10 18 10C16.9 10 16 10.9 16 12Z"
+        fill="currentColor"
+      />
+    </svg>
+    <span class="accessibility-text">Accesibilidad</span>
+  </button>
+
+  <!-- Panel emergente de ajustes -->
+  @if (isOpen()) {
+    <div
+      id="accessibility-panel"
+      class="accessibility-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="accessibility-title"
+    >
+      <div class="panel-header">
+        <h3 id="accessibility-title">Ajustes de Accesibilidad</h3>
+        <button class="close-button" (click)="closePanel()" aria-label="Cerrar panel de accesibilidad">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 4L16 16M16 4L4 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="panel-content">
+        <!-- Tamaño de texto -->
+        <div class="setting-group">
+          <div class="setting-label">Tamaño del texto</div>
+          <div class="size-controls">
+            <button
+              class="size-btn"
+              (click)="decreaseFontSize()"
+              aria-label="Reducir tamaño del texto"
+              [disabled]="currentFontSize() <= 80"
+            >
+              <span>A-</span>
+            </button>
+            <span class="size-indicator">{{ currentFontSize() }}%</span>
+            <button
+              class="size-btn"
+              (click)="increaseFontSize()"
+              aria-label="Aumentar tamaño del texto"
+              [disabled]="currentFontSize() >= 150"
+            >
+              <span>A+</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Contraste -->
+        <div class="setting-group">
+          <div class="setting-label">Modo de contraste</div>
+          <div class="contrast-info">
+            @if (isDarkMode()) {
+              <small class="theme-info">Tema oscuro activado en el sistema</small>
+            }
+          </div>
+          <div class="contrast-options">
+            <button
+              class="contrast-btn"
+              (click)="setContrastMode('normal')"
+              [class.active]="contrastMode() === 'normal'"
+              [attr.aria-pressed]="contrastMode() === 'normal' ? 'true' : 'false'"
+            >
+              Normal
+            </button>
+            <button
+              class="contrast-btn"
+              (click)="setContrastMode('high')"
+              [class.active]="contrastMode() === 'high'"
+              [attr.aria-pressed]="contrastMode() === 'high' ? 'true' : 'false'"
+            >
+              Alto contraste
+            </button>
+            <button
+              class="contrast-btn"
+              (click)="setContrastMode('dark')"
+              [class.active]="contrastMode() === 'dark'"
+              [attr.aria-pressed]="contrastMode() === 'dark' ? 'true' : 'false'"
+            >
+              Oscuro accesible
+            </button>
+          </div>
+        </div>
+
+        <!-- Espaciado -->
+        <div class="setting-group">
+          <div class="setting-label">Espaciado de línea</div>
+          <div class="spacing-controls">
+            <button
+              class="spacing-btn"
+              (click)="setLineSpacing('normal')"
+              [class.active]="lineSpacing() === 'normal'"
+              [attr.aria-pressed]="lineSpacing() === 'normal' ? 'true' : 'false'"
+            >
+              Normal
+            </button>
+            <button
+              class="spacing-btn"
+              (click)="setLineSpacing('wide')"
+              [class.active]="lineSpacing() === 'wide'"
+              [attr.aria-pressed]="lineSpacing() === 'wide' ? 'true' : 'false'"
+            >
+              Amplio
+            </button>
+            <button
+              class="spacing-btn"
+              (click)="setLineSpacing('extra-wide')"
+              [class.active]="lineSpacing() === 'extra-wide'"
+              [attr.aria-pressed]="lineSpacing() === 'extra-wide' ? 'true' : 'false'"
+            >
+              Muy amplio
+            </button>
+          </div>
+        </div>
+
+        <!-- Foco visible -->
+        <div class="setting-group">
+          <div class="setting-label">Indicadores de foco</div>
+          <div class="focus-toggle">
+            <label class="toggle-switch">
+              <input
+                type="checkbox"
+                [checked]="highContrastFocus()"
+                (change)="toggleHighContrastFocus()"
+                aria-label="Activar foco de alto contraste"
+              />
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="toggle-label">Foco de alto contraste</span>
+          </div>
+        </div>
+
+        <!-- Reset -->
+        <div class="setting-actions">
+          <button class="reset-btn" (click)="resetSettings()" aria-label="Restablecer ajustes de accesibilidad">
+            Restablecer ajustes
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>
