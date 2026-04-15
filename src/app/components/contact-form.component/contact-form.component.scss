@@ -1,3 +1,97 @@
+/* Estilos de foco accesibles WCAG 2.1 */
+
+/* Foco visible para todos los elementos interactivos */
+*:focus {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+/* Foco específico para botones */
+button:focus,
+.btn:focus {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+}
+
+/* Foco para inputs y formularios */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  border-color: var(--focus-color);
+}
+
+/* Foco para enlaces */
+a:focus {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+  text-decoration: underline;
+}
+
+/* Foco para checkboxes y radio buttons */
+input[type="checkbox"]:focus + label,
+input[type="radio"]:focus + label {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+/* Orden de tabulación lógico */
+.form-group,
+.checkbox-group,
+.form-actions,
+.image-examples,
+.demo-category {
+  position: relative;
+}
+
+/* Saltos de línea lógicos */
+.form-container header,
+.user-profile-section,
+form,
+.image-examples {
+  position: relative;
+}
+
+/* Indicadores de foco para elementos específicos */
+.focus-success:focus {
+  outline: 2px solid var(--success-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.2);
+}
+
+.focus-warning:focus {
+  outline: 2px solid var(--warning-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.2);
+}
+
+.focus-error:focus {
+  outline: 2px solid var(--error-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.2);
+}
+
+.focus-info:focus {
+  outline: 2px solid var(--info-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+}
+
+/* Navegación por teclado para imágenes clickeables */
+img[onclick],
+img[tabindex] {
+  cursor: pointer;
+}
+
+img[onclick]:focus,
+img[tabindex]:focus {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
 /* Estilos accesibles para el formulario de contacto */
 
 .contact-form {
@@ -10,11 +104,12 @@
 }
 
 .form-container {
-  background: #6b7280;
+  background: var(--bg-secondary);
   border-radius: 16px;
   padding: 2.5rem;
   box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
 }
 
 /* Header del formulario */
@@ -23,6 +118,116 @@
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
   border-bottom: 2px solid var(--border-color);
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-icon {
+  margin-bottom: 0.5rem;
+}
+
+.field-icon {
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+/* Sección de perfil de usuario */
+.user-profile-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-primary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  border: 3px solid var(--primary-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-info h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+}
+
+.user-info p {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-secondary);
+}
+
+.language-flag {
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Galería de ejemplos de imágenes */
+.image-examples {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--bg-primary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.example-item {
+  text-align: center;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.example-avatar {
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  border: 2px solid var(--primary-color);
+}
+
+.example-flag {
+  border-radius: 2px;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.example-decorative {
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
+}
+
+.example-item p {
+  margin: 0.5rem 0 0 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.example-item strong {
+  color: var(--text-primary);
 }
 
 .form-container h1 {

@@ -2,9 +2,18 @@
   <div class="demo-container">
     <header>
       <h1 id="demo-title">Demostración de Colores Accesibles WCAG 2.2 AA</h1>
-      <p class="demo-intro">
-        Esta página demuestra el cumplimiento de los requisitos de contraste mínimo (4.5:1) según WCAG 2.2 AA.
-      </p>
+      <div class="header-content">
+        <img
+          src="assets/icons/accessibility-icon.svg"
+          alt="Icono de accesibilidad representando inclusión digital"
+          class="header-icon"
+          width="48"
+          height="48"
+        />
+        <p class="demo-intro">
+          Esta página demuestra el cumplimiento de los requisitos de contraste mínimo (4.5:1) según WCAG 2.2 AA.
+        </p>
+      </div>
     </header>
 
     <main>
@@ -116,7 +125,17 @@
 
         <div class="testing-info">
           <div class="testing-card">
-            <h3>Validación Automática</h3>
+            <h3>
+              <img
+                src="assets/icons/validation-icon.svg"
+                alt=""
+                class="card-icon"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              />
+              Validación Automática
+            </h3>
             <ul>
               <li>&#x2713; Lighthouse Accessibility Audit</li>
               <li>&#x2713; axe DevTools Extension</li>
@@ -126,7 +145,17 @@
           </div>
 
           <div class="testing-card">
-            <h3>Validación Manual</h3>
+            <h3>
+              <img
+                src="assets/icons/manual-testing-icon.svg"
+                alt=""
+                class="card-icon"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              />
+              Validación Manual
+            </h3>
             <ul>
               <li>&#x2713; Navegación por teclado completa</li>
               <li>&#x2713; Lector de pantalla (NVDA/VoiceOver)</li>
@@ -137,19 +166,147 @@
         </div>
       </section>
 
+      <!-- Sección de ejemplos de imágenes accesibles -->
+      <section aria-labelledby="images-title">
+        <h2 id="images-title">Ejemplos de Imágenes Accesibles</h2>
+
+        <div class="images-demo">
+          <div class="demo-category">
+            <h3>Imágenes de Perfiles con Texto Alternativo Descriptivo</h3>
+            <div class="profile-gallery">
+              <div class="profile-item">
+                <img
+                  src="/assets/images/avatares/user3-128x128.jpg"
+                  alt="Ana López, consultora de accesibilidad digital"
+                  class="profile-img"
+                  width="80"
+                  height="80"
+                />
+                <p>Ana López</p>
+              </div>
+              <div class="profile-item">
+                <img
+                  src="/assets/images/avatares/user4-128x128.jpg"
+                  alt="Carlos Rodríguez, desarrollador frontend especializado en accesibilidad"
+                  class="profile-img"
+                  width="80"
+                  height="80"
+                />
+                <p>Carlos Rodríguez</p>
+              </div>
+              <div class="profile-item">
+                <img
+                  src="/assets/images/avatares/user5-128x128.jpg"
+                  alt="Laura Martínez, diseñadora UX/UI con enfoque inclusivo"
+                  class="profile-img"
+                  width="80"
+                  height="80"
+                />
+                <p>Laura Martínez</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="demo-category">
+            <h3>Banderas de Idiomas con Propósito Claro</h3>
+            <div class="flags-gallery">
+              <div class="flag-item">
+                <img
+                  src="/assets/images/flags/FR.png"
+                  alt="Bandera de Francia - Idioma francés"
+                  class="flag-img"
+                  width="40"
+                  height="24"
+                />
+                <p>Français</p>
+              </div>
+              <div class="flag-item">
+                <img
+                  src="/assets/images/flags/DE.png"
+                  alt="Bandera de Alemania - Idioma alemán"
+                  class="flag-img"
+                  width="40"
+                  height="24"
+                />
+                <p>Deutsch</p>
+              </div>
+              <div class="flag-item">
+                <img
+                  src="/assets/images/flags/IT.png"
+                  alt="Bandera de Italia - Idioma italiano"
+                  class="flag-img"
+                  width="40"
+                  height="24"
+                />
+                <p>Italiano</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="demo-category">
+            <h3>Imágenes Decorativas vs Informativas</h3>
+            <div class="comparison-grid">
+              <div class="comparison-item">
+                <h4>✅ Correcto - Imagen Informativa</h4>
+                <img
+                  src="/assets/images/avatares/user6-128x128.jpg"
+                  alt="Equipo de desarrollo trabajando en proyecto de accesibilidad web"
+                  class="comparison-img"
+                  width="120"
+                  height="120"
+                />
+                <p>El texto alternativo describe el contenido y contexto</p>
+              </div>
+              <div class="comparison-item">
+                <h4>✅ Correcto - Imagen Decorativa</h4>
+                <img
+                  src="assets/images/no-image-available.png"
+                  alt=""
+                  class="comparison-img"
+                  width="120"
+                  height="120"
+                  aria-hidden="true"
+                />
+                <p>Alt vacío y aria-hidden="true" para elementos decorativos</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Resumen de cumplimiento -->
       <section aria-labelledby="compliance-title">
         <h2 id="compliance-title">Resumen de Cumplimiento WCAG 2.2 AA</h2>
 
         <div class="compliance-grid">
           <div class="compliance-item success">
-            <h3>1.3.1 Información y Relaciones</h3>
+            <h3>
+              <img
+                src="assets/icons/check-icon.svg"
+                alt=""
+                class="compliance-icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              />
+              1.3.1 Información y Relaciones
+            </h3>
             <p>HTML semántico y estructura jerárquica correcta</p>
             <span class="status">&#x2713; Cumple</span>
           </div>
 
           <div class="compliance-item success">
-            <h3>1.4.3 Contraste Mínimo</h3>
+            <h3>
+              <img
+                src="assets/icons/check-icon.svg"
+                alt=""
+                class="compliance-icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              />
+              1.4.3 Contraste Mínimo
+            </h3>
             <p>Contraste mínimo 4.5:1 para texto normal</p>
             <span class="status">&#x2713; Cumple</span>
           </div>

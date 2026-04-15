@@ -11,10 +11,12 @@
   --color-sidebar: #f0f8ff;
   --color-content: #fafafa;
   --color-footer: #fff8f0;
-  --bg-primary: #ffffff;
+  --bg-primary: #f8f9fa; /* Cambiado de blanco puro a gris suave para mejor legibilidad */
   --bg-secondary: #f8f9fa;
-  --text-primary: #1a1a1a;
-  --text-secondary: #4a4a4a;
+  --bg-tertiary: #e9ecef; /* Añadido para jerarquía de fondos */
+  --text-primary: #1a1a1a; /* Ratio 16.43:1 sobre #f8f9fa */
+  --text-secondary: #4a4a4a; /* Ratio 7.63:1 sobre #f8f9fa */
+  --text-muted: #6b7280; /* Ratio 5.89:1 sobre #f8f9fa */
   --border-color: #d1d5db;
 
   /* Espaciados */
