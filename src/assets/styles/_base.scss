@@ -1,0 +1,81 @@
+/* =========================================================
+   Base Visual Global - Estilos fundamentales
+   ========================================================= */
+
+body {
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition:
+    color var(--transition-normal),
+    background-color var(--transition-normal);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-primary);
+}
+
+p,
+small,
+li,
+dd,
+dt,
+blockquote {
+  color: var(--text-secondary);
+}
+
+a {
+  color: var(--link-color);
+}
+
+input,
+textarea,
+select {
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+button:hover {
+  filter: brightness(0.95);
+}
+
+fieldset,
+th,
+td {
+  border-color: var(--border-color);
+}
+
+th {
+  background-color: var(--table-header-bg);
+}
+
+.skip-link {
+  background-color: var(--skip-link-bg);
+  color: var(--skip-link-text);
+}
+
+:focus-visible {
+  outline-color: var(--focus-color);
+}
+
+.help-text {
+  color: var(--text-secondary);
+}
+
+.error-text {
+  color: var(--error-color);
+}
+
+.success-text {
+  color: var(--success-color);
+}

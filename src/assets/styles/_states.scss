@@ -1,0 +1,39 @@
+/* =========================================================
+   Estados de Enfoque Accesibles
+   ========================================================= */
+
+.focus-success:focus-visible {
+  outline: 2px solid var(--success-color);
+  outline-offset: 2px;
+}
+
+.focus-warning:focus-visible {
+  outline: 2px solid var(--warning-color);
+  outline-offset: 2px;
+}
+
+.focus-error:focus-visible {
+  outline: 2px solid var(--error-color);
+  outline-offset: 2px;
+}
+
+.focus-info:focus-visible {
+  outline: 2px solid var(--info-color);
+  outline-offset: 2px;
+}
+
+.dark .focus-success:focus-visible {
+  outline-color: var(--success-dark);
+}
+
+.dark .focus-warning:focus-visible {
+  outline-color: var(--warning-dark);
+}
+
+.dark .focus-error:focus-visible {
+  outline-color: var(--error-dark);
+}
+
+.dark .focus-info:focus-visible {
+  outline-color: var(--info-dark);
+}

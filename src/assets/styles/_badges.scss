@@ -1,0 +1,48 @@
+/* =========================================================
+   Badges Accesibles
+   ========================================================= */
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.badge-success {
+  background-color: var(--success-color);
+  color: #ffffff;
+}
+
+.badge-warning {
+  background-color: var(--warning-color);
+  color: #ffffff;
+}
+
+.badge-error {
+  background-color: var(--error-color);
+  color: #ffffff;
+}
+
+.badge-info {
+  background-color: var(--info-color);
+  color: #ffffff;
+}
+
+.dark .badge-success {
+  background-color: var(--success-dark);
+}
+
+.dark .badge-warning {
+  background-color: var(--warning-dark);
+}
+
+.dark .badge-error {
+  background-color: var(--error-dark);
+}
+
+.dark .badge-info {
+  background-color: var(--info-dark);
+}

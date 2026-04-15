@@ -1,0 +1,23 @@
+/* =========================================================
+   Scroll Personalizado Global
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+  border-radius: var(--border-radius-sm);
+}
+
+::-webkit-scrollbar-track {
+  background: #ffebee;
+  border-radius: var(--border-radius-sm);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d32f2f;
+  border-radius: var(--border-radius-sm);
+  transition: background-color var(--transition-normal);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b71c1c;
+}
