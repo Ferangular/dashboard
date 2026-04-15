@@ -1,41 +1,24 @@
-/* Estilos de foco accesibles WCAG 2.1 */
-
-/* Foco visible para todos los elementos interactivos */
+/* Focus styles WCAG 2.1 */
 *:focus {
   outline: 2px solid var(--focus-color);
   outline-offset: 2px;
 }
-
-/* Foco específico para botones */
 button:focus,
 .btn:focus {
-  outline: 2px solid var(--focus-color);
-  outline-offset: 2px;
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
 }
-
-/* Foco para inputs y formularios */
 input:focus,
 textarea:focus,
 select:focus {
-  outline: 2px solid var(--focus-color);
-  outline-offset: 2px;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
   border-color: var(--focus-color);
 }
-
-/* Foco para enlaces */
 a:focus {
-  outline: 2px solid var(--focus-color);
-  outline-offset: 2px;
   text-decoration: underline;
 }
-
-/* Foco para checkboxes y radio buttons */
 input[type="checkbox"]:focus + label,
 input[type="radio"]:focus + label {
   outline: 2px solid var(--focus-color);
-  outline-offset: 2px;
 }
 
 /* Orden de tabulación lógico */
@@ -55,28 +38,16 @@ form,
   position: relative;
 }
 
-/* Indicadores de foco para elementos específicos */
 .focus-success:focus {
-  outline: 2px solid var(--success-color);
-  outline-offset: 2px;
   box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.2);
 }
-
 .focus-warning:focus {
-  outline: 2px solid var(--warning-color);
-  outline-offset: 2px;
   box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.2);
 }
-
 .focus-error:focus {
-  outline: 2px solid var(--error-color);
-  outline-offset: 2px;
   box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.2);
 }
-
 .focus-info:focus {
-  outline: 2px solid var(--info-color);
-  outline-offset: 2px;
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
 }
 
@@ -250,11 +221,9 @@ img[tabindex]:focus {
   margin-bottom: 1.5rem;
   position: relative;
 }
-
 .form-group--error {
   position: relative;
 }
-
 .form-label {
   display: block;
   font-size: 1rem;
@@ -263,13 +232,11 @@ img[tabindex]:focus {
   margin-bottom: 0.5rem;
   line-height: 1.4;
 }
-
 .required-indicator {
   color: #e74c3c;
   font-weight: 700;
   margin-left: 0.25rem;
 }
-
 .optional-indicator {
   color: var(--text-secondary);
   font-weight: 400;
@@ -323,33 +290,6 @@ img[tabindex]:focus {
   box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
 }
 
-.form-group {
-  margin-bottom: 1.5rem;
-  position: relative;
-}
-.form-group--error {
-  position: relative;
-}
-.form-label {
-  display: block;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
-  line-height: 1.4;
-}
-.required-indicator {
-  color: #e74c3c;
-  font-weight: 700;
-  margin-left: 0.25rem;
-}
-.optional-indicator {
-  color: var(--text-secondary);
-  font-weight: 400;
-  font-size: 0.875rem;
-  margin-left: 0.5rem;
-}
-
 .form-input,
 .form-select,
 .form-textarea {
@@ -377,7 +317,6 @@ img[tabindex]:focus {
 .form-textarea:hover {
   border-color: var(--text-secondary);
 }
-
 .form-input--error,
 .form-select--error,
 .form-textarea--error {
