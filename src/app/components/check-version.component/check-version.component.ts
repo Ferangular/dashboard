@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { AppSettingsService } from '../../core/services/app-settings.service';
 import { environment } from '../../../environments/environment';
+import { AppSettingsService } from '../../core/services/app-settings.service';
 
 @Component({
   selector: 'app-check-version.component',
   imports: [],
   templateUrl: './check-version.component.html',
-  styleUrl: './check-version.component.css',
+  styleUrl: './check-version.component.scss',
 })
 export class CheckVersionComponent {
   environment = environment;
