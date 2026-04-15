@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
   FormField,
   debounce,
@@ -25,7 +26,7 @@ interface ContactData {
 @Component({
   selector: 'app-contact-form',
   standalone: true,
-  imports: [CommonModule, FormField],
+  imports: [CommonModule, FormsModule, FormField],
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

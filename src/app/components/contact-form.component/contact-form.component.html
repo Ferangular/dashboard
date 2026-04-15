@@ -7,7 +7,7 @@
       </p>
     </header>
 
-    <form (ngSubmit)="onSubmit()" novalidate aria-labelledby="form-title">
+    <form (ngSubmit)="onSubmit($event)" novalidate aria-labelledby="form-title">
       <!-- Campo Nombre -->
       <div class="form-group" [class.form-group--error]="getErrorMessage('name')">
         <label for="name" class="form-label">
@@ -24,7 +24,6 @@
           [attr.aria-describedby]="getErrorMessage('name') ? 'name-error' : null"
           placeholder="Ej: Juan Pérez García"
           autocomplete="name"
-          required
         />
         @if (getErrorMessage('name')) {
           <div id="name-error" class="form-error" role="alert" aria-live="polite">
@@ -50,9 +49,8 @@
           [attr.aria-describedby]="getErrorMessage('email') ? 'email-error email-help' : 'email-help'"
           placeholder="ejemplo@correo.com"
           autocomplete="email"
-          required
         />
-        <div id="email-help" class="form-help">Usa un formato de correo válido (ejemplo@dominio.com)</div>
+        <div id="email-help" class="form-help">Usa un formato de correo válido</div>
         @if (getErrorMessage('email')) {
           <div id="email-error" class="form-error" role="alert" aria-live="polite">
             <span class="error-icon">!</span>
@@ -100,7 +98,6 @@
           [class.form-select--error]="getErrorMessage('subject')"
           [attr.aria-invalid]="getErrorMessage('subject') ? 'true' : 'false'"
           [attr.aria-describedby]="getErrorMessage('subject') ? 'subject-error' : null"
-          required
         >
           <option value="">Selecciona un asunto...</option>
           <option value="consultation">Consulta general</option>
@@ -132,7 +129,6 @@
           [attr.aria-describedby]="getErrorMessage('message') ? 'message-error message-help' : 'message-help'"
           rows="5"
           placeholder="Describe tu consulta o solicitud en detalle..."
-          required
         ></textarea>
         <div id="message-help" class="form-help">
           Mínimo 10 caracteres. Sé lo más específico posible para poder ayudarte mejor.
