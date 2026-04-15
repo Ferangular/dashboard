@@ -1,3 +1,6 @@
+<!-- Regla 7: Skip Link para saltar al contenido principal -->
+<a href="#main-content" class="skip-link" translate="no">Saltar al contenido principal</a>
+
 <aside class="sidebar" [class.sidebar--collapsed]="isCollapsed()" [class.sidebar--mobile-open]="isMobileOpen()">
   <div class="sidebar__header">
     <div class="sidebar__logo">
@@ -8,28 +11,40 @@
     </div>
 
     @if (!isCollapsed()) {
-      <button class="sidebar__toggle" (click)="toggleCollapse()" aria-label="Toggle sidebar">
+      <button
+        class="sidebar__toggle"
+        (click)="toggleCollapse()"
+        aria-label="Contraer sidebar"
+        title="Contraer menú de navegación"
+      >
         <span class="sidebar__toggle-icon">←</span>
       </button>
     } @else {
-      <button class="sidebar__toggle sidebar__toggle--collapsed" (click)="toggleCollapse()" aria-label="Expand sidebar">
+      <button
+        class="sidebar__toggle sidebar__toggle--collapsed"
+        (click)="toggleCollapse()"
+        aria-label="Expandir sidebar"
+        title="Expandir menú de navegación"
+      >
         <span class="sidebar__toggle-icon">→</span>
       </button>
     }
   </div>
 
-  <nav class="sidebar__nav">
-    <ul class="sidebar__nav-list">
+  <nav class="sidebar__nav" role="navigation" aria-label="Navegación principal">
+    <ul class="sidebar__nav-list" role="menubar">
       @for (item of navigationItems; track item.id) {
-        <li class="sidebar__nav-item">
+        <li class="sidebar__nav-item" role="none">
           @if (item.children && item.children.length > 0) {
             <div class="sidebar__nav-group">
               <button
                 class="sidebar__nav-btn sidebar__nav-btn--parent"
                 [class.sidebar__nav-btn--active]="isActive(item.path)"
                 (click)="handleParentClick(item)"
-                aria-expanded="{{ isExpanded(item.id) }}"
-                aria-controls="submenu-{{ item.id }}"
+                [attr.aria-expanded]="isExpanded(item.id)"
+                [attr.aria-controls]="'submenu-' + item.id"
+                role="button"
+                tabindex="0"
               >
                 <span class="sidebar__nav-icon">{{ item.icon }}</span>
 
@@ -43,13 +58,19 @@
                 id="submenu-{{ item.id }}"
                 class="sidebar__submenu"
                 [class.sidebar__submenu--expanded]="isExpanded(item.id)"
+                role="menu"
+                [attr.aria-hidden]="!isExpanded(item.id)"
+                [attr.aria-label]="translate(item.label) + ' submenu'"
               >
                 @for (child of item.children; track child.id) {
-                  <li class="sidebar__submenu-item">
+                  <li class="sidebar__submenu-item" role="none">
                     <button
                       class="sidebar__nav-btn sidebar__nav-btn--child"
                       [class.sidebar__nav-btn--active]="isActive(child.path)"
                       (click)="handleChildClick(child.path)"
+                      role="menuitem"
+                      tabindex="-1"
+                      [attr.aria-label]="translate(child.label) + ' - ' + translate(item.label)"
                     >
                       <span class="sidebar__nav-icon">{{ child.icon }}</span>
                       <span class="sidebar__nav-label">{{ translate(child.label) }}</span>
@@ -63,6 +84,9 @@
               class="sidebar__nav-btn"
               [class.sidebar__nav-btn--active]="isActive(item.path)"
               (click)="navigateTo(item.path)"
+              role="menuitem"
+              [attr.aria-label]="translate(item.label) + (isActive(item.path) ? ' - página actual' : '')"
+              [attr.aria-current]="isActive(item.path) ? 'page' : null"
             >
               <span class="sidebar__nav-icon">{{ item.icon }}</span>
               @if (!isCollapsed()) {
