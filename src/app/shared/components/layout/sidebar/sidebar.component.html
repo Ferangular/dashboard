@@ -49,7 +49,7 @@
                     <button
                       class="sidebar__nav-btn sidebar__nav-btn--child"
                       [class.sidebar__nav-btn--active]="isActive(child.path)"
-                      (click)="navigateTo(child.path)"
+                      (click)="handleChildClick(child.path)"
                     >
                       <span class="sidebar__nav-icon">{{ child.icon }}</span>
                       <span class="sidebar__nav-label">{{ translate(child.label) }}</span>

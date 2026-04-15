@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, HostListener, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationItem } from '../../../../core/interfaces/navigation.interface';
 import { I18nService } from '../../../../core/services/i18n.service';
@@ -126,13 +126,25 @@ export class SidebarComponent {
   }
 
   handleParentClick(item: NavigationItem): void {
-    // Si tiene hijos, manejar el submenú
     if (item.children && item.children.length > 0) {
       this.toggleSubmenu(item.id);
-    } else {
-      // Si no tiene hijos, navegar normalmente
-      this.navigateTo(item.path);
+      return;
     }
+
+    this.closeAllSubmenus();
+    this.navigateTo(item.path);
+  }
+
+  // Cerrar todos los submenús
+  closeAllSubmenus(): void {
+    this.expandedItems.set(new Set());
+  }
+
+  // Manejar clic en elementos del submenú
+  handleChildClick(path: string): void {
+    this.closeAllSubmenus();
+    (document.activeElement as HTMLElement | null)?.blur();
+    this.navigateTo(path);
   }
 
   toggleCollapse(): void {
@@ -155,5 +167,16 @@ export class SidebarComponent {
 
   translate(key: string): string {
     return this.i18nService.translate(key);
+  }
+
+  // Cerrar submenús al hacer clic fuera
+  @HostListener('document:click', ['$event'])
+  handleDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement | null;
+    const isClickInsideSidebar = target?.closest('.sidebar');
+
+    if (!isClickInsideSidebar) {
+      this.closeAllSubmenus();
+    }
   }
 }

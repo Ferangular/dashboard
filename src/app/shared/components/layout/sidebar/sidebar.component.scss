@@ -227,21 +227,35 @@
 }
 
 .sidebar__submenu {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  min-width: 220px;
   list-style: none;
-  margin: 0 0.5rem 0 1rem;
-  padding: 0;
-  max-height: 0;
-  overflow: hidden;
+  margin: 0;
+  padding: 0.5rem;
   background: var(--bg-primary);
-  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-8px);
   transition:
-    max-height 0.3s ease,
     opacity 0.2s ease,
+    visibility 0.2s ease,
     transform 0.2s ease;
+  z-index: 1200;
+  pointer-events: none;
+  max-height: none;
+  overflow: visible;
 }
 
 .sidebar__submenu--expanded {
-  max-height: 500px;
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  pointer-events: auto;
 }
 
 .sidebar__submenu-item {
@@ -287,6 +301,16 @@
   }
 }
 
+/* Mostrar submenu con hover y focus */
+//.sidebar__nav-group:hover .sidebar__submenu,
+//.sidebar__nav-group:focus-within .sidebar__submenu {
+//  opacity: 1;
+//  visibility: visible;
+//  transform: translateX(0);
+//  pointer-events: auto;
+//}
+
+/* COLAPSADO: ocultar labels y flechas, mantener submenu emergente */
 .sidebar--collapsed {
   .sidebar__nav-btn {
     justify-content: center;
@@ -306,38 +330,6 @@
     display: none;
   }
 
-  .sidebar__submenu {
-    position: absolute;
-    left: calc(100% + 8px);
-    top: 0;
-    min-width: 220px;
-    max-height: none;
-    overflow: visible;
-    margin: 0;
-    padding: 0.5rem;
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    box-shadow: var(--shadow-lg);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(-10px);
-    z-index: 1100;
-    pointer-events: none;
-  }
-
-  .sidebar__nav-group:hover .sidebar__submenu,
-  .sidebar__submenu--expanded {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-    pointer-events: auto;
-  }
-
-  .sidebar__submenu-item {
-    margin: 0.25rem 0;
-  }
-
   .sidebar__nav-btn--child {
     justify-content: flex-start;
 
@@ -350,12 +342,11 @@
 @keyframes submenuSlideIn {
   from {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateX(-8px);
   }
-
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
@@ -369,6 +360,7 @@
   }
 }
 
+/* Mobile: submenu debajo */
 @media (max-width: 768px) {
   .sidebar-backdrop {
     position: fixed;
@@ -380,6 +372,7 @@
     z-index: 999;
   }
 
+  /* En mobile, los submenús aparecen debajo */
   .sidebar__submenu {
     position: static !important;
     left: auto !important;
@@ -397,12 +390,20 @@
     box-shadow: none;
     border: none;
     background: var(--bg-primary);
+    transition: max-height 0.3s ease;
   }
 
   .sidebar__submenu--expanded {
     max-height: 500px;
-    padding: 0;
   }
+
+  /* Ocultar hover effects en mobile */
+  //.sidebar__nav-group:hover .sidebar__submenu,
+  //.sidebar__nav-group:focus-within .sidebar__submenu {
+  //  opacity: 1;
+  //  visibility: visible;
+  //  transform: none;
+  //}
 
   .sidebar--collapsed {
     .sidebar__submenu {
