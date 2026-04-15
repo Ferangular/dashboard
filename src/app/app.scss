@@ -67,7 +67,7 @@
     position: fixed;
     top: 3.75rem; // Debajo del header (60px)
     left: 0;
-    width: var(--sidebar-width);
+    width: 15.625rem; // 250px - valor fijo en lugar de variable
 
     border-right: 0.0625rem solid var(--border-color);
     transition:
@@ -78,7 +78,7 @@
     z-index: 20;
 
     &--collapsed {
-      --sidebar-width: 3.75rem; // 60px
+      width: 3.75rem; // 60px cuando está colapsado
     }
   }
 
@@ -87,12 +87,13 @@
     display: flex;
     flex-direction: column;
     min-height: 0;
-    margin-left: var(--sidebar-width); // Espacio para el sidebar fijo
-    transition: margin-left 0.3s ease; // Transición suave
+    margin-left: 15.625rem; // 250px - espacio para sidebar expandido
+    transition: margin-left 0.3s ease; // Transición suave para efecto acordeón
+  }
 
-    .app__sidebar--collapsed & {
-      margin-left: 3.75rem; // Espacio cuando está colapsado
-    }
+  // Cuando el sidebar está colapsado, el contenido se expande
+  &__sidebar--collapsed ~ &__content-wrapper {
+    margin-left: 3.75rem; // 60px - espacio reducido cuando sidebar colapsado
   }
 
   &__main {
