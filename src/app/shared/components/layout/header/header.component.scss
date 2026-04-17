@@ -6,6 +6,16 @@
     background-color var(--transition-normal),
     border-color var(--transition-normal);
 
+  // Posicionamiento como banner landmark a nivel superior
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-primary);
+  border-bottom: 0.0625rem solid var(--border-color);
+  transition:
+    background-color var(--transition-normal),
+    border-color var(--transition-normal);
+
   &__container {
     display: flex;
     justify-content: space-between;

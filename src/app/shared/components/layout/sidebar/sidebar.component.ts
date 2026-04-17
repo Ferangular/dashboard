@@ -127,12 +127,20 @@ export class SidebarComponent {
     this.isToggling.set(true);
 
     const current = new Set(this.expandedItems());
-    if (current.has(itemId)) {
+    const wasExpanded = current.has(itemId);
+
+    if (wasExpanded) {
       current.delete(itemId);
     } else {
       current.add(itemId);
     }
     this.expandedItems.set(current);
+
+    // Anunciar cambio de estado
+    const item = this.navigationItems.find((navItem) => navItem.id === itemId);
+    if (item) {
+      this.announceSubmenuToggle(item, !wasExpanded);
+    }
 
     // Usar signal con efecto para limpiar el estado después de la animación
     requestAnimationFrame(() => {
@@ -199,5 +207,120 @@ export class SidebarComponent {
     if (!isClickInsideSidebar) {
       this.closeAllSubmenus();
     }
+  }
+
+  // Gestión de navegación por teclado
+  @HostListener('keydown', ['$event'])
+  handleKeydown(event: KeyboardEvent): void {
+    const target = event.target as HTMLElement;
+    const menuitem = target.closest('[role="menuitem"]') as HTMLElement | null;
+
+    if (!menuitem) return;
+
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        this.focusNextMenuItem(menuitem);
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        this.focusPreviousMenuItem(menuitem);
+        break;
+      case 'ArrowRight':
+        event.preventDefault();
+        this.handleArrowRight(menuitem);
+        break;
+      case 'ArrowLeft':
+        event.preventDefault();
+        this.handleArrowLeft(menuitem);
+        break;
+      case 'Enter':
+      case ' ':
+        event.preventDefault();
+        menuitem.click();
+        break;
+      case 'Escape':
+        event.preventDefault();
+        this.closeAllSubmenus();
+        break;
+    }
+  }
+
+  private focusNextMenuItem(currentItem: HTMLElement): void {
+    const allMenuitems = Array.from(
+      document.querySelectorAll('[role="menuitem"]:not([tabindex="-1"])'),
+    ) as HTMLElement[];
+    const currentIndex = allMenuitems.indexOf(currentItem);
+    const nextIndex = (currentIndex + 1) % allMenuitems.length;
+    allMenuitems[nextIndex]?.focus();
+  }
+
+  private focusPreviousMenuItem(currentItem: HTMLElement): void {
+    const allMenuitems = Array.from(
+      document.querySelectorAll('[role="menuitem"]:not([tabindex="-1"])'),
+    ) as HTMLElement[];
+    const currentIndex = allMenuitems.indexOf(currentItem);
+    const previousIndex = currentIndex === 0 ? allMenuitems.length - 1 : currentIndex - 1;
+    allMenuitems[previousIndex]?.focus();
+  }
+
+  private handleArrowRight(menuitem: HTMLElement): void {
+    // Si tiene submenu, expandirlo
+    const hasPopup = menuitem.getAttribute('aria-haspopup') === 'true';
+    if (hasPopup && menuitem.getAttribute('aria-expanded') === 'false') {
+      menuitem.click();
+    } else {
+      // Si no, mover al siguiente item
+      this.focusNextMenuItem(menuitem);
+    }
+  }
+
+  private handleArrowLeft(menuitem: HTMLElement): void {
+    // Si está en un submenu, cerrarlo
+    const submenu = menuitem.closest('.sidebar__submenu');
+    if (submenu) {
+      const parentButton = document.querySelector(`[aria-controls="${submenu.id}"]`) as HTMLElement;
+      if (parentButton) {
+        this.closeAllSubmenus();
+        parentButton.focus();
+      }
+    } else {
+      // Si no, mover al item anterior
+      this.focusPreviousMenuItem(menuitem);
+    }
+  }
+
+  // Mensajes para aria-live
+  ariaLiveMessage = signal('');
+
+  getAriaLiveMessage(): string {
+    return this.ariaLiveMessage();
+  }
+
+  // Generar etiquetas aria-label mejoradas
+  getAriaLabelForItem(item: NavigationItem): string {
+    const label = this.translate(item.label);
+    const isActive = this.isActive(item.path);
+    return isActive ? `${label} - página actual` : label;
+  }
+
+  getAriaLabelForChild(child: NavigationItem, parent: NavigationItem): string {
+    const childLabel = this.translate(child.label);
+    const parentLabel = this.translate(parent.label);
+    const isActive = this.isActive(child.path);
+    const baseLabel = `${childLabel} - ${parentLabel}`;
+    return isActive ? `${baseLabel} - página actual` : baseLabel;
+  }
+
+  // Anunciar cambios en submenús
+  announceSubmenuToggle(item: NavigationItem, isExpanded: boolean): void {
+    const label = this.translate(item.label);
+    const message = isExpanded ? `Menú ${label} expandido` : `Menú ${label} contraído`;
+    this.ariaLiveMessage.set(message);
+
+    // Limpiar mensaje después de un tiempo
+    setTimeout(() => {
+      this.ariaLiveMessage.set('');
+    }, 1000);
   }
 }

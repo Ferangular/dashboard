@@ -31,6 +31,11 @@
     }
   </div>
 
+  <!-- Región live para anuncios de estado del menú -->
+  <div aria-live="polite" aria-atomic="true" class="sr-only">
+    {{ getAriaLiveMessage() }}
+  </div>
+
   <nav class="sidebar__nav" role="navigation" aria-label="Navegación principal">
     <ul class="sidebar__nav-list" role="menubar">
       @for (item of navigationItems; track item.id) {
@@ -43,7 +48,8 @@
                 (click)="handleParentClick(item)"
                 [attr.aria-expanded]="isExpanded(item.id)"
                 [attr.aria-controls]="'submenu-' + item.id"
-                role="button"
+                role="menuitem"
+                aria-haspopup="true"
                 tabindex="0"
               >
                 <span class="sidebar__nav-icon">{{ item.icon }}</span>
@@ -69,11 +75,15 @@
                       [class.sidebar__nav-btn--active]="isActive(child.path)"
                       (click)="handleChildClick(child.path)"
                       role="menuitem"
-                      tabindex="-1"
-                      [attr.aria-label]="translate(child.label) + ' - ' + translate(item.label)"
+                      [attr.tabindex]="isExpanded(item.id) ? '0' : '-1'"
+                      [attr.aria-label]="getAriaLabelForChild(child, item)"
+                      [attr.aria-current]="isActive(child.path) ? 'page' : null"
                     >
                       <span class="sidebar__nav-icon">{{ child.icon }}</span>
                       <span class="sidebar__nav-label">{{ translate(child.label) }}</span>
+                      @if (isActive(child.path)) {
+                        <span class="sidebar__current-indicator" aria-hidden="true">(actual)</span>
+                      }
                     </button>
                   </li>
                 }
@@ -85,12 +95,15 @@
               [class.sidebar__nav-btn--active]="isActive(item.path)"
               (click)="navigateTo(item.path)"
               role="menuitem"
-              [attr.aria-label]="translate(item.label) + (isActive(item.path) ? ' - página actual' : '')"
+              [attr.aria-label]="getAriaLabelForItem(item)"
               [attr.aria-current]="isActive(item.path) ? 'page' : null"
             >
               <span class="sidebar__nav-icon">{{ item.icon }}</span>
               @if (!isCollapsed()) {
                 <span class="sidebar__nav-label">{{ translate(item.label) }}</span>
+                @if (isActive(item.path)) {
+                  <span class="sidebar__current-indicator" aria-hidden="true">(actual)</span>
+                }
               }
             </button>
           }

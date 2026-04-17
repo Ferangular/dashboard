@@ -2,19 +2,19 @@
   <!-- Enlace de salto al contenido principal (Regla 7) -->
   <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-  <header class="app__header">
-    <app-header></app-header>
-  </header>
+  <!-- Header como banner landmark a nivel superior -->
+  <app-header></app-header>
+
+  <!-- Sidebar como complementary landmark a nivel superior -->
+  <aside
+    class="app__sidebar"
+    [class.app__sidebar--collapsed]="isSidebarCollapsed()"
+    aria-label="Menú de navegación principal"
+  >
+    <app-sidebar></app-sidebar>
+  </aside>
 
   <div class="app__container">
-    <nav
-      class="app__sidebar"
-      [class.app__sidebar--collapsed]="isSidebarCollapsed()"
-      aria-label="Menú de navegación principal"
-    >
-      <app-sidebar></app-sidebar>
-    </nav>
-
     <div class="app__content-wrapper">
       <main id="main-content" class="app__main" role="main">
         <div class="app__content">
