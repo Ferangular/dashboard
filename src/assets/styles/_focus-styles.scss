@@ -1,0 +1,140 @@
+// =============================================================================
+// ESTILOS DE FOCO DE ALTO CONTRASTE - WCAG 2.4.7 Foco Visible
+// =============================================================================
+
+// Foco general de alto contraste
+.high-contrast-focus *:focus {
+  outline: 3px solid #ffcc00 !important;
+  outline-offset: 2px !important;
+  box-shadow:
+    0 0 0 2px #000000,
+    0 0 8px rgba(255, 204, 0, 0.8) !important;
+  background: rgba(255, 204, 0, 0.1) !important;
+  color: #000000 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #ffcc00 !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 4px !important;
+}
+
+// Foco específico para botones y elementos interactivos
+.high-contrast-focus button:focus,
+.high-contrast-focus input:focus,
+.high-contrast-focus textarea:focus,
+.high-contrast-focus select:focus,
+.high-contrast-focus a:focus {
+  outline: 3px solid #ffcc00 !important;
+  outline-offset: 2px !important;
+  border: 2px solid #ffcc00 !important;
+  box-shadow:
+    0 0 0 2px #000000,
+    0 0 12px rgba(255, 204, 0, 0.9) !important;
+  background: rgba(255, 204, 0, 0.15) !important;
+  color: #000000 !important;
+  font-weight: 600 !important;
+  transform: scale(1.02) !important;
+  transition: all 0.2s ease !important;
+}
+
+// Foco para elementos específicos del widget
+.high-contrast-focus .toggle-switch:focus-within .toggle-slider {
+  outline: 4px solid #ffcc00 !important;
+  outline-offset: 2px !important;
+  box-shadow:
+    0 0 0 3px #000000,
+    0 0 16px rgba(255, 204, 0, 1) !important;
+  border-color: #ffcc00 !important;
+  transform: scale(1.05) !important;
+}
+
+.high-contrast-focus .contrast-btn:focus,
+.high-contrast-focus .spacing-btn:focus,
+.high-contrast-focus .size-btn:focus {
+  outline: 3px solid #ffcc00 !important;
+  outline-offset: 2px !important;
+  box-shadow:
+    0 0 0 2px #000000,
+    0 0 12px rgba(255, 204, 0, 0.9) !important;
+  background: rgba(255, 204, 0, 0.2) !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  transform: translateY(-1px) !important;
+  transition: all 0.2s ease !important;
+}
+
+// Foco para enlaces
+.high-contrast-focus a:focus {
+  outline: 3px solid #ffcc00 !important;
+  outline-offset: 2px !important;
+  box-shadow:
+    0 0 0 2px #000000,
+    0 0 10px rgba(255, 204, 0, 0.8) !important;
+  background: rgba(255, 204, 0, 0.1) !important;
+  color: #000000 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #ffcc00 !important;
+  text-decoration-thickness: 3px !important;
+  text-underline-offset: 4px !important;
+}
+
+// Foco para formularios
+.high-contrast-focus input:focus,
+.high-contrast-focus textarea:focus,
+.high-contrast-focus select:focus {
+  outline: 3px solid #ffcc00 !important;
+  outline-offset: 2px !important;
+  border: 2px solid #ffcc00 !important;
+  box-shadow:
+    0 0 0 2px #000000,
+    0 0 12px rgba(255, 204, 0, 0.9) !important;
+  background: rgba(255, 204, 0, 0.1) !important;
+  color: #000000 !important;
+}
+
+// Foco para botones principales
+.high-contrast-focus button:focus {
+  outline: 3px solid #ffcc00 !important;
+  outline-offset: 2px !important;
+  border: 2px solid #ffcc00 !important;
+  box-shadow:
+    0 0 0 2px #000000,
+    0 0 12px rgba(255, 204, 0, 0.9) !important;
+  background: rgba(255, 204, 0, 0.15) !important;
+  color: #000000 !important;
+  font-weight: 600 !important;
+  transform: scale(1.02) !important;
+  transition: all 0.2s ease !important;
+}
+
+// Reducción de animaciones para accesibilidad
+.reduce-animations * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+.reduce-animations button,
+.reduce-animations .contrast-btn,
+.reduce-animations .spacing-btn,
+.reduce-animations .size-btn,
+.reduce-animations .toggle-slider {
+  transition: none !important;
+  animation: none !important;
+}
+
+// Subrayado permanente de enlaces
+.underline-links a {
+  text-decoration: underline !important;
+  text-decoration-style: solid !important;
+  text-decoration-color: currentColor !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: 2px !important;
+
+  &:hover,
+  &:focus {
+    text-decoration-style: double !important;
+    text-decoration-thickness: 2px !important;
+    text-underline-offset: 3px !important;
+  }
+}
