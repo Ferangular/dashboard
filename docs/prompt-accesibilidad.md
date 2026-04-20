@@ -136,3 +136,8 @@ ESTILO
 - conciso
 - orientado a producción
 - paso a paso
+
+IDIOMA
+
+- Responde siempre en castellano, salvo que el usuario pida expresamente otro idioma.
+- Mantén nombres técnicos estándar en inglés cuando sea útil (por ejemplo: focus trap, screen
