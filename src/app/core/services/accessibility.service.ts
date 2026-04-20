@@ -59,7 +59,9 @@ export class AccessibilityService {
   }
 
   updateContrastMode(mode: AccessibilitySettings['contrastMode']): void {
+    console.log('updateContrastMode called with:', mode);
     this.settingsSignal.update((settings) => ({ ...settings, contrastMode: mode }));
+    console.log('Settings updated, current contrast mode:', this.settingsSignal().contrastMode);
     this.applyContrast();
     this.saveSettings();
   }
@@ -182,16 +184,38 @@ export class AccessibilityService {
     const body = this.document.body;
     const contrastMode = this.settingsSignal().contrastMode;
 
-    // Limpiar clases de contraste existentes
-    this.renderer.removeClass(body, 'contrast-high-dark');
-    this.renderer.removeClass(body, 'contrast-high-light');
-    this.renderer.removeClass(body, 'contrast-black-yellow');
-    this.renderer.removeClass(body, 'contrast-yellow-black');
+    console.log('applyContrast called with mode:', contrastMode);
+    console.log('Body classes before:', body.className);
+
+    // Limpiar TODAS las clases de contraste existentes
+    const contrastClasses = [
+      'contrast-high-dark',
+      'contrast-high-light',
+      'contrast-black-yellow',
+      'contrast-yellow-black',
+      'contrast-high',
+      'contrast-dark',
+    ];
+
+    contrastClasses.forEach((className) => {
+      this.renderer.removeClass(body, className);
+    });
 
     // Aplicar nueva clase de contraste
     if (contrastMode !== 'normal') {
-      this.renderer.addClass(body, `contrast-${contrastMode}`);
+      const className = `contrast-${contrastMode}`;
+      console.log('Adding class:', className);
+      this.renderer.addClass(body, className);
+
+      // Forzar actualización de variables CSS
+      this.forceContrastUpdate(contrastMode);
+    } else {
+      // Limpiar variables CSS cuando es modo normal
+      this.clearContrastVariables();
+      console.log('Cleared contrast variables for normal mode');
     }
+
+    console.log('Body classes after:', body.className);
 
     // Sincronizar con tema oscuro/claro si es necesario
     if (contrastMode === 'high-dark' || contrastMode === 'black-yellow') {
@@ -201,6 +225,75 @@ export class AccessibilityService {
       this.themeService.isDarkMode.set(false);
       this.themeService.updateTheme();
     }
+  }
+
+  // Método auxiliar para forzar actualización de contraste
+  private forceContrastUpdate(mode: AccessibilitySettings['contrastMode']): void {
+    const root = this.document.documentElement;
+
+    // Aplicar variables CSS directamente como fallback
+    const contrastSettings: Record<
+      AccessibilitySettings['contrastMode'],
+      Record<string, string>
+    > = {
+      normal: {
+        '--bg-primary': '',
+        '--text-primary': '',
+        '--bg-secondary': '',
+        '--text-secondary': '',
+      },
+      'high-dark': {
+        '--bg-primary': '#000000',
+        '--text-primary': '#ffffff',
+        '--bg-secondary': '#1a1a1a',
+        '--text-secondary': '#e0e0e0',
+      },
+      'high-light': {
+        '--bg-primary': '#ffffff',
+        '--text-primary': '#000000',
+        '--bg-secondary': '#f5f5f5',
+        '--text-secondary': '#333333',
+      },
+      'black-yellow': {
+        '--bg-primary': '#000000',
+        '--text-primary': '#ffff00',
+        '--bg-secondary': '#1a1a1a',
+        '--text-secondary': '#ffff99',
+      },
+      'yellow-black': {
+        '--bg-primary': '#ffff00',
+        '--text-primary': '#000000',
+        '--bg-secondary': '#ffff99',
+        '--text-secondary': '#333333',
+      },
+    };
+
+    const settings = contrastSettings[mode];
+    if (settings && mode !== 'normal') {
+      Object.entries(settings).forEach(([property, value]) => {
+        if (value) {
+          // Solo aplicar si el valor no está vacío
+          root.style.setProperty(property, value);
+          console.log(`Set CSS variable: ${property} = ${value}`);
+        }
+      });
+    }
+  }
+
+  // Método para limpiar variables CSS de contraste
+  private clearContrastVariables(): void {
+    const root = this.document.documentElement;
+    const variablesToClear = [
+      '--bg-primary',
+      '--text-primary',
+      '--bg-secondary',
+      '--text-secondary',
+    ];
+
+    variablesToClear.forEach((variable) => {
+      root.style.removeProperty(variable);
+      console.log(`Cleared CSS variable: ${variable}`);
+    });
   }
 
   private applyLineHeight(): void {

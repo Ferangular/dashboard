@@ -432,56 +432,7 @@
   }
 }
 
-/* Clases aplicadas al body para los diferentes modos */
-
-/* Temas de contraste mejorados */
-.contrast-high-dark {
-  --bg-primary: #000000 !important;
-  --bg-secondary: #1a1a1a !important;
-  --bg-tertiary: #2d2d2d !important;
-  --text-primary: #ffffff !important;
-  --text-secondary: #e0e0e0 !important;
-  --text-muted: #b0b0b0 !important;
-  --border-color: #404040 !important;
-  --color-primary: #ffcc00 !important;
-  --focus-color: #ffcc00 !important;
-}
-
-.contrast-high-light {
-  --bg-primary: #ffffff !important;
-  --bg-secondary: #f5f5f5 !important;
-  --bg-tertiary: #e8e8e8 !important;
-  --text-primary: #000000 !important;
-  --text-secondary: #333333 !important;
-  --text-muted: #666666 !important;
-  --border-color: #000000 !important;
-  --color-primary: #0066cc !important;
-  --focus-color: #0066cc !important;
-}
-
-.contrast-black-yellow {
-  --bg-primary: #000000 !important;
-  --bg-secondary: #1a1a1a !important;
-  --bg-tertiary: #2d2d2d !important;
-  --text-primary: #ffff00 !important;
-  --text-secondary: #ffcc00 !important;
-  --text-muted: #ff9900 !important;
-  --border-color: #ffff00 !important;
-  --color-primary: #ffff00 !important;
-  --focus-color: #ffffff !important;
-}
-
-.contrast-yellow-black {
-  --bg-primary: #ffff00 !important;
-  --bg-secondary: #ffcc00 !important;
-  --bg-tertiary: #ff9900 !important;
-  --text-primary: #000000 !important;
-  --text-secondary: #1a1a1a !important;
-  --text-muted: #333333 !important;
-  --border-color: #000000 !important;
-  --color-primary: #000000 !important;
-  --focus-color: #000000 !important;
-}
+/* Las clases de contraste se definen en app.scss para evitar duplicación */
 
 /* Modos de contraste */
 .contrast-high {

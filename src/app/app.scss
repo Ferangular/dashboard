@@ -286,75 +286,75 @@ html {
 
 // Temas de contraste de accesibilidad
 .contrast-high-dark {
-  --bg-primary: #000000;
-  --bg-secondary: #1a1a1a;
-  --bg-tertiary: #2d2d2d;
-  --text-primary: #ffffff;
-  --text-secondary: #e0e0e0;
-  --text-muted: #b0b0b0;
-  --border-primary: #404040;
-  --border-secondary: #606060;
-  --accent-primary: #ffff00;
-  --accent-secondary: #00ff00;
-  --accent-tertiary: #00ffff;
-  --error: #ff6b6b;
-  --warning: #ffa726;
-  --success: #66bb6a;
-  --info: #42a5f5;
+  --bg-primary: #000000 !important;
+  --bg-secondary: #1a1a1a !important;
+  --bg-tertiary: #2d2d2d !important;
+  --text-primary: #ffffff !important;
+  --text-secondary: #e0e0e0 !important;
+  --text-muted: #b0b0b0 !important;
+  --border-primary: #404040 !important;
+  --border-secondary: #606060 !important;
+  --accent-primary: #ffff00 !important;
+  --accent-secondary: #00ff00 !important;
+  --accent-tertiary: #00ffff !important;
+  --error: #ff6b6b !important;
+  --warning: #ffa726 !important;
+  --success: #66bb6a !important;
+  --info: #42a5f5 !important;
 }
 
 .contrast-high-light {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f5f5f5;
-  --bg-tertiary: #e8e8e8;
-  --text-primary: #000000;
-  --text-secondary: #333333;
-  --text-muted: #666666;
-  --border-primary: #000000;
-  --border-secondary: #333333;
-  --accent-primary: #0000ff;
-  --accent-secondary: #ff0000;
-  --accent-tertiary: #008000;
-  --error: #d32f2f;
-  --warning: #f57c00;
-  --success: #388e3c;
-  --info: #1976d2;
+  --bg-primary: #ffffff !important;
+  --bg-secondary: #f5f5f5 !important;
+  --bg-tertiary: #e8e8e8 !important;
+  --text-primary: #000000 !important;
+  --text-secondary: #333333 !important;
+  --text-muted: #666666 !important;
+  --border-primary: #000000 !important;
+  --border-secondary: #333333 !important;
+  --accent-primary: #0000ff !important;
+  --accent-secondary: #ff0000 !important;
+  --accent-tertiary: #008000 !important;
+  --error: #d32f2f !important;
+  --warning: #f57c00 !important;
+  --success: #388e3c !important;
+  --info: #1976d2 !important;
 }
 
 .contrast-black-yellow {
-  --bg-primary: #000000;
-  --bg-secondary: #1a1a1a;
-  --bg-tertiary: #2d2d2d;
-  --text-primary: #ffff00;
-  --text-secondary: #ffff99;
-  --text-muted: #ffffcc;
-  --border-primary: #ffff00;
-  --border-secondary: #ffff99;
-  --accent-primary: #ffffff;
-  --accent-secondary: #00ffff;
-  --accent-tertiary: #ff00ff;
-  --error: #ff9999;
-  --warning: #ffcc00;
-  --success: #99ff99;
-  --info: #9999ff;
+  --bg-primary: #000000 !important;
+  --bg-secondary: #1a1a1a !important;
+  --bg-tertiary: #2d2d2d !important;
+  --text-primary: #ffff00 !important;
+  --text-secondary: #ffff99 !important;
+  --text-muted: #ffffcc !important;
+  --border-primary: #ffff00 !important;
+  --border-secondary: #ffff99 !important;
+  --accent-primary: #ffffff !important;
+  --accent-secondary: #00ffff !important;
+  --accent-tertiary: #ff00ff !important;
+  --error: #ff9999 !important;
+  --warning: #ffcc00 !important;
+  --success: #99ff99 !important;
+  --info: #9999ff !important;
 }
 
 .contrast-yellow-black {
-  --bg-primary: #ffff00;
-  --bg-secondary: #ffff99;
-  --bg-tertiary: #ffffcc;
-  --text-primary: #000000;
-  --text-secondary: #333333;
-  --text-muted: #666666;
-  --border-primary: #000000;
-  --border-secondary: #333333;
-  --accent-primary: #ff0000;
-  --accent-secondary: #0000ff;
-  --accent-tertiary: #008000;
-  --error: #990000;
-  --warning: #cc6600;
-  --success: #006600;
-  --info: #0066cc;
+  --bg-primary: #ffff00 !important;
+  --bg-secondary: #ffff99 !important;
+  --bg-tertiary: #ffffcc !important;
+  --text-primary: #000000 !important;
+  --text-secondary: #333333 !important;
+  --text-muted: #666666 !important;
+  --border-primary: #000000 !important;
+  --border-secondary: #333333 !important;
+  --accent-primary: #ff0000 !important;
+  --accent-secondary: #0000ff !important;
+  --accent-tertiary: #008000 !important;
+  --error: #990000 !important;
+  --warning: #cc6600 !important;
+  --success: #006600 !important;
+  --info: #0066cc !important;
 }
 
 // Estilos de foco de alto contraste

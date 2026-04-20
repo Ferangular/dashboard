@@ -110,11 +110,13 @@ export class AccessibilityWidgetComponent implements OnInit {
 
   // Control del contraste
   setContrastMode(mode: string): void {
+    console.log('setContrastMode called with:', mode);
+
     // Mapear valores antiguos a nuevos valores
     const modeMap: Record<string, AccessibilitySettings['contrastMode']> = {
       normal: 'normal',
-      high: 'high-dark',
-      dark: 'high-light',
+      high: 'high-light', // Alto contraste = blanco sobre negro
+      dark: 'high-dark', // Oscuro = negro sobre blanco
       'high-dark': 'high-dark',
       'high-light': 'high-light',
       'black-yellow': 'black-yellow',
@@ -122,6 +124,8 @@ export class AccessibilityWidgetComponent implements OnInit {
     };
 
     const newMode = modeMap[mode] || 'normal';
+    console.log('Mapped mode:', mode, '=>', newMode);
+
     this.accessibilityService.updateContrastMode(newMode);
   }
 
