@@ -64,16 +64,16 @@
               class="size-btn"
               (click)="decreaseFontSize()"
               aria-label="Reducir tamaño del texto"
-              [disabled]="currentFontSize() <= 80"
+              [disabled]="currentFontSizePercentage() <= 80"
             >
               <span>A-</span>
             </button>
-            <span class="size-indicator">{{ currentFontSize() }}%</span>
+            <span class="size-indicator">{{ currentFontSizePercentage() }}%</span>
             <button
               class="size-btn"
               (click)="increaseFontSize()"
               aria-label="Aumentar tamaño del texto"
-              [disabled]="currentFontSize() >= 150"
+              [disabled]="currentFontSizePercentage() >= 150"
             >
               <span>A+</span>
             </button>
