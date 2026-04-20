@@ -120,6 +120,140 @@
               Oscuro
             </button>
           </div>
+
+          <!-- Opciones adicionales de alto contraste WCAG -->
+          <div class="setting-group">
+            <div class="setting-label">Alto contraste WCAG</div>
+            <div class="contrast-options" role="radiogroup" aria-labelledby="contrast-wcag-label">
+              <button
+                class="contrast-btn"
+                role="radio"
+                (click)="setContrastMode('white-blue')"
+                [class.active]="contrastMode() === 'white-blue'"
+                [attr.aria-checked]="contrastMode() === 'white-blue' ? 'true' : 'false'"
+                aria-label="Blanco sobre azul"
+              >
+                Blanco/Azul
+              </button>
+              <button
+                class="contrast-btn"
+                role="radio"
+                (click)="setContrastMode('blue-white')"
+                [class.active]="contrastMode() === 'blue-white'"
+                [attr.aria-checked]="contrastMode() === 'blue-white' ? 'true' : 'false'"
+                aria-label="Azul sobre blanco"
+              >
+                Azul/Blanco
+              </button>
+              <button
+                class="contrast-btn"
+                role="radio"
+                (click)="setContrastMode('green-black')"
+                [class.active]="contrastMode() === 'green-black'"
+                [attr.aria-checked]="contrastMode() === 'green-black' ? 'true' : 'false'"
+                aria-label="Verde sobre negro"
+              >
+                Verde/Negro
+              </button>
+              <button
+                class="contrast-btn"
+                role="radio"
+                (click)="setContrastMode('black-green')"
+                [class.active]="contrastMode() === 'black-green'"
+                [attr.aria-checked]="contrastMode() === 'black-green' ? 'true' : 'false'"
+                aria-label="Negro sobre verde"
+              >
+                Negro/Verde
+              </button>
+            </div>
+
+            <!-- Más opciones de contraste -->
+            <div class="setting-group">
+              <div class="setting-label">Más contraste</div>
+              <div class="contrast-options" role="radiogroup" aria-labelledby="more-contrast-label">
+                <button
+                  class="contrast-btn"
+                  role="radio"
+                  (click)="setContrastMode('black-cyan')"
+                  [class.active]="contrastMode() === 'black-cyan'"
+                  [attr.aria-checked]="contrastMode() === 'black-cyan' ? 'true' : 'false'"
+                  aria-label="Negro sobre cian"
+                >
+                  Negro/Cian
+                </button>
+                <button
+                  class="contrast-btn"
+                  role="radio"
+                  (click)="setContrastMode('cyan-black')"
+                  [class.active]="contrastMode() === 'cyan-black'"
+                  [attr.aria-checked]="contrastMode() === 'cyan-black' ? 'true' : 'false'"
+                  aria-label="Cian sobre negro"
+                >
+                  Cian/Negro
+                </button>
+                <button
+                  class="contrast-btn"
+                  role="radio"
+                  (click)="setContrastMode('purple-white')"
+                  [class.active]="contrastMode() === 'purple-white'"
+                  [attr.aria-checked]="contrastMode() === 'purple-white' ? 'true' : 'false'"
+                  aria-label="Púrpura sobre blanco"
+                >
+                  Púrpura/Blanco
+                </button>
+                <button
+                  class="contrast-btn"
+                  role="radio"
+                  (click)="setContrastMode('white-purple')"
+                  [class.active]="contrastMode() === 'white-purple'"
+                  [attr.aria-checked]="contrastMode() === 'white-purple' ? 'true' : 'false'"
+                  aria-label="Blanco sobre púrpura"
+                >
+                  Blanco/Púrpura
+                </button>
+                <button
+                  class="contrast-btn"
+                  role="radio"
+                  (click)="setContrastMode('orange-black')"
+                  [class.active]="contrastMode() === 'orange-black'"
+                  [attr.aria-checked]="contrastMode() === 'orange-black' ? 'true' : 'false'"
+                  aria-label="Naranja sobre negro"
+                >
+                  Naranja/Negro
+                </button>
+                <button
+                  class="contrast-btn"
+                  role="radio"
+                  (click)="setContrastMode('black-orange')"
+                  [class.active]="contrastMode() === 'black-orange'"
+                  [attr.aria-checked]="contrastMode() === 'black-orange' ? 'true' : 'false'"
+                  aria-label="Negro sobre naranja"
+                >
+                  Negro/Naranja
+                </button>
+                <button
+                  class="contrast-btn"
+                  role="radio"
+                  (click)="setContrastMode('magenta-black')"
+                  [class.active]="contrastMode() === 'magenta-black'"
+                  [attr.aria-checked]="contrastMode() === 'magenta-black' ? 'true' : 'false'"
+                  aria-label="Magenta sobre negro"
+                >
+                  Magenta/Negro
+                </button>
+                <button
+                  class="contrast-btn"
+                  role="radio"
+                  (click)="setContrastMode('black-magenta')"
+                  [class.active]="contrastMode() === 'black-magenta'"
+                  [attr.aria-checked]="contrastMode() === 'black-magenta' ? 'true' : 'false'"
+                  aria-label="Negro sobre magenta"
+                >
+                  Negro/Magenta
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Espaciado de línea -->

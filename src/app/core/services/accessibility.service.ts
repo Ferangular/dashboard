@@ -4,7 +4,24 @@ import { ThemeService } from './theme.service';
 
 export interface AccessibilitySettings {
   fontSize: 'small' | 'medium' | 'large' | 'extra-large';
-  contrastMode: 'normal' | 'high-dark' | 'high-light' | 'black-yellow' | 'yellow-black';
+  contrastMode:
+    | 'normal'
+    | 'high-dark'
+    | 'high-light'
+    | 'black-yellow'
+    | 'yellow-black'
+    | 'white-blue'
+    | 'blue-white'
+    | 'green-black'
+    | 'black-green'
+    | 'black-cyan'
+    | 'cyan-black'
+    | 'purple-white'
+    | 'white-purple'
+    | 'orange-black'
+    | 'black-orange'
+    | 'magenta-black'
+    | 'black-magenta';
   lineHeight: 'normal' | 'wide' | 'extra-wide';
   letterSpacing: 'normal' | 'wide' | 'extra-wide';
   wordSpacing: 'normal' | 'wide' | 'extra-wide';
@@ -266,6 +283,78 @@ export class AccessibilityService {
         '--bg-secondary': '#ffff99',
         '--text-secondary': '#333333',
       },
+      'white-blue': {
+        '--bg-primary': '#ffffff',
+        '--text-primary': '#003366',
+        '--bg-secondary': '#f8f9fa',
+        '--text-secondary': '#004080',
+      },
+      'blue-white': {
+        '--bg-primary': '#003366',
+        '--text-primary': '#ffffff',
+        '--bg-secondary': '#002244',
+        '--text-secondary': '#f0f0f0',
+      },
+      'green-black': {
+        '--bg-primary': '#006600',
+        '--text-primary': '#ffffff',
+        '--bg-secondary': '#004d00',
+        '--text-secondary': '#f0fff0',
+      },
+      'black-green': {
+        '--bg-primary': '#000000',
+        '--text-primary': '#00ff00',
+        '--bg-secondary': '#1a1a00',
+        '--text-secondary': '#66ff66',
+      },
+      'black-cyan': {
+        '--bg-primary': '#000000',
+        '--text-primary': '#00ffff',
+        '--bg-secondary': '#001a1a',
+        '--text-secondary': '#66ffff',
+      },
+      'cyan-black': {
+        '--bg-primary': '#00ffff',
+        '--text-primary': '#000000',
+        '--bg-secondary': '#66ffff',
+        '--text-secondary': '#333333',
+      },
+      'purple-white': {
+        '--bg-primary': '#4b0082',
+        '--text-primary': '#ffffff',
+        '--bg-secondary': '#37006b',
+        '--text-secondary': '#f0f0f0',
+      },
+      'white-purple': {
+        '--bg-primary': '#ffffff',
+        '--text-primary': '#4b0082',
+        '--bg-secondary': '#f8f0ff',
+        '--text-secondary': '#37006b',
+      },
+      'orange-black': {
+        '--bg-primary': '#ff8c00',
+        '--text-primary': '#000000',
+        '--bg-secondary': '#cc7000',
+        '--text-secondary': '#333333',
+      },
+      'black-orange': {
+        '--bg-primary': '#000000',
+        '--text-primary': '#ff8c00',
+        '--bg-secondary': '#1a0a00',
+        '--text-secondary': '#ffaa00',
+      },
+      'magenta-black': {
+        '--bg-primary': '#ff00ff',
+        '--text-primary': '#000000',
+        '--bg-secondary': '#cc00cc',
+        '--text-secondary': '#333333',
+      },
+      'black-magenta': {
+        '--bg-primary': '#000000',
+        '--text-primary': '#ff00ff',
+        '--bg-secondary': '#1a001a',
+        '--text-secondary': '#ff66ff',
+      },
     };
 
     const settings = contrastSettings[mode];
@@ -394,6 +483,18 @@ export class AccessibilityService {
       'high-light': 'Alto Contraste Claro',
       'black-yellow': 'Negro sobre Amarillo',
       'yellow-black': 'Amarillo sobre Negro',
+      'white-blue': 'Blanco sobre Azul (WCAG)',
+      'blue-white': 'Azul sobre Blanco (WCAG)',
+      'green-black': 'Verde sobre Negro (WCAG)',
+      'black-green': 'Negro sobre Verde (WCAG)',
+      'black-cyan': 'Negro sobre Cian (WCAG)',
+      'cyan-black': 'Cian sobre Negro (WCAG)',
+      'purple-white': 'Púrpura sobre Blanco (WCAG)',
+      'white-purple': 'Blanco sobre Púrpura (WCAG)',
+      'orange-black': 'Naranja sobre Negro (WCAG)',
+      'black-orange': 'Negro sobre Naranja (WCAG)',
+      'magenta-black': 'Magenta sobre Negro (WCAG)',
+      'black-magenta': 'Negro sobre Magenta (WCAG)',
     };
     return labels[this.settingsSignal().contrastMode];
   }

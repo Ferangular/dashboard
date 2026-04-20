@@ -59,6 +59,18 @@ export class AccessibilityWidgetComponent implements OnInit {
       'high-light': 'dark',
       'black-yellow': 'high-dark',
       'yellow-black': 'high-light',
+      'white-blue': 'white-blue',
+      'blue-white': 'blue-white',
+      'green-black': 'green-black',
+      'black-green': 'black-green',
+      'black-cyan': 'black-cyan',
+      'cyan-black': 'cyan-black',
+      'purple-white': 'purple-white',
+      'white-purple': 'white-purple',
+      'orange-black': 'orange-black',
+      'black-orange': 'black-orange',
+      'magenta-black': 'magenta-black',
+      'black-magenta': 'black-magenta',
     };
     return reverseMap[current] || 'normal';
   });
@@ -121,6 +133,18 @@ export class AccessibilityWidgetComponent implements OnInit {
       'high-light': 'high-light',
       'black-yellow': 'black-yellow',
       'yellow-black': 'yellow-black',
+      'white-blue': 'white-blue',
+      'blue-white': 'blue-white',
+      'green-black': 'green-black',
+      'black-green': 'black-green',
+      'black-cyan': 'black-cyan',
+      'cyan-black': 'cyan-black',
+      'purple-white': 'purple-white',
+      'white-purple': 'white-purple',
+      'orange-black': 'orange-black',
+      'black-orange': 'black-orange',
+      'magenta-black': 'magenta-black',
+      'black-magenta': 'black-magenta',
     };
 
     const newMode = modeMap[mode] || 'normal';

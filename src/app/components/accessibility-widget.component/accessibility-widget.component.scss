@@ -137,7 +137,7 @@
 /* Contenido del panel */
 .panel-content {
   padding: 1.25rem;
-  max-height: 400px;
+  max-height: 600px; // Aumentado para mostrar todas las opciones
   overflow-y: auto;
 }
 
@@ -232,10 +232,12 @@
 /* Opciones de contraste */
 .contrast-options {
   display: flex;
+  flex-wrap: wrap; // Permitir que los botones pasen a la siguiente fila
   gap: 0.5rem;
 
   .contrast-btn {
-    flex: 1;
+    flex: 1 1 auto; // Ancho mínimo pero flexible
+    min-width: 120px; // Ancho mínimo para legibilidad
     padding: 0.5rem;
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
