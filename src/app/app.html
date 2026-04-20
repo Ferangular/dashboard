@@ -1,41 +1,83 @@
-<div class="app">
-  <!-- Enlace de salto al contenido principal (Regla 7) -->
-  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<div class="app" role="application" aria-label="Laboratorio de Accesibilidad Angular">
+  <!-- Enlace de salto al contenido principal (WCAG 2.4.1) -->
+  <a href="#main-content" class="skip-link" aria-label="Saltar al contenido principal">Saltar al contenido principal</a>
 
-  <!-- Header como banner landmark a nivel superior -->
-  <app-header></app-header>
+  <!-- Header como banner landmark (WCAG 1.3.1) -->
+  <header role="banner">
+    <app-header></app-header>
+  </header>
 
-  <!-- Sidebar como complementary landmark a nivel superior -->
+  <!-- Sidebar como navigation landmark (WCAG 1.3.1) -->
   <aside
     class="app__sidebar"
     [class.app__sidebar--collapsed]="isSidebarCollapsed()"
-    aria-label="Menú de navegación principal"
+    role="navigation"
+    aria-label="Menú de navegación principal del laboratorio"
+    [attr.aria-hidden]="isSidebarCollapsed() ? 'true' : 'false'"
   >
     <app-sidebar></app-sidebar>
   </aside>
 
+  <!-- Contenedor principal con contenido y footer -->
   <div class="app__container">
     <div class="app__content-wrapper">
-      <main id="main-content" class="app__main" role="main">
+      <!-- Main como landmark principal (WCAG 1.3.1, 2.4.1) -->
+      <main id="main-content" class="app__main" role="main" aria-label="Contenido principal de la página" tabindex="-1">
         <div class="app__content">
+          <!-- Breadcrumb para navegación contextual (WCAG 2.4.6) -->
+          @if (showBreadcrumb()) {
+            <nav class="breadcrumb" aria-label="Navegación jerárquica">
+              <ol class="breadcrumb__list">
+                <li class="breadcrumb__item">
+                  <a href="/" class="breadcrumb__link">Inicio</a>
+                </li>
+                <li class="breadcrumb__item" aria-current="page">
+                  <span class="breadcrumb__current">{{ getCurrentPageTitle() }}</span>
+                </li>
+              </ol>
+            </nav>
+          }
+          <!-- Área de anuncios para cambios dinámicos (WCAG 4.1.3) -->
+          <div class="visually-hidden" aria-live="polite" aria-atomic="true" id="page-announcements"></div>
+
           <router-outlet></router-outlet>
         </div>
       </main>
 
-      <!-- Footer independiente -->
-      <div class="app__footer" [class.app__footer--hidden]="!isFooterVisible()">
+      <!-- Footer como contentinfo landmark (WCAG 1.3.1) -->
+      <footer
+        class="app__footer"
+        [class.app__footer--hidden]="!isFooterVisible()"
+        role="contentinfo"
+        aria-label="Información del sitio y enlaces de pie de página"
+      >
         @if (isFooterVisible()) {
           <app-footer></app-footer>
         }
-      </div>
+      </footer>
     </div>
   </div>
 
-  <!-- Botón toggle independiente y flotante -->
-  <button class="footer__toggle" (click)="toggleFooter()" aria-label="Toggle footer">
-    <span class="footer__toggle-icon">{{ isFooterVisible() ? '&#x25bc;' : '&#x25b2;' }}</span>
+  <!-- Botón toggle de footer accesible -->
+  <button
+    class="footer__toggle"
+    (click)="toggleFooter()"
+    aria-label="{{ isFooterVisible() ? 'Ocultar pie de página' : 'Mostrar pie de página' }}"
+    aria-expanded="{{ isFooterVisible() }}"
+    aria-controls="app-footer"
+    type="button"
+  >
+    <span class="footer__toggle-icon" aria-hidden="true">
+      {{ isFooterVisible() ? '&#x25bc;' : '&#x25b2;' }}
+    </span>
+    <span class="footer__toggle-text">
+      {{ isFooterVisible() ? 'Ocultar' : 'Mostrar' }}
+    </span>
   </button>
 
   <!-- Widget de accesibilidad flotante -->
   <app-accessibility-widget></app-accessibility-widget>
+
+  <!-- Indicador de carga para lectores de pantalla -->
+  <div class="visually-hidden" aria-live="assertive" aria-atomic="true" id="loading-announcements"></div>
 </div>

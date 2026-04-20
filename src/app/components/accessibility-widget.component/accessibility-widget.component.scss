@@ -156,6 +156,14 @@
     color: var(--text-primary);
     font-size: 0.875rem;
   }
+
+  .setting-description {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
 }
 
 /* Controles de tamaño de fuente */
@@ -368,6 +376,7 @@
     font-weight: 500;
     color: var(--text-secondary);
     transition: all 0.2s ease;
+    min-height: 44px; /* WCAG minimum touch target */
 
     &:hover {
       background: var(--bg-tertiary);
@@ -378,38 +387,100 @@
       outline: 2px solid var(--focus-color);
       outline-offset: 2px;
     }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+/* Información adicional */
+.setting-info {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  border-radius: 6px;
+  padding: 1rem;
+
+  .info-text {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    strong {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    kbd {
+      display: inline-block;
+      padding: 0.125rem 0.25rem;
+      font-size: 0.6875rem;
+      font-family: "Courier New", monospace;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      color: var(--text-primary);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    }
   }
 }
 
 /* Clases aplicadas al body para los diferentes modos */
 
-/* Tamaños de fuente */
-.font-size-80 {
-  font-size: 0.8em !important;
+/* Temas de contraste mejorados */
+.contrast-high-dark {
+  --bg-primary: #000000 !important;
+  --bg-secondary: #1a1a1a !important;
+  --bg-tertiary: #2d2d2d !important;
+  --text-primary: #ffffff !important;
+  --text-secondary: #e0e0e0 !important;
+  --text-muted: #b0b0b0 !important;
+  --border-color: #404040 !important;
+  --color-primary: #ffcc00 !important;
+  --focus-color: #ffcc00 !important;
 }
 
-.font-size-90 {
-  font-size: 0.9em !important;
+.contrast-high-light {
+  --bg-primary: #ffffff !important;
+  --bg-secondary: #f5f5f5 !important;
+  --bg-tertiary: #e8e8e8 !important;
+  --text-primary: #000000 !important;
+  --text-secondary: #333333 !important;
+  --text-muted: #666666 !important;
+  --border-color: #000000 !important;
+  --color-primary: #0066cc !important;
+  --focus-color: #0066cc !important;
 }
 
-.font-size-110 {
-  font-size: 1.1em !important;
+.contrast-black-yellow {
+  --bg-primary: #000000 !important;
+  --bg-secondary: #1a1a1a !important;
+  --bg-tertiary: #2d2d2d !important;
+  --text-primary: #ffff00 !important;
+  --text-secondary: #ffcc00 !important;
+  --text-muted: #ff9900 !important;
+  --border-color: #ffff00 !important;
+  --color-primary: #ffff00 !important;
+  --focus-color: #ffffff !important;
 }
 
-.font-size-120 {
-  font-size: 1.2em !important;
-}
-
-.font-size-130 {
-  font-size: 1.3em !important;
-}
-
-.font-size-140 {
-  font-size: 1.4em !important;
-}
-
-.font-size-150 {
-  font-size: 1.5em !important;
+.contrast-yellow-black {
+  --bg-primary: #ffff00 !important;
+  --bg-secondary: #ffcc00 !important;
+  --bg-tertiary: #ff9900 !important;
+  --text-primary: #000000 !important;
+  --text-secondary: #1a1a1a !important;
+  --text-muted: #333333 !important;
+  --border-color: #000000 !important;
+  --color-primary: #000000 !important;
+  --focus-color: #000000 !important;
 }
 
 /* Modos de contraste */
@@ -438,9 +509,112 @@
   line-height: 2 !important;
 }
 
-/* Foco de alto contraste */
+/* Foco de alto contraste mejorado */
 .high-contrast-focus *:focus {
-  outline: 3px solid #ffcc00 !important;
+  outline: 3px solid var(--focus-color, #ffcc00) !important;
   outline-offset: 2px !important;
-  box-shadow: 0 0 0 2px #000000 !important;
+  box-shadow:
+    0 0 0 2px var(--bg-primary, #ffffff),
+    0 0 8px rgba(255, 204, 0, 0.5) !important;
+}
+
+/* Enlaces subrayados permanentemente */
+.underline-links a {
+  text-decoration: underline !important;
+  text-decoration-color: currentColor !important;
+  text-decoration-thickness: 1px !important;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline !important;
+    text-decoration-thickness: 2px !important;
+  }
+}
+
+/* Reducción de animaciones */
+.reduce-animations * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+.reduce-animations .accessibility-panel {
+  animation: none !important;
+}
+
+.reduce-animations .accessibility-toggle:hover {
+  transform: none !important;
+}
+
+.reduce-animations .toggle-slider:before {
+  transition: none !important;
+}
+
+.reduce-animations .toggle-slider {
+  transition: none !important;
+}
+
+.reduce-animations button,
+.reduce-animations .contrast-btn,
+.reduce-animations .spacing-btn {
+  transition: none !important;
+}
+
+/* Skip links mejorados */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--color-primary, #c1083b);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  z-index: 10000;
+  transition: top 0.3s;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  min-width: 44px;
+  justify-content: center;
+
+  &:focus {
+    top: 6px;
+    outline: 2px solid var(--focus-color, #2563eb);
+    outline-offset: 2px;
+  }
+}
+
+/* Mejoras para lectores de pantalla */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Responsive improvements */
+@media (prefers-reduced-motion: reduce) {
+  .accessibility-widget * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .setting-info {
+    padding: 0.75rem;
+  }
+
+  .info-text {
+    font-size: 0.6875rem;
+  }
 }

@@ -15,32 +15,119 @@
 .skip-link {
   position: absolute;
   top: -40px;
-  left: 0;
-  background: #000;
-  color: #fff;
-  padding: 8px;
+  left: 6px;
+  background: var(--color-primary, #c1083b);
+  color: white;
+  padding: 8px 12px;
   text-decoration: none;
-  z-index: 1000;
-  border-radius: 0 0 4px 0;
-  font-size: 14px;
-  font-weight: 500;
+  border-radius: 4px;
+  font-weight: 600;
+  z-index: 10000;
   transition: top 0.3s ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  min-width: 44px;
+  justify-content: center;
 
   &:focus {
-    top: 0;
-    outline: 2px solid #fff;
+    top: 6px;
+    outline: 2px solid var(--focus-color, #2563eb);
     outline-offset: 2px;
   }
 
   // Modo oscuro
   :global(.dark) & {
-    background: #fff;
-    color: #000;
+    background: var(--color-primary, #e11d48);
 
     &:focus {
-      outline-color: #000;
+      outline-color: var(--focus-color, #60a5fa);
     }
   }
+}
+
+// Breadcrumb accesible (WCAG 2.4.6)
+.breadcrumb {
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-primary, #e5e7eb);
+
+  &__list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.5rem;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: var(--text-secondary, #6b7280);
+
+    &:not(:last-child)::after {
+      content: "/";
+      margin-left: 0.5rem;
+      color: var(--text-muted, #9ca3af);
+    }
+  }
+
+  &__link {
+    color: var(--accent-primary, #2563eb);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+
+    &:hover,
+    &:focus {
+      color: var(--accent-primary-hover, #1d4ed8);
+      text-decoration: underline;
+    }
+
+    &:focus {
+      outline: 2px solid var(--focus-color);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  &__current {
+    color: var(--text-primary, #111827);
+    font-weight: 600;
+  }
+
+  // Modo oscuro
+  :global(.dark) & {
+    border-bottom-color: var(--border-secondary, #374151);
+
+    &__item {
+      color: var(--text-secondary, #d1d5db);
+    }
+
+    &__link {
+      color: var(--accent-primary, #60a5fa);
+
+      &:hover,
+      &:focus {
+        color: var(--accent-primary-hover, #3b82f6);
+      }
+    }
+
+    &__current {
+      color: var(--text-primary, #f9fafb);
+    }
+  }
+}
+
+// Aplicar tamaño de fuente dinámico al body y html
+body,
+html {
+  font-size: var(--base-font-size, 16px) !important;
+  line-height: var(--line-height-base, 1.5) !important;
+  letter-spacing: var(--letter-spacing-base, 0) !important;
+  word-spacing: var(--word-spacing-base, 0) !important;
 }
 
 .app {
@@ -51,6 +138,10 @@
     system-ui,
     -apple-system,
     sans-serif;
+  font-size: var(--base-font-size, 16px);
+  line-height: var(--line-height-base, 1.5);
+  letter-spacing: var(--letter-spacing-base, 0);
+  word-spacing: var(--word-spacing-base, 0);
   background-color: var(--bg-primary);
   transition: background-color var(--transition-normal);
 

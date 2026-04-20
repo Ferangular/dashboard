@@ -4,6 +4,7 @@ import {
   computed,
   HostListener,
   inject,
+  OnInit,
   Renderer2,
   RendererFactory2,
   signal,
@@ -21,7 +22,7 @@ import { ThemeService } from '../../core/services/theme.service';
   templateUrl: './accessibility-widget.component.html',
   styleUrls: ['./accessibility-widget.component.scss'],
 })
-export class AccessibilityWidgetComponent {
+export class AccessibilityWidgetComponent implements OnInit {
   // Signals para el estado del panel
   private isOpenSignal = signal(false);
 
@@ -63,6 +64,12 @@ export class AccessibilityWidgetComponent {
   });
   currentFontSizePercentage = computed(() => this.accessibilityService.getFontSizePercentage());
 
+  ngOnInit(): void {
+    console.log('AccessibilityWidget initialized');
+    console.log('Current font size:', this.currentFontSize());
+    console.log('Current font size percentage:', this.currentFontSizePercentage());
+  }
+
   // Control del panel
   togglePanel(): void {
     this.isOpenSignal.set(!this.isOpenSignal());
@@ -84,7 +91,10 @@ export class AccessibilityWidgetComponent {
     const current = this.currentFontSize();
     const currentIndex = sizes.indexOf(current);
     const nextIndex = Math.min(currentIndex + 1, sizes.length - 1);
-    this.accessibilityService.updateFontSize(sizes[nextIndex]);
+    const newSize = sizes[nextIndex];
+
+    console.log('Increasing font size:', current, '=>', newSize);
+    this.accessibilityService.updateFontSize(newSize);
   }
 
   decreaseFontSize(): void {
@@ -92,7 +102,10 @@ export class AccessibilityWidgetComponent {
     const current = this.currentFontSize();
     const currentIndex = sizes.indexOf(current);
     const prevIndex = Math.max(currentIndex - 1, 0);
-    this.accessibilityService.updateFontSize(sizes[prevIndex]);
+    const newSize = sizes[prevIndex];
+
+    console.log('Decreasing font size:', current, '=>', newSize);
+    this.accessibilityService.updateFontSize(newSize);
   }
 
   // Control del contraste
@@ -149,15 +162,7 @@ export class AccessibilityWidgetComponent {
   // Reset de configuración
   resetSettings(): void {
     this.accessibilityService.resetSettings();
-  }
-
-  // Utilidades
-  getFontSizePercentage(): number {
-    return this.accessibilityService.getFontSizePercentage();
-  }
-
-  getContrastLabel(): string {
-    return this.accessibilityService.getContrastLabel();
+    this.closePanel(); // Cerrar panel después de resetear
   }
 
   // Cerrar panel con Escape

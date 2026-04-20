@@ -1,5 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AccessibilityWidgetComponent } from './components/accessibility-widget.component/accessibility-widget.component';
 import { AppSettingsService } from './core/services/app-settings.service';
 import { SidebarService } from './core/services/sidebar.service';
@@ -12,6 +13,7 @@ import { SidebarComponent } from './shared/components/layout/sidebar/sidebar.com
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    CommonModule,
     RouterOutlet,
     HeaderComponent,
     SidebarComponent,
@@ -24,6 +26,7 @@ import { SidebarComponent } from './shared/components/layout/sidebar/sidebar.com
 export class App {
   private appSettings = inject(AppSettingsService);
   private sidebarService = inject(SidebarService);
+  private router = inject(Router);
 
   appConfig = computed(() => this.appSettings.config);
   isSidebarCollapsed = this.sidebarService.isCollapsed;
@@ -35,5 +38,43 @@ export class App {
 
   toggleFooter(): void {
     this.isFooterVisible.update((visible) => !visible);
+    // Anunciar cambio para lectores de pantalla
+    this.announceToScreenReader(
+      this.isFooterVisible() ? 'Pie de página mostrado' : 'Pie de página oculto',
+    );
+  }
+
+  // Métodos para navegación accesible
+  showBreadcrumb(): boolean {
+    const url = this.router.url;
+    return url !== '/' && url !== '/dashboard';
+  }
+
+  getCurrentPageTitle(): string {
+    const url = this.router.url;
+    const titleMap: Record<string, string> = {
+      '/dashboard': 'Dashboard',
+      '/semantic-structure': 'Estructura Semántica',
+      '/keyboard-navigation': 'Navegación por Teclado',
+      '/accessible-forms': 'Formularios Accesibles',
+      '/dynamic-components': 'Componentes Dinámicos',
+      '/accessible-tables': 'Tablas Accesibles',
+      '/accessible-design': 'Diseño Accesible',
+      '/seo-accessibility': 'SEO y Accesibilidad',
+      '/accessibility-testing': 'Testing de Accesibilidad',
+    };
+    return titleMap[url] || 'Página actual';
+  }
+
+  // Utilidad para anunciar cambios a lectores de pantalla
+  private announceToScreenReader(message: string): void {
+    const announcement = document.getElementById('page-announcements');
+    if (announcement) {
+      announcement.textContent = message;
+      // Limpiar después de un tiempo para permitir repetir el mismo mensaje
+      setTimeout(() => {
+        announcement.textContent = '';
+      }, 1000);
+    }
   }
 }

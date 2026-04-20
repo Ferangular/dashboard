@@ -117,6 +117,20 @@ export class AccessibilityService {
     this.saveSettings();
   }
 
+  // Getters para valores computados
+  getFontSizePercentage(): number {
+    const sizeMap: Record<AccessibilitySettings['fontSize'], number> = {
+      small: 80,
+      medium: 100,
+      large: 120,
+      'extra-large': 150,
+    };
+    const currentSize = this.settingsSignal().fontSize;
+    const percentage = sizeMap[currentSize];
+    console.log('getFontSizePercentage:', currentSize, '=>', percentage);
+    return percentage;
+  }
+
   // Reset de configuración
   resetSettings(): void {
     this.settingsSignal.set({
@@ -154,7 +168,14 @@ export class AccessibilityService {
       large: '18px',
       'extra-large': '20px',
     };
-    root.style.setProperty('--base-font-size', fontSizes[this.settingsSignal().fontSize]);
+    const currentSize = this.settingsSignal().fontSize;
+    const fontSizeValue = fontSizes[currentSize];
+
+    console.log('Applying font size:', currentSize, '=>', fontSizeValue);
+    root.style.setProperty('--base-font-size', fontSizeValue);
+
+    // También aplicarlo directamente al body para asegurar que funcione
+    this.document.body.style.fontSize = fontSizeValue;
   }
 
   private applyContrast(): void {
@@ -264,11 +285,6 @@ export class AccessibilityService {
   }
 
   // Utilidades
-  getFontSizePercentage(): number {
-    const sizes = { small: 87.5, medium: 100, large: 112.5, 'extra-large': 125 };
-    return sizes[this.settingsSignal().fontSize];
-  }
-
   getContrastLabel(): string {
     const labels = {
       normal: 'Normal',

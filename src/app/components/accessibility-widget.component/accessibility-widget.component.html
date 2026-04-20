@@ -88,59 +88,71 @@
               <small class="theme-info">Tema oscuro activado en el sistema</small>
             }
           </div>
-          <div class="contrast-options">
+          <div class="contrast-options" role="radiogroup" aria-labelledby="contrast-label">
             <button
               class="contrast-btn"
+              role="radio"
               (click)="setContrastMode('normal')"
               [class.active]="contrastMode() === 'normal'"
-              [attr.aria-pressed]="contrastMode() === 'normal' ? 'true' : 'false'"
+              [attr.aria-checked]="contrastMode() === 'normal' ? 'true' : 'false'"
+              aria-label="Modo de contraste normal"
             >
               Normal
             </button>
             <button
               class="contrast-btn"
+              role="radio"
               (click)="setContrastMode('high')"
               [class.active]="contrastMode() === 'high'"
-              [attr.aria-pressed]="contrastMode() === 'high' ? 'true' : 'false'"
+              [attr.aria-checked]="contrastMode() === 'high' ? 'true' : 'false'"
+              aria-label="Modo de alto contraste"
             >
               Alto contraste
             </button>
             <button
               class="contrast-btn"
+              role="radio"
               (click)="setContrastMode('dark')"
               [class.active]="contrastMode() === 'dark'"
-              [attr.aria-pressed]="contrastMode() === 'dark' ? 'true' : 'false'"
+              [attr.aria-checked]="contrastMode() === 'dark' ? 'true' : 'false'"
+              aria-label="Modo oscuro accesible"
             >
-              Oscuro accesible
+              Oscuro
             </button>
           </div>
         </div>
 
-        <!-- Espaciado -->
+        <!-- Espaciado de línea -->
         <div class="setting-group">
           <div class="setting-label">Espaciado de línea</div>
-          <div class="spacing-controls">
+          <div class="spacing-controls" role="radiogroup" aria-labelledby="spacing-label">
             <button
               class="spacing-btn"
+              role="radio"
               (click)="setLineSpacing('normal')"
               [class.active]="lineSpacing() === 'normal'"
-              [attr.aria-pressed]="lineSpacing() === 'normal' ? 'true' : 'false'"
+              [attr.aria-checked]="lineSpacing() === 'normal' ? 'true' : 'false'"
+              aria-label="Espaciado de línea normal"
             >
               Normal
             </button>
             <button
               class="spacing-btn"
+              role="radio"
               (click)="setLineSpacing('wide')"
               [class.active]="lineSpacing() === 'wide'"
-              [attr.aria-pressed]="lineSpacing() === 'wide' ? 'true' : 'false'"
+              [attr.aria-checked]="lineSpacing() === 'wide' ? 'true' : 'false'"
+              aria-label="Espaciado de línea amplio"
             >
               Amplio
             </button>
             <button
               class="spacing-btn"
+              role="radio"
               (click)="setLineSpacing('extra-wide')"
               [class.active]="lineSpacing() === 'extra-wide'"
-              [attr.aria-pressed]="lineSpacing() === 'extra-wide' ? 'true' : 'false'"
+              [attr.aria-checked]="lineSpacing() === 'extra-wide' ? 'true' : 'false'"
+              aria-label="Espaciado de línea muy amplio"
             >
               Muy amplio
             </button>
@@ -156,19 +168,80 @@
                 type="checkbox"
                 [checked]="highContrastFocus()"
                 (change)="toggleHighContrastFocus()"
-                aria-label="Activar foco de alto contraste"
+                aria-describedby="focus-description"
               />
               <span class="toggle-slider"></span>
             </label>
             <span class="toggle-label">Foco de alto contraste</span>
+            <span id="focus-description" class="setting-description">
+              Aumenta la visibilidad de los elementos enfocados
+            </span>
+          </div>
+        </div>
+
+        <!-- Enlaces subrayados -->
+        <div class="setting-group">
+          <div class="setting-label">Estilo de enlaces</div>
+          <div class="focus-toggle">
+            <label class="toggle-switch">
+              <input
+                type="checkbox"
+                [checked]="shouldUnderlineLinks()"
+                (change)="toggleUnderlineLinks()"
+                aria-describedby="underline-description"
+              />
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="toggle-label">Subrayar enlaces permanentemente</span>
+            <span id="underline-description" class="setting-description">
+              Mantiene los enlaces subrayados siempre visibles
+            </span>
+          </div>
+        </div>
+
+        <!-- Reducción de animaciones -->
+        <div class="setting-group">
+          <div class="setting-label">Animaciones</div>
+          <div class="focus-toggle">
+            <label class="toggle-switch">
+              <input
+                type="checkbox"
+                [checked]="shouldReduceAnimations()"
+                (change)="toggleReduceAnimations()"
+                aria-describedby="animation-description"
+              />
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="toggle-label">Reducir animaciones</span>
+            <span id="animation-description" class="setting-description">
+              Minimiza movimientos para usuarios sensibles
+            </span>
           </div>
         </div>
 
         <!-- Reset -->
         <div class="setting-actions">
-          <button class="reset-btn" (click)="resetSettings()" aria-label="Restablecer ajustes de accesibilidad">
+          <button
+            class="reset-btn"
+            (click)="resetSettings()"
+            aria-label="Restablecer todos los ajustes de accesibilidad a valores predeterminados"
+          >
             Restablecer ajustes
           </button>
+        </div>
+
+        <!-- Información adicional -->
+        <div class="setting-info">
+          <p class="info-text">
+            <strong>Tip:</strong>
+            Estos ajustes se guardan automáticamente y se aplicarán en tu próxima visita.
+          </p>
+          <p class="info-text">
+            <strong>Atajo:</strong>
+            Presiona
+            <kbd>Escape</kbd>
+            para cerrar este panel.
+          </p>
         </div>
       </div>
     </div>
