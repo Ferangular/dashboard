@@ -148,6 +148,8 @@ export class AccessibilityWidgetComponent implements OnInit {
 
   // Control del foco
   toggleHighContrastFocus(): void {
+    console.log('toggleHighContrastFocus called');
+    console.log('Current highContrastFocus:', this.highContrastFocus());
     this.accessibilityService.toggleHighContrastFocus();
   }
 

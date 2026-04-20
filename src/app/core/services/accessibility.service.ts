@@ -331,11 +331,20 @@ export class AccessibilityService {
 
   private applyFocusStyles(): void {
     const body = this.document.body;
-    if (this.settingsSignal().highContrastFocus) {
+    const isEnabled = this.settingsSignal().highContrastFocus;
+
+    console.log('applyFocusStyles called, highContrastFocus:', isEnabled);
+    console.log('Body classes before:', body.className);
+
+    if (isEnabled) {
       this.renderer.addClass(body, 'high-contrast-focus');
+      console.log('Added high-contrast-focus class');
     } else {
       this.renderer.removeClass(body, 'high-contrast-focus');
+      console.log('Removed high-contrast-focus class');
     }
+
+    console.log('Body classes after:', body.className);
   }
 
   private applyLinkStyles(): void {

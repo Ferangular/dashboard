@@ -308,12 +308,18 @@
   position: relative;
   display: inline-block;
   width: 48px;
-  height: 24px;
+  height: 22px; // Casi igual al diámetro del círculo (18px + 2px bordes)
+  min-height: 22px; // WCAG minimum touch target
+  min-width: 48px;
 
   input {
     opacity: 0;
     width: 0;
     height: 0;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
   }
 
   .toggle-slider {
@@ -323,34 +329,59 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--border-color);
-    transition: 0.3s;
-    border-radius: 24px;
+    background-color: var(--border-color, #d1d5db);
+    transition: all 0.3s ease;
+    border-radius: 10px; // Mitad de 20px
+    border: 1px solid var(--border-color, #d1d5db); // Borde más fino
 
     &:before {
       position: absolute;
       content: "";
-      height: 18px;
+      height: 18px; // Mantenemos el círculo de 18px
       width: 18px;
-      left: 3px;
-      bottom: 3px;
+      left: 1px; // Menos espacio porque el borde es más fino
+      top: 1px; // Centrado perfecto
       background-color: white;
-      transition: 0.3s;
-      border-radius: 50%;
+      transition: all 0.3s ease;
+      border-radius: 9px; // Achatado
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
   }
 
   input:checked + .toggle-slider {
-    background-color: var(--color-primary);
+    background-color: var(--color-primary, #c1083b);
+    border-color: var(--color-primary, #c1083b);
   }
 
   input:checked + .toggle-slider:before {
-    transform: translateX(24px);
+    transform: translateX(28px); // Ajustado para altura de 20px
+    background-color: white;
   }
 
   input:focus + .toggle-slider {
-    outline: 2px solid var(--focus-color);
+    outline: 2px solid var(--focus-color, #2563eb);
     outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+  }
+
+  input:hover + .toggle-slider {
+    background-color: var(--bg-tertiary, #f3f4f6);
+    border-color: var(--border-secondary, #9ca3af);
+  }
+
+  input:checked:hover + .toggle-slider {
+    background-color: var(--color-primary-hover, #a00630);
+    border-color: var(--color-primary-hover, #a00630);
+  }
+
+  // Estado activo para mejor feedback visual
+  input:active + .toggle-slider {
+    transform: scale(0.98);
+  }
+
+  input:checked:active + .toggle-slider {
+    transform: scale(0.98);
   }
 }
 
