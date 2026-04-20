@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import { inject, Injectable, Renderer2, RendererFactory2, signal } from '@angular/core';
 
 @Injectable({
@@ -6,6 +7,7 @@ import { inject, Injectable, Renderer2, RendererFactory2, signal } from '@angula
 export class ThemeService {
   private rendererFactory = inject(RendererFactory2);
   private renderer: Renderer2;
+  private document = inject(DOCUMENT);
 
   // Signal global para el modo oscuro
   readonly isDarkMode = signal(false);
@@ -33,19 +35,19 @@ export class ThemeService {
     this.updateTheme();
   }
 
-  private updateTheme(): void {
+  updateTheme(): void {
     if (this.isDarkMode()) {
-      this.renderer.addClass(document.documentElement, 'dark');
+      this.renderer.addClass(this.document.documentElement, 'dark');
       this.updateSelectOptions(true);
     } else {
-      this.renderer.removeClass(document.documentElement, 'dark');
+      this.renderer.removeClass(this.document.documentElement, 'dark');
       this.updateSelectOptions(false);
     }
   }
 
   private updateSelectOptions(isDark: boolean): void {
     setTimeout(() => {
-      const select = document.querySelector('.header__language-select') as HTMLSelectElement;
+      const select = this.document.querySelector('.header__language-select') as HTMLSelectElement;
       if (select) {
         const options = select.querySelectorAll('option');
         options.forEach((option) => {

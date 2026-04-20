@@ -1,0 +1,176 @@
+<header class="dashboard-header">
+  <div class="dashboard-header__content">
+    <h1 class="dashboard-header__title">
+      <span class="dashboard-header__title-main">Laboratorio de Accesibilidad</span>
+      <span class="dashboard-header__title-sub">Practica WCAG 2.2 AA con Angular</span>
+    </h1>
+
+    <div class="dashboard-header__stats">
+      <div class="stat-card">
+        <span class="stat-card__number">{{ getStats().total }}</span>
+        <span class="stat-card__label">Demos</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__number">{{ getStats().completed }}</span>
+        <span class="stat-card__label">Completadas</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__number">{{ getStats().percentage }}%</span>
+        <span class="stat-card__label">Progreso</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="dashboard-main">
+  <section class="dashboard-controls" aria-label="Filtros y búsqueda">
+    <div class="search-container">
+      <label for="search-input" class="visually-hidden">Buscar demos</label>
+      <input
+        id="search-input"
+        type="search"
+        class="search-input"
+        placeholder="Buscar demos por título, descripción u objetivos..."
+        [value]="searchQuery()"
+        (input)="setSearchQuery($any($event.target).value)"
+        aria-describedby="search-help"
+      />
+      <span id="search-help" class="visually-hidden">Usa palabras clave para filtrar las demos disponibles</span>
+    </div>
+
+    <nav class="category-filters" role="navigation" aria-label="Filtrar por dificultad">
+      <h2 class="category-filters__title">Filtrar por dificultad:</h2>
+      <ul class="category-filters__list">
+        @for (category of categories; track category.value) {
+          <li class="category-filters__item">
+            <button
+              class="category-filter"
+              [class.category-filter--active]="selectedCategory() === category.value"
+              (click)="setCategory(category.value)"
+              aria-pressed="{{ selectedCategory() === category.value }}"
+              aria-describedby="category-count-{{ category.value }}"
+            >
+              <span class="category-filter__label">{{ category.label }}</span>
+              <span class="category-filter__count">{{ category.count }}</span>
+            </button>
+            <span id="category-count-{{ category.value }}" class="visually-hidden">
+              {{ category.count }} demos disponibles
+            </span>
+          </li>
+        }
+      </ul>
+    </nav>
+  </section>
+
+  <section class="demos-grid" aria-label="Demos de accesibilidad">
+    <h2 class="visually-hidden">Demos disponibles</h2>
+
+    @if (filteredDemos().length === 0) {
+      <div class="no-results">
+        <div class="no-results__icon" aria-hidden="true">ð</div>
+        <h3 class="no-results__title">No se encontraron demos</h3>
+        <p class="no-results__description">Intenta ajustar los filtros o usa términos de búsqueda diferentes.</p>
+        <button class="no-results__reset" (click)="setCategory('all'); setSearchQuery('')">Resetear filtros</button>
+      </div>
+    } @else {
+      <div class="demos-list">
+        @for (demo of filteredDemos(); track demo.id) {
+          <article class="demo-card">
+            <header class="demo-card__header">
+              <div class="demo-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="demo-card__icon-svg">
+                  <path [attr.d]="getIconPath(demo.icon)" />
+                </svg>
+              </div>
+              <div class="demo-card__meta">
+                <h3 class="demo-card__title">
+                  <a [routerLink]="demo.path" class="demo-card__link" aria-describedby="demo-{{ demo.id }}-description">
+                    {{ demo.title }}
+                  </a>
+                </h3>
+                <div class="demo-card__badges">
+                  <span class="difficulty-badge" [style.--badge-color]="getDifficultyColor(demo.difficulty)">
+                    {{ getDifficultyLabel(demo.difficulty) }}
+                  </span>
+                  <span class="time-badge" aria-label="Tiempo estimado">
+                    <span aria-hidden="true">â</span>
+                    {{ demo.estimatedTime }}
+                  </span>
+                </div>
+              </div>
+            </header>
+
+            <div class="demo-card__content">
+              <p id="demo-{{ demo.id }}-description" class="demo-card__description">
+                {{ demo.description }}
+              </p>
+
+              <div class="demo-card__wcag">
+                <h4 class="demo-card__wcag-title">Criterios WCAG:</h4>
+                <ul class="demo-card__wcag-list">
+                  @for (principle of demo.wcagPrinciples; track principle) {
+                    <li class="demo-card__wcag-item">
+                      <code class="wcag-code">{{ principle }}</code>
+                    </li>
+                  }
+                </ul>
+              </div>
+
+              <div class="demo-card__objectives">
+                <h4 class="demo-card__objectives-title">Aprenderás:</h4>
+                <ul class="demo-card__objectives-list">
+                  @for (objective of demo.learningObjectives; track objective) {
+                    <li class="demo-card__objective-item">{{ objective }}</li>
+                  }
+                </ul>
+              </div>
+
+              <footer class="demo-card__actions">
+                <a [routerLink]="demo.path" class="demo-card__button" aria-describedby="demo-{{ demo.id }}-duration">
+                  Comenzar demo
+                  <span class="demo-card__button-arrow" aria-hidden="true">â</span>
+                </a>
+                <span id="demo-{{ demo.id }}-duration" class="visually-hidden">
+                  Duración estimada: {{ demo.estimatedTime }}
+                </span>
+              </footer>
+            </div>
+          </article>
+        }
+      </div>
+    }
+  </section>
+
+  @if (getStats().nextRecommended) {
+    <section class="next-recommended" aria-label="Recomendación">
+      <div class="next-recommended__content">
+        <h2 class="next-recommended__title">
+          <span class="next-recommended__emoji">ð¡</span>
+          Recomendado para empezar
+        </h2>
+        <div class="next-recommended__demo">
+          <a [routerLink]="getStats().nextRecommended!.path" class="next-recommended__link">
+            <span class="next-recommended__demo-title">
+              {{ getStats().nextRecommended!.title }}
+            </span>
+            <span class="next-recommended__demo-time">
+              {{ getStats().nextRecommended!.estimatedTime }}
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+  }
+</main>
+
+<!-- Skip to content link for keyboard users -->
+<a href="#demos-grid" class="skip-link">Saltar a las demos</a>
+
+<!-- Screen reader only content -->
+<div class="visually-hidden" aria-live="polite">
+  @if (filteredDemos().length > 0) {
+    <p>Se encontraron {{ filteredDemos().length }} demos disponibles</p>
+  } @else {
+    <p>No se encontraron demos con los filtros actuales</p>
+  }
+</div>

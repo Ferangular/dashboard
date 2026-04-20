@@ -1,5 +1,17 @@
-import { CommonModule } from '@angular/common';
-import { Component, computed, HostListener, inject, OnInit, signal } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import {
+  Component,
+  computed,
+  HostListener,
+  inject,
+  Renderer2,
+  RendererFactory2,
+  signal,
+} from '@angular/core';
+import {
+  AccessibilityService,
+  AccessibilitySettings,
+} from '../../core/services/accessibility.service';
 import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
@@ -9,175 +21,143 @@ import { ThemeService } from '../../core/services/theme.service';
   templateUrl: './accessibility-widget.component.html',
   styleUrls: ['./accessibility-widget.component.scss'],
 })
-export class AccessibilityWidgetComponent implements OnInit {
+export class AccessibilityWidgetComponent {
   // Signals para el estado del panel
   private isOpenSignal = signal(false);
-  private currentFontSizeSignal = signal(100);
-  private contrastModeSignal = signal<'normal' | 'high' | 'dark'>('normal');
-  private lineSpacingSignal = signal<'normal' | 'wide' | 'extra-wide'>('normal');
-  private highContrastFocusSignal = signal(false);
 
+  private accessibilityService = inject(AccessibilityService);
   private themeService = inject(ThemeService);
+  private document = inject(DOCUMENT);
+  private rendererFactory = inject(RendererFactory2);
+  private renderer: Renderer2;
+
+  constructor() {
+    this.renderer = this.rendererFactory.createRenderer(null, null);
+  }
+
+  // Getters públicos usando el servicio
+  isOpen = this.isOpenSignal.asReadonly();
+  settings = this.accessibilityService.settings;
+  currentFontSize = this.accessibilityService.currentFontSize;
+  currentContrast = this.accessibilityService.currentContrast;
+  isHighContrastFocus = this.accessibilityService.isHighContrastFocus;
+  shouldUnderlineLinks = this.accessibilityService.shouldUnderlineLinks;
+  shouldReduceAnimations = this.accessibilityService.shouldReduceAnimations;
+  shouldShowSkipLinks = this.accessibilityService.shouldShowSkipLinks;
   isDarkMode = this.themeService.isDarkMode;
 
-  // Getters públicos
-  isOpen = this.isOpenSignal.asReadonly();
-  currentFontSize = this.currentFontSizeSignal.asReadonly();
-  contrastMode = this.contrastModeSignal.asReadonly();
-  lineSpacing = this.lineSpacingSignal.asReadonly();
-  highContrastFocus = this.highContrastFocusSignal.asReadonly();
-
-  // Computed properties para clases CSS específicas del widget
-  fontSizeClass = computed(() => `font-size-${this.currentFontSizeSignal()}`);
-  contrastClass = computed(() => {
-    const mode = this.contrastModeSignal();
-    return mode === 'normal' ? '' : `accessibility-contrast-${mode}`;
+  // Propiedades adicionales para compatibilidad con template
+  lineSpacing = computed(() => this.settings().lineHeight);
+  highContrastFocus = this.isHighContrastFocus;
+  contrastMode = computed(() => {
+    // Mapear nuevos valores a valores antiguos para compatibilidad con template
+    const current = this.currentContrast();
+    const reverseMap: Record<AccessibilitySettings['contrastMode'], string> = {
+      normal: 'normal',
+      'high-dark': 'high',
+      'high-light': 'dark',
+      'black-yellow': 'high-dark',
+      'yellow-black': 'high-light',
+    };
+    return reverseMap[current] || 'normal';
   });
-  spacingClass = computed(() => `spacing-${this.lineSpacingSignal()}`);
-  focusClass = computed(() => (this.highContrastFocusSignal() ? 'high-contrast-focus' : ''));
-
-  ngOnInit(): void {
-    // Cargar preferencias guardadas al iniciar
-    this.loadPreferences();
-    // Aplicar clases iniciales al body
-    this.applyAccessibilityClasses();
-  }
+  currentFontSizePercentage = computed(() => this.accessibilityService.getFontSizePercentage());
 
   // Control del panel
   togglePanel(): void {
     this.isOpenSignal.set(!this.isOpenSignal());
     if (this.isOpenSignal()) {
-      document.body.setAttribute('aria-hidden', 'true');
+      this.renderer.setAttribute(this.document.body, 'aria-hidden', 'true');
     } else {
-      document.body.removeAttribute('aria-hidden');
+      this.renderer.removeAttribute(this.document.body, 'aria-hidden');
     }
   }
 
   closePanel(): void {
     this.isOpenSignal.set(false);
-    document.body.removeAttribute('aria-hidden');
+    this.renderer.removeAttribute(this.document.body, 'aria-hidden');
   }
 
   // Control del tamaño de fuente
   increaseFontSize(): void {
-    const newSize = Math.min(this.currentFontSizeSignal() + 10, 150);
-    this.currentFontSizeSignal.set(newSize);
-    this.updateFontSize();
-    this.savePreferences();
+    const sizes: AccessibilitySettings['fontSize'][] = ['small', 'medium', 'large', 'extra-large'];
+    const current = this.currentFontSize();
+    const currentIndex = sizes.indexOf(current);
+    const nextIndex = Math.min(currentIndex + 1, sizes.length - 1);
+    this.accessibilityService.updateFontSize(sizes[nextIndex]);
   }
 
   decreaseFontSize(): void {
-    const newSize = Math.max(this.currentFontSizeSignal() - 10, 80);
-    this.currentFontSizeSignal.set(newSize);
-    this.updateFontSize();
-    this.savePreferences();
+    const sizes: AccessibilitySettings['fontSize'][] = ['small', 'medium', 'large', 'extra-large'];
+    const current = this.currentFontSize();
+    const currentIndex = sizes.indexOf(current);
+    const prevIndex = Math.max(currentIndex - 1, 0);
+    this.accessibilityService.updateFontSize(sizes[prevIndex]);
   }
 
   // Control del contraste
-  setContrastMode(mode: 'normal' | 'high' | 'dark'): void {
-    this.contrastModeSignal.set(mode);
-    this.updateContrast();
-    this.savePreferences();
+  setContrastMode(mode: string): void {
+    // Mapear valores antiguos a nuevos valores
+    const modeMap: Record<string, AccessibilitySettings['contrastMode']> = {
+      normal: 'normal',
+      high: 'high-dark',
+      dark: 'high-light',
+      'high-dark': 'high-dark',
+      'high-light': 'high-light',
+      'black-yellow': 'black-yellow',
+      'yellow-black': 'yellow-black',
+    };
+
+    const newMode = modeMap[mode] || 'normal';
+    this.accessibilityService.updateContrastMode(newMode);
   }
 
   // Control del espaciado
-  setLineSpacing(spacing: 'normal' | 'wide' | 'extra-wide'): void {
-    this.lineSpacingSignal.set(spacing);
-    this.updateLineSpacing();
-    this.savePreferences();
+  setLineHeight(height: AccessibilitySettings['lineHeight']): void {
+    this.accessibilityService.updateLineHeight(height);
+  }
+
+  setLineSpacing(spacing: AccessibilitySettings['lineHeight']): void {
+    this.accessibilityService.updateLineHeight(spacing);
+  }
+
+  setLetterSpacing(spacing: AccessibilitySettings['letterSpacing']): void {
+    this.accessibilityService.updateLetterSpacing(spacing);
+  }
+
+  setWordSpacing(spacing: AccessibilitySettings['wordSpacing']): void {
+    this.accessibilityService.updateWordSpacing(spacing);
   }
 
   // Control del foco
   toggleHighContrastFocus(): void {
-    this.highContrastFocusSignal.set(!this.highContrastFocusSignal());
-    this.updateFocusStyle();
-    this.savePreferences();
+    this.accessibilityService.toggleHighContrastFocus();
+  }
+
+  toggleUnderlineLinks(): void {
+    this.accessibilityService.toggleUnderlineLinks();
+  }
+
+  toggleReduceAnimations(): void {
+    this.accessibilityService.toggleReduceAnimations();
+  }
+
+  toggleSkipLinks(): void {
+    this.accessibilityService.toggleSkipLinks();
   }
 
   // Reset de configuración
   resetSettings(): void {
-    this.currentFontSizeSignal.set(100);
-    this.contrastModeSignal.set('normal');
-    this.lineSpacingSignal.set('normal');
-    this.highContrastFocusSignal.set(false);
-
-    this.updateFontSize();
-    this.updateContrast();
-    this.updateLineSpacing();
-    this.updateFocusStyle();
-
-    this.savePreferences();
+    this.accessibilityService.resetSettings();
   }
 
-  // Métodos privados para aplicar estilos
-  private updateFontSize(): void {
-    const root = document.documentElement;
-    root.style.setProperty('--font-size-multiplier', `${this.currentFontSizeSignal() / 100}`);
-    this.applyAccessibilityClasses();
+  // Utilidades
+  getFontSizePercentage(): number {
+    return this.accessibilityService.getFontSizePercentage();
   }
 
-  private updateContrast(): void {
-    this.applyAccessibilityClasses();
-  }
-
-  private updateLineSpacing(): void {
-    const root = document.documentElement;
-    const spacingMap = {
-      normal: '1.5',
-      wide: '1.75',
-      'extra-wide': '2',
-    };
-    root.style.setProperty('--line-height-multiplier', spacingMap[this.lineSpacingSignal()]);
-    this.applyAccessibilityClasses();
-  }
-
-  private updateFocusStyle(): void {
-    this.applyAccessibilityClasses();
-  }
-
-  private applyAccessibilityClasses(): void {
-    const body = document.body;
-    const classes = [
-      this.fontSizeClass(),
-      this.contrastClass(),
-      this.spacingClass(),
-      this.focusClass(),
-    ].filter(Boolean);
-
-    // Limpiar solo clases de accesibilidad, no tocar clases del tema
-    body.className = body.className.replace(
-      /font-size-\d+|accessibility-contrast-\w+|spacing-\w+|high-contrast-focus/g,
-      '',
-    );
-
-    // Aplicar nuevas clases de accesibilidad
-    body.classList.add(...classes);
-  }
-
-  // Guardar y cargar preferencias
-  private savePreferences(): void {
-    const preferences = {
-      fontSize: this.currentFontSizeSignal(),
-      contrastMode: this.contrastModeSignal(),
-      lineSpacing: this.lineSpacingSignal(),
-      highContrastFocus: this.highContrastFocusSignal(),
-    };
-    localStorage.setItem('accessibility-preferences', JSON.stringify(preferences));
-  }
-
-  private loadPreferences(): void {
-    try {
-      const saved = localStorage.getItem('accessibility-preferences');
-      if (saved) {
-        const preferences = JSON.parse(saved);
-        this.currentFontSizeSignal.set(preferences.fontSize || 100);
-        this.contrastModeSignal.set(preferences.contrastMode || 'normal');
-        this.lineSpacingSignal.set(preferences.lineSpacing || 'normal');
-        this.highContrastFocusSignal.set(preferences.highContrastFocus || false);
-      }
-    } catch (error) {
-      console.warn('Error loading accessibility preferences:', error);
-    }
+  getContrastLabel(): string {
+    return this.accessibilityService.getContrastLabel();
   }
 
   // Cerrar panel con Escape

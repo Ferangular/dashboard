@@ -12,42 +12,47 @@ export const routes: Routes = [
   {
     path: '',
     component: CheckVersionComponent,
-    title: 'Dashboard - Angular 21 Performance Lab',
-  },
-  {
-    path: 'accessibility',
-    component: AccessibilityDemoComponent,
-    title: 'Demostración de Accesibilidad WCAG 2.2 AA',
-  },
-  {
-    path: 'contact-form',
-    component: ContactFormComponent,
-    title: 'Formulario de Contacto Accesible',
-  },
-  {
-    path: 'keyboard-navigation',
-    component: KeyboardNavigationDemoComponent,
-    title: 'Regla 4: Navegación por Teclado',
+    title: 'Laboratorio de Accesibilidad - Dashboard Principal',
   },
   {
     path: 'semantic-structure',
     component: SemanticStructure,
-    title: 'Regla 6: Encabezados y Estructura Semántica',
+    title: 'Demo 1: Estructura Semántica y HTML5',
   },
   {
-    path: 'skip-links',
-    component: SkipLinksDemoComponent,
-    title: 'Regla 7: Skip Links y Bloques de Omisión',
+    path: 'keyboard-navigation',
+    component: KeyboardNavigationDemoComponent,
+    title: 'Demo 2: Navegación por Teclado',
   },
   {
-    path: 'meaningful-links',
-    component: MeaningfulLinksComponent,
-    title: 'Regla 8: Enlaces Significativos',
+    path: 'accessible-forms',
+    component: ContactFormComponent,
+    title: 'Demo 3: Formularios Accesibles',
   },
   {
-    path: 'aria-states',
+    path: 'dynamic-components',
     component: AriaStatesComponent,
-    title: 'Regla 10: Estados y Propiedades ARIA',
+    title: 'Demo 4: Componentes Dinámicos con ARIA',
+  },
+  {
+    path: 'accessible-tables',
+    component: AccessibilityDemoComponent,
+    title: 'Demo 5: Tablas y Listados Accesibles',
+  },
+  {
+    path: 'accessible-design',
+    component: MeaningfulLinksComponent,
+    title: 'Demo 6: Diseño Accesible y Contraste',
+  },
+  {
+    path: 'seo-accessibility',
+    component: SkipLinksDemoComponent,
+    title: 'Demo 7: SEO y Accesibilidad',
+  },
+  {
+    path: 'accessibility-testing',
+    component: CheckVersionComponent,
+    title: 'Demo 8: Análisis y Evaluación de Accesibilidad',
   },
   {
     path: '**',
