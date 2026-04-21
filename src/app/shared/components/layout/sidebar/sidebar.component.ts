@@ -180,7 +180,6 @@ export class SidebarComponent {
   isToggling = signal(false);
 
   toggleSubmenu(itemId: string): void {
-    // Prevenir múltiples clicks rápidos
     if (this.isToggling()) return;
     this.isToggling.set(true);
 
@@ -190,6 +189,7 @@ export class SidebarComponent {
     if (wasExpanded) {
       current.delete(itemId);
     } else {
+      current.clear();
       current.add(itemId);
     }
     this.expandedItems.set(current);
