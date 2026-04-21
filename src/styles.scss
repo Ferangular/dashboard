@@ -1,4 +1,4 @@
-﻿@use "./assets/styles/normalize";
+@use "./assets/styles/normalize";
 @use "./assets/styles/tokens";
 @use "./assets/styles/theme-dark";
 @use "./assets/styles/base";
@@ -6,3 +6,7 @@
 @use "./assets/styles/utilities";
 @use "./assets/styles/states";
 @use "./assets/styles/badges";
+@use "./assets/styles/contrast-modes";
+@use "./assets/styles/focus-styles";
+@use "./assets/styles/layout";
+@use "./assets/styles/navigation";
