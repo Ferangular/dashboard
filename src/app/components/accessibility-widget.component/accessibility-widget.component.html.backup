@@ -390,5 +390,6 @@
       <span class="documentation-toggle__icon">📚</span>
       <span class="documentation-toggle__text">Docs</span>
     </button>
-  }
+
+      }
 </div>

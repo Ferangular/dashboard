@@ -332,5 +332,3 @@ Una vez validadas estas mejoras:
 5. **Establecer** accesibilidad como requisito en todos los PRs
 
 ---
-
-_¡Felicidades! Has implementado 8 de 10 reglas de accesibilidad WCAG 2.2 AA._

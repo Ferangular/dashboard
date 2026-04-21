@@ -6,16 +6,14 @@
     "performance": "Rendimiento",
     "laboratory": "Laboratorio",
     "accessibility": "Accesibilidad",
-    "accessibilityDemo": "Demo de Accesibilidad",
-    "contactForm": "Formulario Accesible",
-    "keyboardNavigation": "Navegación por Teclado",
-    "semanticStructure": "Estructura Semántica",
-    "skipLinks": "Skip Links",
-    "meaningfulLinks": "Enlaces Significativos",
-    "ariaStates": "Estados ARIA",
-    "keyboard": "Teclado",
+    "documentation": "Documentación",
     "contact": "Contacto",
-    "settings": "Ajustes"
+    "settings": "Configuración",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "index": "Índice",
+    "newTab": "Nueva Pestaña",
+    "download": "Descargar"
   },
   "language": {
     "select": "Seleccionar idioma"

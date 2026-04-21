@@ -3,6 +3,7 @@
 // =============================================================================
 
 // Modos de contraste básicos
+// Temas de contraste de accesibilidad
 .contrast-high-dark {
   --bg-primary: #000000 !important;
   --bg-secondary: #1a1a1a !important;
@@ -75,7 +76,8 @@
   --info: #0066cc !important;
 }
 
-// Modos WCAG adicionales
+// Nuevos modos de contraste WCAG 1.4.3 (Ratio 4.5:1 mínimo)
+
 .contrast-white-blue {
   --bg-primary: #ffffff !important;
   --bg-secondary: #f8f9fa !important;
@@ -148,7 +150,8 @@
   --info: #66ffff !important;
 }
 
-// Modos adicionales de alto contraste
+// Modos adicionales de contraste WCAG 1.4.3
+
 .contrast-black-cyan {
   --bg-primary: #000000 !important;
   --bg-secondary: #001a1a !important;

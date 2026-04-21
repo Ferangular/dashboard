@@ -1,672 +1,127 @@
-// Variables BEM y diseño
-:root {
-  --sidebar-width: 15.625rem; // 250px
-
-  // Variables de accesibilidad base
-  --base-font-size: 16px;
-  --line-height-base: 1.5;
-  --letter-spacing-base: 0;
-  --word-spacing-base: 0;
-  --animation-duration: 0.3s;
-  --transition-duration: 0.2s;
-}
-
-// Enlace de salto al contenido principal (Regla 7 - Accesibilidad)
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 6px;
-  background: var(--color-primary, #c1083b);
-  color: white;
-  padding: 8px 12px;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: 600;
-  z-index: 10000;
-  transition: top 0.3s ease;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  min-width: 44px;
-  justify-content: center;
-
-  &:focus {
-    top: 6px;
-    outline: 2px solid var(--focus-color, #2563eb);
-    outline-offset: 2px;
-  }
-
-  // Modo oscuro
-  :global(.dark) & {
-    background: var(--color-primary, #e11d48);
-
-    &:focus {
-      outline-color: var(--focus-color, #60a5fa);
-    }
-  }
-}
-
-// Breadcrumb accesible (WCAG 2.4.6)
-.breadcrumb {
-  padding: 1rem 0;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--border-primary, #e5e7eb);
-
-  &__list {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 0.5rem;
-  }
-
-  &__item {
-    display: flex;
-    align-items: center;
-    font-size: 0.875rem;
-    color: var(--text-secondary, #6b7280);
-
-    &:not(:last-child)::after {
-      content: "/";
-      margin-left: 0.5rem;
-      color: var(--text-muted, #9ca3af);
-    }
-  }
-
-  &__link {
-    color: var(--accent-primary, #2563eb);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
-
-    &:hover,
-    &:focus {
-      color: var(--accent-primary-hover, #1d4ed8);
-      text-decoration: underline;
-    }
-
-    &:focus {
-      outline: 2px solid var(--focus-color);
-      outline-offset: 2px;
-      border-radius: 2px;
-    }
-  }
-
-  &__current {
-    color: var(--text-primary, #111827);
-    font-weight: 600;
-  }
-
-  // Modo oscuro
-  :global(.dark) & {
-    border-bottom-color: var(--border-secondary, #374151);
-
-    &__item {
-      color: var(--text-secondary, #d1d5db);
-    }
-
-    &__link {
-      color: var(--accent-primary, #60a5fa);
-
-      &:hover,
-      &:focus {
-        color: var(--accent-primary-hover, #3b82f6);
-      }
-    }
-
-    &__current {
-      color: var(--text-primary, #f9fafb);
-    }
-  }
-}
-
-// Aplicar tamaño de fuente dinámico al body y html
-body,
-html {
-  font-size: var(--base-font-size, 16px) !important;
-  line-height: var(--line-height-base, 1.5) !important;
-  letter-spacing: var(--letter-spacing-base, 0) !important;
-  word-spacing: var(--word-spacing-base, 0) !important;
-}
-
-.app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-family:
-    system-ui,
-    -apple-system,
-    sans-serif;
-  font-size: var(--base-font-size, 16px);
-  line-height: var(--line-height-base, 1.5);
-  letter-spacing: var(--letter-spacing-base, 0);
-  word-spacing: var(--word-spacing-base, 0);
-  background-color: var(--bg-primary);
-  transition: background-color var(--transition-normal);
-
-  &__container {
-    display: flex;
-    flex: 1;
-    min-height: 0;
-  }
-
-  &__content-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    margin-left: 15.625rem; // 250px - espacio para sidebar expandido
-    transition: margin-left 0.3s ease; // Transición suave para efecto acordeón
-  }
-
-  // Cuando el sidebar está colapsado, el contenido se expande
-  &__sidebar--collapsed ~ &__content-wrapper {
-    margin-left: 3.75rem; // 60px - espacio reducido cuando sidebar colapsado
-  }
-
-  &__main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  // Scroll personalizado para mejor UX
-  &__content {
-    flex: 1;
-    padding: 2rem;
-    overflow-y: auto;
-    overflow-x: hidden;
-    min-height: calc(100vh - 3.75rem); // Altura mínima menos header
-    padding-bottom: 9.375rem; // Espacio extra para que no se corte con el footer (150px)
-    background-color: var(--bg-primary);
-    transition: background-color var(--transition-normal);
-
-    // Scroll personalizado
-    &::-webkit-scrollbar {
-      width: 0.5rem; // 8px
-      border-radius: 0.25rem; // 4px
-    }
-
-    &::-webkit-scrollbar-track {
-      background: var(--bg-secondary);
-      border-radius: 0.25rem; // 4px
-      transition: background-color var(--transition-normal);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: var(--text-secondary);
-      border-radius: 0.25rem; // 4px
-      transition: background-color var(--transition-normal);
-
-      &:hover {
-        background: var(--text-primary);
-      }
-    }
-  }
-
-  &__footer {
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: transparent; // Sin fondo de colores
-    z-index: 5; // Por debajo del widget de accesibilidad (z-index: 1000)
-    transition:
-      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-      height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: bottom;
-
-    &--hidden {
-      transform: translateY(calc(100% - 3rem)); // Muestra solo el botón flotante
-      height: 3rem;
-      overflow: hidden;
-    }
-  }
-
-  .footer__toggle {
-    position: fixed; // Botón flotante
-    bottom: 3.5rem; // Encima del footer
-    right: 2rem;
-    background: rgba(255, 255, 255, 0.95); // Blanco semitransparente
-    color: #2c3e50;
-    border: 0.0625rem solid rgba(44, 62, 80, 0.2);
-    border-radius: 50%; // Botón circular
-    padding: 0.75rem;
-    cursor: pointer;
-    font-size: 1.25rem;
-    font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 6; // Por debajo del widget de accesibilidad (z-index: 1000)
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    box-shadow: var(--shadow-md);
-    backdrop-filter: blur(10px);
-
-    &:hover {
-      background: rgba(255, 255, 255, 1);
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: var(--shadow-lg);
-      border-color: rgba(44, 62, 80, 0.3);
-    }
-
-    &:active {
-      transform: translateY(0) scale(0.95);
-      box-shadow: var(--shadow-sm);
-    }
-
-    // Modo oscuro
-    :global(.dark) & {
-      background: rgba(30, 30, 30, 0.95);
-      color: var(--text-primary);
-      border-color: var(--border-color);
-
-      &:hover {
-        background: rgba(40, 40, 40, 1);
-        border-color: var(--text-secondary);
-      }
-    }
-  }
-
-  .footer__toggle-icon {
-    font-size: 1.125rem;
-    line-height: 1;
-    transition: transform 0.3s ease;
-  }
-
-  .footer__toggle:hover .footer__toggle-icon {
-    transform: rotate(180deg);
-  }
-}
-
-// Temas de contraste de accesibilidad
-.contrast-high-dark {
-  --bg-primary: #000000 !important;
-  --bg-secondary: #1a1a1a !important;
-  --bg-tertiary: #2d2d2d !important;
-  --text-primary: #ffffff !important;
-  --text-secondary: #e0e0e0 !important;
-  --text-muted: #b0b0b0 !important;
-  --border-primary: #404040 !important;
-  --border-secondary: #606060 !important;
-  --accent-primary: #ffff00 !important;
-  --accent-secondary: #00ff00 !important;
-  --accent-tertiary: #00ffff !important;
-  --error: #ff6b6b !important;
-  --warning: #ffa726 !important;
-  --success: #66bb6a !important;
-  --info: #42a5f5 !important;
-}
-
-.contrast-high-light {
-  --bg-primary: #ffffff !important;
-  --bg-secondary: #f5f5f5 !important;
-  --bg-tertiary: #e8e8e8 !important;
-  --text-primary: #000000 !important;
-  --text-secondary: #333333 !important;
-  --text-muted: #666666 !important;
-  --border-primary: #000000 !important;
-  --border-secondary: #333333 !important;
-  --accent-primary: #0000ff !important;
-  --accent-secondary: #ff0000 !important;
-  --accent-tertiary: #008000 !important;
-  --error: #d32f2f !important;
-  --warning: #f57c00 !important;
-  --success: #388e3c !important;
-  --info: #1976d2 !important;
-}
-
-.contrast-black-yellow {
-  --bg-primary: #000000 !important;
-  --bg-secondary: #1a1a1a !important;
-  --bg-tertiary: #2d2d2d !important;
-  --text-primary: #ffff00 !important;
-  --text-secondary: #ffff99 !important;
-  --text-muted: #ffffcc !important;
-  --border-primary: #ffff00 !important;
-  --border-secondary: #ffff99 !important;
-  --accent-primary: #ffffff !important;
-  --accent-secondary: #00ffff !important;
-  --accent-tertiary: #ff00ff !important;
-  --error: #ff9999 !important;
-  --warning: #ffcc00 !important;
-  --success: #99ff99 !important;
-  --info: #9999ff !important;
-}
-
-.contrast-yellow-black {
-  --bg-primary: #ffff00 !important;
-  --bg-secondary: #ffff99 !important;
-  --bg-tertiary: #ffffcc !important;
-  --text-primary: #000000 !important;
-  --text-secondary: #333333 !important;
-  --text-muted: #666666 !important;
-  --border-primary: #000000 !important;
-  --border-secondary: #333333 !important;
-  --accent-primary: #ff0000 !important;
-  --accent-secondary: #0000ff !important;
-  --accent-tertiary: #008000 !important;
-  --error: #990000 !important;
-  --warning: #cc6600 !important;
-  --success: #006600 !important;
-  --info: #0066cc !important;
-}
-
-// Nuevos modos de contraste WCAG 1.4.3 (Ratio 4.5:1 mínimo)
-
-.contrast-white-blue {
-  --bg-primary: #ffffff !important;
-  --bg-secondary: #f8f9fa !important;
-  --bg-tertiary: #e9ecef !important;
-  --text-primary: #003366 !important;
-  --text-secondary: #004080 !important;
-  --text-muted: #005299 !important;
-  --border-primary: #003366 !important;
-  --border-secondary: #004080 !important;
-  --accent-primary: #0066cc !important;
-  --accent-secondary: #0052a3 !important;
-  --accent-tertiary: #003d82 !important;
-  --error: #cc0000 !important;
-  --warning: #cc6600 !important;
-  --success: #006600 !important;
-  --info: #005299 !important;
-}
-
-.contrast-blue-white {
-  --bg-primary: #003366 !important;
-  --bg-secondary: #002244 !important;
-  --bg-tertiary: #001833 !important;
-  --text-primary: #ffffff !important;
-  --text-secondary: #f0f0f0 !important;
-  --text-muted: #e0e0e0 !important;
-  --border-primary: #ffffff !important;
-  --border-secondary: #f0f0f0 !important;
-  --accent-primary: #66b3ff !important;
-  --accent-secondary: #99ccff !important;
-  --accent-tertiary: #cce6ff !important;
-  --error: #ff9999 !important;
-  --warning: #ffcc99 !important;
-  --success: #99ff99 !important;
-  --info: #99ccff !important;
-}
-
-.contrast-green-black {
-  --bg-primary: #006600 !important;
-  --bg-secondary: #004d00 !important;
-  --bg-tertiary: #003300 !important;
-  --text-primary: #ffffff !important;
-  --text-secondary: #f0fff0 !important;
-  --text-muted: #e0ffe0 !important;
-  --border-primary: #ffffff !important;
-  --border-secondary: #f0fff0 !important;
-  --accent-primary: #66ff66 !important;
-  --accent-secondary: #99ff99 !important;
-  --accent-tertiary: #ccffcc !important;
-  --error: #ff6666 !important;
-  --warning: #ffcc66 !important;
-  --success: #ffffff !important;
-  --info: #66ffff !important;
-}
-
-.contrast-black-green {
-  --bg-primary: #000000 !important;
-  --bg-secondary: #1a1a00 !important;
-  --bg-tertiary: #333300 !important;
-  --text-primary: #00ff00 !important;
-  --text-secondary: #66ff66 !important;
-  --text-muted: #99ff99 !important;
-  --border-primary: #00ff00 !important;
-  --border-secondary: #66ff66 !important;
-  --accent-primary: #ffff00 !important;
-  --accent-secondary: #ffcc00 !important;
-  --accent-tertiary: #ff9900 !important;
-  --error: #ff6666 !important;
-  --warning: #ffcc00 !important;
-  --success: #00ff00 !important;
-  --info: #66ffff !important;
-}
-
-// Modos adicionales de contraste WCAG 1.4.3
-
-.contrast-black-cyan {
-  --bg-primary: #000000 !important;
-  --bg-secondary: #001a1a !important;
-  --bg-tertiary: #003333 !important;
-  --text-primary: #00ffff !important;
-  --text-secondary: #66ffff !important;
-  --text-muted: #99ffff !important;
-  --border-primary: #00ffff !important;
-  --border-secondary: #66ffff !important;
-  --accent-primary: #ffff00 !important;
-  --accent-secondary: #ffcc00 !important;
-  --accent-tertiary: #ff9900 !important;
-  --error: #ff6666 !important;
-  --warning: #ffcc00 !important;
-  --success: #00ff00 !important;
-  --info: #00ffff !important;
-}
-
-.contrast-cyan-black {
-  --bg-primary: #00ffff !important;
-  --bg-secondary: #66ffff !important;
-  --bg-tertiary: #99ffff !important;
-  --text-primary: #000000 !important;
-  --text-secondary: #333333 !important;
-  --text-muted: #666666 !important;
-  --border-primary: #000000 !important;
-  --border-secondary: #333333 !important;
-  --accent-primary: #ff0000 !important;
-  --accent-secondary: #cc0000 !important;
-  --accent-tertiary: #990000 !important;
-  --error: #cc0000 !important;
-  --warning: #ff6600 !important;
-  --success: #006600 !important;
-  --info: #0066cc !important;
-}
-
-.contrast-purple-white {
-  --bg-primary: #4b0082 !important;
-  --bg-secondary: #37006b !important;
-  --bg-tertiary: #2d0052 !important;
-  --text-primary: #ffffff !important;
-  --text-secondary: #f0f0f0 !important;
-  --text-muted: #e0e0e0 !important;
-  --border-primary: #ffffff !important;
-  --border-secondary: #f0f0f0 !important;
-  --accent-primary: #cc99ff !important;
-  --accent-secondary: #9966ff !important;
-  --accent-tertiary: #6633ff !important;
-  --error: #ff9999 !important;
-  --warning: #ffcc99 !important;
-  --success: #99ff99 !important;
-  --info: #9999ff !important;
-}
-
-.contrast-white-purple {
-  --bg-primary: #ffffff !important;
-  --bg-secondary: #f8f0ff !important;
-  --bg-tertiary: #f0e0ff !important;
-  --text-primary: #4b0082 !important;
-  --text-secondary: #37006b !important;
-  --text-muted: #2d0052 !important;
-  --border-primary: #4b0082 !important;
-  --border-secondary: #37006b !important;
-  --accent-primary: #9966ff !important;
-  --accent-secondary: #6633ff !important;
-  --accent-tertiary: #4d1aff !important;
-  --error: #cc0066 !important;
-  --warning: #cc6600 !important;
-  --success: #006600 !important;
-  --info: #6600cc !important;
-}
-
-.contrast-orange-black {
-  --bg-primary: #ff8c00 !important;
-  --bg-secondary: #cc7000 !important;
-  --bg-tertiary: #995400 !important;
-  --text-primary: #000000 !important;
-  --text-secondary: #333333 !important;
-  --text-muted: #666666 !important;
-  --border-primary: #000000 !important;
-  --border-secondary: #333333 !important;
-  --accent-primary: #ffff00 !important;
-  --accent-secondary: #ffcc00 !important;
-  --accent-tertiary: #ff9900 !important;
-  --error: #ffffff !important;
-  --warning: #ffffff !important;
-  --success: #00ff00 !important;
-  --info: #00ccff !important;
-}
-
-.contrast-black-orange {
-  --bg-primary: #000000 !important;
-  --bg-secondary: #1a0a00 !important;
-  --bg-tertiary: #330d00 !important;
-  --text-primary: #ff8c00 !important;
-  --text-secondary: #ffaa00 !important;
-  --text-muted: #ffcc33 !important;
-  --border-primary: #ff8c00 !important;
-  --border-secondary: #ffaa00 !important;
-  --accent-primary: #ffff00 !important;
-  --accent-secondary: #ffcc00 !important;
-  --accent-tertiary: #ff9900 !important;
-  --error: #ff6666 !important;
-  --warning: #ffcc00 !important;
-  --success: #00ff00 !important;
-  --info: #66ffff !important;
-}
-
-.contrast-magenta-black {
-  --bg-primary: #ff00ff !important;
-  --bg-secondary: #cc00cc !important;
-  --bg-tertiary: #990099 !important;
-  --text-primary: #000000 !important;
-  --text-secondary: #333333 !important;
-  --text-muted: #666666 !important;
-  --border-primary: #000000 !important;
-  --border-secondary: #333333 !important;
-  --accent-primary: #ffff00 !important;
-  --accent-secondary: #ffcc00 !important;
-  --accent-tertiary: #ff9900 !important;
-  --error: #ffffff !important;
-  --warning: #ffffff !important;
-  --success: #00ff00 !important;
-  --info: #00ffff !important;
-}
-
-.contrast-black-magenta {
-  --bg-primary: #000000 !important;
-  --bg-secondary: #1a001a !important;
-  --bg-tertiary: #330033 !important;
-  --text-primary: #ff00ff !important;
-  --text-secondary: #ff66ff !important;
-  --text-muted: #ff99ff !important;
-  --border-primary: #ff00ff !important;
-  --border-secondary: #ff66ff !important;
-  --accent-primary: #ffff00 !important;
-  --accent-secondary: #ffcc00 !important;
-  --accent-tertiary: #ff9900 !important;
-  --error: #ff6666 !important;
-  --warning: #ffcc00 !important;
-  --success: #00ff00 !important;
-  --info: #66ffff !important;
-}
-
-// Estilos de foco de alto contraste mejorados
-.high-contrast-focus *:focus {
-  outline: 3px solid #ffcc00 !important;
-  outline-offset: 2px !important;
-  box-shadow:
-    0 0 0 2px #000000,
-    0 0 8px rgba(255, 204, 0, 0.8) !important;
-  background: rgba(255, 204, 0, 0.1) !important;
-  color: #000000 !important;
-  text-decoration: underline !important;
-  text-decoration-color: #ffcc00 !important;
-  text-decoration-thickness: 2px !important;
-  text-underline-offset: 4px !important;
-}
-
-// Foco específico para botones y elementos interactivos
-.high-contrast-focus button:focus,
-.high-contrast-focus input:focus,
-.high-contrast-focus textarea:focus,
-.high-contrast-focus select:focus,
-.high-contrast-focus a:focus {
-  outline: 3px solid #ffcc00 !important;
-  outline-offset: 2px !important;
-  border: 2px solid #ffcc00 !important;
-  box-shadow:
-    0 0 0 2px #000000,
-    0 0 12px rgba(255, 204, 0, 0.9) !important;
-  background: rgba(255, 204, 0, 0.15) !important;
-  color: #000000 !important;
-  font-weight: 600 !important;
-  transform: scale(1.02) !important;
-  transition: all 0.2s ease !important;
-}
-
-// Foco para elementos específicos del widget
-.high-contrast-focus .toggle-switch:focus-within .toggle-slider {
-  outline: 4px solid #ffcc00 !important;
-  outline-offset: 2px !important;
-  box-shadow:
-    0 0 0 3px #000000,
-    0 0 16px rgba(255, 204, 0, 1) !important;
-  border-color: #ffcc00 !important;
-}
-
-.high-contrast-focus .contrast-btn:focus,
-.high-contrast-focus .spacing-btn:focus,
-.high-contrast-focus .size-btn:focus {
-  outline: 3px solid #ffcc00 !important;
-  outline-offset: 2px !important;
-  box-shadow:
-    0 0 0 2px #000000,
-    0 0 12px rgba(255, 204, 0, 0.9) !important;
-  background: rgba(255, 204, 0, 0.2) !important;
-  color: #000000 !important;
-  font-weight: 700 !important;
-  transform: translateY(-1px) !important;
-}
-
-// Subrayado permanente de enlaces
-.underline-links a {
-  text-decoration: underline !important;
-
-  &:hover,
-  &:focus {
-    text-decoration: underline !important;
-    text-decoration-style: double !important;
-  }
-}
-
-// Reducción de animaciones
-.reduce-animations * {
-  animation-duration: 0.01ms !important;
-  animation-iteration-count: 1 !important;
-  transition-duration: 0.01ms !important;
-  scroll-behavior: auto !important;
-}
-
-// Aplicar variables de accesibilidad al body
-body {
-  font-size: var(--base-font-size);
-  line-height: var(--line-height-base);
-  letter-spacing: var(--letter-spacing-base);
-  word-spacing: var(--word-spacing-base);
-}
-
-// Responsive
-@media (max-width: 768px) {
-  .app {
-    &__content {
-      padding: 1rem;
-    }
-  }
-}
+@use "../assets/styles/contrast-modes";
+@use "../assets/styles/focus-styles";
+@use "../assets/styles/layout";
+@use "../assets/styles/navigation";
+
+//// Variables BEM y diseño
+//:root {
+//  --sidebar-width: 15.625rem; // 250px
+//
+//  // Variables de accesibilidad base
+//  --base-font-size: 16px;
+//  --line-height-base: 1.5;
+//  --letter-spacing-base: 0;
+//  --word-spacing-base: 0;
+//  --animation-duration: 0.3s;
+//  --transition-duration: 0.2s;
+//}
+//
+//// Enlace de salto al contenido principal (Regla 7 - Accesibilidad)
+//.skip-link {
+//  position: absolute;
+//  top: -40px;
+//  left: 6px;
+//  background: var(--color-primary, #c1083b);
+//  color: white;
+//  padding: 8px 12px;
+//  text-decoration: none;
+//  border-radius: 4px;
+//  font-weight: 600;
+//  z-index: 10000;
+//  transition: top 0.3s ease;
+//  min-height: 44px;
+//  display: flex;
+//  align-items: center;
+//  min-width: 44px;
+//  justify-content: center;
+//
+//  &:focus {
+//    top: 6px;
+//    outline: 2px solid var(--focus-color, #2563eb);
+//    outline-offset: 2px;
+//  }
+//
+//  // Modo oscuro
+//  :global(.dark) & {
+//    background: var(--color-primary, #e11d48);
+//
+//    &:focus {
+//      outline-color: var(--focus-color, #60a5fa);
+//    }
+//  }
+//}
+//
+//// Breadcrumb accesible (WCAG 2.4.6)
+//.breadcrumb {
+//  padding: 1rem 0;
+//  margin-bottom: 1rem;
+//  border-bottom: 1px solid var(--border-primary, #e5e7eb);
+//
+//  &__list {
+//    display: flex;
+//    align-items: center;
+//    list-style: none;
+//    margin: 0;
+//    padding: 0;
+//    gap: 0.5rem;
+//  }
+//
+//  &__item {
+//    display: flex;
+//    align-items: center;
+//    font-size: 0.875rem;
+//    color: var(--text-secondary, #6b7280);
+//
+//    &:not(:last-child)::after {
+//      content: "/";
+//      margin-left: 0.5rem;
+//      color: var(--text-muted, #9ca3af);
+//    }
+//  }
+//
+//  &__link {
+//    color: var(--accent-primary, #2563eb);
+//    text-decoration: none;
+//    font-weight: 500;
+//    transition: color 0.2s ease;
+//
+//    &:hover,
+//    &:focus {
+//      color: var(--accent-primary-hover, #1d4ed8);
+//      text-decoration: underline;
+//    }
+//
+//    &:focus {
+//      outline: 2px solid var(--focus-color);
+//      outline-offset: 2px;
+//      border-radius: 2px;
+//    }
+//  }
+//
+//  &__current {
+//    color: var(--text-primary, #111827);
+//    font-weight: 600;
+//  }
+//
+//  // Modo oscuro
+//  :global(.dark) & {
+//    border-bottom-color: var(--border-secondary, #374151);
+//
+//    &__item {
+//      color: var(--text-secondary, #d1d5db);
+//    }
+//
+//    &__link {
+//      color: var(--accent-primary, #60a5fa);
+//
+//      &:hover,
+//      &:focus {
+//        color: var(--accent-primary-hover, #3b82f6);
+//      }
+//    }
+//
+//    &__current {
+//      color: var(--text-primary, #f9fafb);
+//    }
+//  }
+//}

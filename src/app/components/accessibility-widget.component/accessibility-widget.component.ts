@@ -25,6 +25,7 @@ import { ThemeService } from '../../core/services/theme.service';
 export class AccessibilityWidgetComponent implements OnInit {
   // Signals para el estado del panel
   private isOpenSignal = signal(false);
+  private showDocumentationNavSignal = signal(false);
 
   private accessibilityService = inject(AccessibilityService);
   private themeService = inject(ThemeService);
@@ -195,11 +196,27 @@ export class AccessibilityWidgetComponent implements OnInit {
     this.closePanel(); // Cerrar panel después de resetear
   }
 
+  // Métodos para navegación de documentación
+  showDocumentationNav() {
+    return this.showDocumentationNavSignal();
+  }
+
+  toggleDocumentationNav(): void {
+    this.showDocumentationNavSignal.set(!this.showDocumentationNavSignal());
+  }
+
+  closeDocumentationNav(): void {
+    this.showDocumentationNavSignal.set(false);
+  }
+
   // Cerrar panel con Escape
   @HostListener('document:keydown.escape')
   handleEscape(): void {
     if (this.isOpenSignal()) {
       this.closePanel();
+    }
+    if (this.showDocumentationNavSignal()) {
+      this.closeDocumentationNav();
     }
   }
 
